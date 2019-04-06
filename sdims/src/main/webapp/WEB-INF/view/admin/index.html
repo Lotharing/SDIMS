@@ -105,16 +105,20 @@
 					<li><a href="#customerSetting" class="nav-header collapsed"
 						data-toggle="collapse"> <i class="glyphicon glyphicon-star"></i>
 							销售管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
-					</a>
+						</a>
 						<ul id="customerSetting" class="nav nav-list secondmenu collapse">
 							<li>
 								<a href="javascript:void(0);" onclick="getCustomer()">
 									<i class="glyphicon glyphicon-user"></i>&nbsp;<span id="customerManager">客户管理</span>
 								</a>
 							</li>
-							<li><a href="https://www.baidu.com"><i
-									class="glyphicon glyphicon-book"></i>&nbsp;销售订单</a></li>
-						</ul></li>
+							<li>
+								<a  href="javascript:void(0);" onclick="getSaleOrder()">
+									<i class="glyphicon glyphicon-book"></i>&nbsp;<span id="saleOrderManager">销售订单</span>
+								</a>
+							</li>
+						</ul>
+					</li>
 
 					<!-- ----------------账户管理---------------- -->
 					<li><a href="#accountSetting" class="nav-header collapsed"
@@ -171,9 +175,11 @@
 	<script src="../resources/js/admin/goodsLable.js"></script>
 	<!-- 供销商管理标签栏.js控制文件 -->
 	<script src="../resources/js/purchase/purchaseSupplierLable.js"></script>
-	<!-- 订单管理标签栏.js控制文件 -->
+	<!-- 采购订单管理标签栏.js控制文件 -->
 	<script src="../resources/js/purchase/purchaseOrderLable.js"></script>
 	<!-- 客户管理标签栏.js控制文件 -->
 	<script src="../resources/js/sale/saleCustomerLable.js"></script>
+	<!-- 销售管理标签栏.js控制文件 -->
+	<script src="../resources/js/sale/saleOrderLable.js"></script>
 </body>
 </html>

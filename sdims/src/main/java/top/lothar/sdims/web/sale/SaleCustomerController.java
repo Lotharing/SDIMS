@@ -1,5 +1,6 @@
 package top.lothar.sdims.web.sale;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
+import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.SaleCustomerService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -24,7 +26,7 @@ public class SaleCustomerController {
 	
 	private PageBean<Customer> pageBean;
 	/**
-	 * 条件查询供应商列表
+	 * 条件查询客户列表
 	 * @param request
 	 * @return
 	 */
@@ -112,7 +114,7 @@ public class SaleCustomerController {
 		return modelMap;
 	}
 	/**
-	 * 根据前台传的ID移除对应供应商
+	 * 根据前台传的ID移除对应客户
 	 * @param request
 	 * @return
 	 */
@@ -138,5 +140,76 @@ public class SaleCustomerController {
 		}
 		return modelMap;
 	}
-	
+	/**
+	 * 根据前台传递的供应商ID去查询信息并返回前台
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="getcustomerbyid",method=RequestMethod.GET)
+	private Map<String, Object> getCustomerById(HttpServletRequest request){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		Long customerId = HttpServletRequestUtil.getLong(request, "customerId");
+		Customer customer = new Customer();
+		try {
+			customer = saleCustomerService.getCustomerById(customerId);
+			if (customer!=null) {
+				modelMap.put("success", true);
+				modelMap.put("customer", customer);
+			}else {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "查询错误");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.getMessage());
+			return modelMap;
+		}
+		return modelMap;
+	}
+	/**
+	 * 根据前台传过来的信息对应ID进行更新
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/modifycustomer",method=RequestMethod.POST)
+	private Map<String, Object> modifySupplie(HttpServletRequest request){
+		Map<String, Object> modelMap = new HashMap<String,Object>();
+		//这里的数据要包含ID因为是根据ID进行更新
+		String customerStr = HttpServletRequestUtil.getString(request, "customerStr");
+		//JSON转化后的客户存储对象
+		Customer customer = null;
+		//存放json的对象
+		ObjectMapper objectMapper = new ObjectMapper();
+		//接受json形式的Supplier信息
+		try {
+			//使用ObjectMapper类把请求中的json信息存放在customer实体类中
+			customer = objectMapper.readValue(customerStr, Customer.class);
+			//设置更新的时间
+			customer.setUpdateTime(new Date());
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.getMessage());
+			return modelMap;
+		}
+		try {
+			int effectNum = saleCustomerService.modifySaleCustomer(customer);
+			if (effectNum < 1) {
+				System.out.println(effectNum);
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "更新客户失败");
+			}else {
+				modelMap.put("success", true);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.getMessage());
+			return modelMap;
+		}
+		return modelMap;
+	}
 }

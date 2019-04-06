@@ -175,11 +175,14 @@
 			<if test="saleOrderCondition!=null and saleOrderCondition.repository!=null and saleOrderCondition.repository.name!=null">
 				and br.name = #{saleOrderCondition.repository.name}
 			</if>
-			<if test="saleOrderCondition!=null and saleOrderCondition.orderNumber!=null">
+			<if test="saleOrderCondition.orderNumber!=null">
 				and so.order_number = #{saleOrderCondition.orderNumber}
 			</if>
-			<if test="saleOrderCondition!=null and saleOrderCondition.checkState!=null">
+			<if test="saleOrderCondition.checkState!=null">
 				and so.check_state = #{saleOrderCondition.checkState}
+			</if>
+			<if test="saleOrderCondition.stockState!=null">
+				and so.stock_state = #{saleOrderCondition.stockState}
 			</if>
 			AND
 			so.goods_id = bg.goods_id
@@ -211,11 +214,14 @@
 			<if test="saleOrderCondition!=null and saleOrderCondition.repository!=null and saleOrderCondition.repository.name!=null">
 				and br.name = #{saleOrderCondition.repository.name}
 			</if>
-			<if test="saleOrderCondition!=null and saleOrderCondition.orderNumber!=null">
+			<if test="saleOrderCondition.orderNumber!=null">
 				and so.order_number = #{saleOrderCondition.orderNumber}
 			</if>
-			<if test="saleOrderCondition!=null and saleOrderCondition.checkState!=null">
+			<if test="saleOrderCondition.checkState!=null">
 				and so.check_state = #{saleOrderCondition.checkState}
+			</if>
+			<if test="saleOrderCondition.stockState!=null">
+				and so.stock_state = #{saleOrderCondition.stockState}
 			</if>
 			AND
 			so.goods_id = bg.goods_id

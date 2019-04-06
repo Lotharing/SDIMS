@@ -186,7 +186,7 @@ public class PurchaseSupplierController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		//接受json形式的Supplier信息
 		try {
-			//使用ObjectMapper类把请求中的json信息存放在Employee实体类中
+			//使用ObjectMapper类把请求中的json信息存放在supplier实体类中
 			supplier = objectMapper.readValue(supplierStr, Supplier.class);
 			//设置更新的时间
 			supplier.setUpdateTime(new Date());

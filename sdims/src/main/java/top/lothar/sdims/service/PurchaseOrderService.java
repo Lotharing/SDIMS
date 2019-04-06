@@ -5,31 +5,31 @@ import top.lothar.sdims.entity.PurchaseOrder;
 
 public interface PurchaseOrderService {
 	/**
-	 * 添加订单
+	 * 添加采购单
 	 * @param purchaseOrder
 	 * @return
 	 */
 	int addPurchaseOrder(PurchaseOrder purchaseOrder);
 	/**
-	 * 删除订单
+	 * 删除采购单
 	 * @param porderId
 	 * @return
 	 */
 	int removePurchaseOrderById(long porderId);
 	/**
-	 * 更新订单
+	 * 更新采购单
 	 * @param purchaseOrder
 	 * @return
 	 */
 	int modifyPurchaseOrder(PurchaseOrder purchaseOrder);
 	/**
-	 * 根据订单ID查找订单
+	 * 根据订单ID查找采购单
 	 * @param porderId
 	 * @return
 	 */
 	PurchaseOrder getPurchaseOrderById(long porderId);
 	/**
-	 * 条件查询订单(返回泛型订单列表)
+	 * 条件分页查询采购单(返回泛型订单列表)
 	 * @param purchaseOrderCondition
 	 * @return
 	 */

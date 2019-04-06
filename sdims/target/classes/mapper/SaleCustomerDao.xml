@@ -31,7 +31,7 @@
 			<if test="linkName!=null">link_name=#{linkName},</if>
 			<if test="mobile!=null">mobile=#{mobile},</if>
 			<if test="address!=null">address=#{address},</if>
-			<if test="customerDesc!=null">customer_desc=#{customerDesc}</if>
+			<if test="customerDesc!=null">customer_desc=#{customerDesc},</if>
 			<if test="updater!=null">updater=#{updater},</if>
 			<if test="updateTime!=null">update_time=#{updateTime}</if>
 		</set>

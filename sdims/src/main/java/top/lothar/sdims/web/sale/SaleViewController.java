@@ -15,4 +15,12 @@ public class SaleViewController {
 	public String saleCustomer() {
 		return "sale/salecustomer";
 	}
+	/**
+	 * 销售订单管理页
+	 * @return
+	 */
+	@RequestMapping(value="saleorder", method=RequestMethod.GET)
+	public String saleOrder() {
+		return "sale/saleorder";
+	}
 }

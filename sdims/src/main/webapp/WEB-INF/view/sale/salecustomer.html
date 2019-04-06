@@ -104,6 +104,61 @@
     
      <!------------------------------------------------弹出窗口-编辑------------------------------------------------->
      
+     <div class="modal fade" id="EditcustomerModal" tabindex="-1" role="dialog" aria-labelledby="EditcustomerModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="EditcustomerModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">供货商名称</label>
+						<input id="customerNameEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="供货商名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">联系人</label>
+						<input id="customerManEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="联系人(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">联系方式</label>
+						<input id="customerMobileEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="材质"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">供货商地址</label>
+						<input id="customerAddressEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="供货商地址"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">供货商描述</label>
+						<input id="customerDescEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="供货商描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">更新人</label>
+						<input id="customerUpdaterEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="更新人"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">Id</label>
+						<input id="customerIdEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="Id"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESUpdateCustomer" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
      <script type="text/javascript">
      $('#btn_YESAddCustomer').click(function() {
   		var addCustomerUrl = "/sdims/sale/addcustomer";
@@ -139,6 +194,44 @@
  					to_page_customer(totalRecord);
  				} else {
  					alert('添加失败');
+ 				}
+ 			}
+ 		});
+ 	});
+     /**
+ 	 * 得到模态框中的信息，并发送给后台更新数据
+ 	 * @returns
+ 	 */
+ 	$('#btn_YESUpdateCustomer').click(function() {
+ 		//后台更新信息URL
+ 		var updateCustomerUrl = "/sdims/sale/modifycustomer";
+ 		//json存放区域
+ 		var customer = {};
+ 		customer.name = $('#customerNameEdit').val();
+ 		customer.linkName = $('#customerManEdit').val();
+ 		customer.mobile = $('#customerMobileEdit').val();
+ 		customer.address = $('#customerAddressEdit').val();
+ 		customer.customerDesc = $('#customerDescEdit').val();
+ 		customer.updater = $('#customerUpdaterEdit').val();
+ 		customer.customerId = $('#customerIdEdit').val();
+ 		// 生成表单对象，用于接收参数并传递给后台
+ 		var formData = new FormData();
+ 		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+ 		formData.append('customerStr', JSON.stringify(customer));
+ 		$.ajax({
+ 			url : updateCustomerUrl,
+ 			type : 'POST',
+ 			data : formData,
+ 			contentType : false,
+ 			processData : false,
+ 			cache : false,
+ 			success : function(data) {
+ 				if (data.success) {
+ 					alert('更新成功');
+ 					//返回当前页
+ 					to_page_customer(currentPage);
+ 				}else {
+ 					alert("更新失败");
  				}
  			}
  		});

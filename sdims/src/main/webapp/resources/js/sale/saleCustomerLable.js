@@ -180,7 +180,6 @@ function addCustomer() {
  */
 $(document).on("click",".delete_customer_btn",function(){
 	var	customerId = $(this).attr("del-id");
-	alert(customerId);
 	var delCustomerUrl = "/sdims/sale/removecustomer?customerId="+customerId;
 	$.getJSON(delCustomerUrl,function(data){
 		if (data.success) {
@@ -191,4 +190,28 @@ $(document).on("click",".delete_customer_btn",function(){
 			alert(data.errMsg);
 		}
 	});
+});
+/**
+ * 创建按钮的时候绑定点击事件(编辑按钮)
+ * @returns
+ */
+$(document).on("click",".edit_customer_btn",function(){
+	var customerId = $(this).attr("edit-id");
+	var customerInfoUrl = "/sdims/sale/getcustomerbyid?customerId="+customerId;
+	$('#EditcustomerModalLabel').text("编辑信息");
+	$('.modal-dialog').css({"margin":"120px auto"});
+	$('.modal-header').css({"background-color":"#449D44"});
+	//根据ID获取的信息填充在模态框
+	$.getJSON(customerInfoUrl,function(data){
+		if (data.success) {
+			$('#customerNameEdit').val(data.customer.name);
+			$('#customerManEdit').val(data.customer.linkName);
+			$('#customerMobileEdit').val(data.customer.mobile);
+			$('#customerAddressEdit').val(data.customer.address);
+			$('#customerDescEdit').val(data.customer.customerDesc);
+			$('#customerUpdaterEdit').val(data.customer.updater);
+			$('#customerIdEdit').val(data.customer.customerId);
+		}
+	});
+	$('#EditcustomerModal').modal();
 });
