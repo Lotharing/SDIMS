@@ -1,0 +1,39 @@
+2019-04-05 11:03:31.953 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==>  Preparing: SELECT COUNT(supplier_id) FROM sd_purchase_supplier 
+2019-04-05 11:03:32.031 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==> Parameters: 
+2019-04-05 11:03:32.054 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - <==      Total: 1
+2019-04-05 11:04:01.242 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==>  Preparing: SELECT COUNT(supplier_id) FROM sd_purchase_supplier 
+2019-04-05 11:04:01.300 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==> Parameters: 
+2019-04-05 11:04:01.329 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - <==      Total: 1
+2019-04-05 11:04:01.345 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - ==>  Preparing: SELECT supplier_id, name, link_name, mobile, address, supplier_desc, updater, update_time FROM sd_purchase_supplier ORDER BY supplier_id ASC LIMIT ?,?; 
+2019-04-05 11:04:01.346 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-05 11:04:01.352 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - <==      Total: 2
+2019-04-05 11:04:26.951 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==>  Preparing: SELECT COUNT(supplier_id) FROM sd_purchase_supplier WHERE name = ? 
+2019-04-05 11:04:27.029 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - ==> Parameters: 冠仕供应商(String)
+2019-04-05 11:04:27.049 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierCount - <==      Total: 1
+2019-04-05 11:04:27.063 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - ==>  Preparing: SELECT supplier_id, name, link_name, mobile, address, supplier_desc, updater, update_time FROM sd_purchase_supplier WHERE name = ? ORDER BY supplier_id ASC LIMIT ?,?; 
+2019-04-05 11:04:27.064 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - ==> Parameters: 冠仕供应商(String), 0(Integer), 10(Integer)
+2019-04-05 11:04:27.068 [main] DEBUG t.l.s.d.P.queryPurchaseSupplierList - <==      Total: 1
+2019-04-05 13:15:29.875 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==>  Preparing: INSERT INTO sd_purchase_supplier(supplier_id,name,link_name,mobile,address,supplier_desc,updater,update_time) VALUES(?,?,?,?,?,?,?,?) 
+2019-04-05 13:15:29.927 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==> Parameters: null, 鑫爱迪供销商(String), 刘雷(String), 123456789(String), 广东省紫云公司(String), 很好(String), null, 2019-04-05 13:15:29.344(Timestamp)
+2019-04-05 13:15:29.945 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - <==    Updates: 1
+2019-04-05 13:15:56.204 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==>  Preparing: INSERT INTO sd_purchase_supplier(supplier_id,name,link_name,mobile,address,supplier_desc,updater,update_time) VALUES(?,?,?,?,?,?,?,?) 
+2019-04-05 13:15:56.264 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==> Parameters: null, 真是好供销商(String), 刘雷(String), 123456789(String), 广东省真好公司(String), 很好(String), null, 2019-04-05 13:15:55.674(Timestamp)
+2019-04-05 13:15:56.266 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - <==    Updates: 1
+2019-04-05 13:16:16.913 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==>  Preparing: INSERT INTO sd_purchase_supplier(supplier_id,name,link_name,mobile,address,supplier_desc,updater,update_time) VALUES(?,?,?,?,?,?,?,?) 
+2019-04-05 13:16:16.961 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==> Parameters: null, 真是棒供销商(String), 刘雷(String), 123456789(String), 广东省真棒公司(String), 很好(String), null, 2019-04-05 13:16:16.431(Timestamp)
+2019-04-05 13:16:16.983 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - <==    Updates: 1
+2019-04-05 13:16:32.937 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==>  Preparing: INSERT INTO sd_purchase_supplier(supplier_id,name,link_name,mobile,address,supplier_desc,updater,update_time) VALUES(?,?,?,?,?,?,?,?) 
+2019-04-05 13:16:32.999 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - ==> Parameters: null, 真是强供销商(String), 刘雷(String), 123456789(String), 广东省真强公司(String), 很好(String), null, 2019-04-05 13:16:32.399(Timestamp)
+2019-04-05 13:16:33.019 [main] DEBUG t.l.s.d.PurchaseSupplierDao.insertPurchaseSupplie - <==    Updates: 1
+2019-04-05 20:25:44.219 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==>  Preparing: INSERT INTO sd_purchase_order(porder_id,goods_id,supplier_id,repo_id,supplier_name,order_number,count,unit_price,total_price, order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time) VALUES(?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?, ?,?,?,?) 
+2019-04-05 20:25:44.325 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==> Parameters: null, 1(Long), 1(Long), 1(Long), null, null, null, null, null, 采购50件(String), 2019-04-05 20:25:43.702(Timestamp), null, null, null, null, null, null, null, null
+2019-04-05 20:25:44.345 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - <==    Updates: 1
+2019-04-05 20:25:58.678 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==>  Preparing: INSERT INTO sd_purchase_order(porder_id,goods_id,supplier_id,repo_id,supplier_name,order_number,count,unit_price,total_price, order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time) VALUES(?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?, ?,?,?,?) 
+2019-04-05 20:25:58.725 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==> Parameters: null, 1(Long), 1(Long), 1(Long), null, null, null, null, null, 采购50件(String), 2019-04-05 20:25:58.223(Timestamp), null, null, null, null, null, null, null, null
+2019-04-05 20:25:58.744 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - <==    Updates: 1
+2019-04-05 20:26:10.150 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==>  Preparing: INSERT INTO sd_purchase_order(porder_id,goods_id,supplier_id,repo_id,supplier_name,order_number,count,unit_price,total_price, order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time) VALUES(?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?, ?,?,?,?) 
+2019-04-05 20:26:10.237 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==> Parameters: null, 1(Long), 1(Long), 1(Long), null, null, null, null, null, 采购50件(String), 2019-04-05 20:26:09.708(Timestamp), null, null, null, null, null, null, null, null
+2019-04-05 20:26:10.258 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - <==    Updates: 1
+2019-04-05 20:26:20.874 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==>  Preparing: INSERT INTO sd_purchase_order(porder_id,goods_id,supplier_id,repo_id,supplier_name,order_number,count,unit_price,total_price, order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time) VALUES(?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?, ?,?,?,?) 
+2019-04-05 20:26:20.947 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - ==> Parameters: null, 1(Long), 1(Long), 1(Long), null, null, null, null, null, 采购50件(String), 2019-04-05 20:26:20.388(Timestamp), null, null, null, null, null, null, null, null
+2019-04-05 20:26:20.969 [main] DEBUG t.l.sdims.dao.PurchaseOrderDao.insertPurchaseOrder - <==    Updates: 1

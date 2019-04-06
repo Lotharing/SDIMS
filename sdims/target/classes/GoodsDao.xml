@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lothar.sdims.dao.GoodsDao">
+	<!-- 插入商品 -->
+	<insert id="insertGoods" useGeneratedKeys="true"
+		keyColumn="goods_id" keyProperty="goodsId"
+		parameterType="top.lothar.sdims.entity.Goods">
+		INSERT
+		INTO
+		sd_base_goods(goods_id,name,code,type,brand,standard,material,buy_price,sale_price,goods_desc,update_time,picture)
+		VALUES(#{goodsId},#{name},#{code},#{type},#{brand},#{standard},#{material},#{buyPrice},#{salePrice},#{goodsDesc},#{updateTime},#{picture})
+	</insert>
+	<!-- 删除商品 -->
+	<delete id="deleteGoodsById" parameterType="long">
+		DELETE
+		FROM
+		sd_base_goods
+		WHERE
+		goods_id=#{goodsId}
+	</delete>
+	<!-- 更新商品 -->
+	<update id="updateGoods" parameterType="top.lothar.sdims.entity.Goods" keyProperty="goodsId">
+		UPDATE
+		sd_base_goods
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="code!=null">code=#{code},</if>
+			<if test="type!=null">type=#{type},</if>
+			<if test="brand!=null">brand=#{brand},</if>
+			<if test="standard!=null">standard=#{standard},</if>
+			<if test="material!=null">material=#{material},</if>
+			<if test="buyPrice!=null">buy_price=#{buyPrice},</if>
+			<if test="salePrice!=null">sale_price=#{salePrice},</if>
+			<if test="goodsDesc!=null">goods_desc=#{goodsDesc},</if>
+			<if test="updateTime!=null">update_time=#{updateTime},</if>
+			<if test="picture!=null">picture=#{picture}</if>
+		</set>
+		WHERE
+		goods_id=#{goodsId}
+	</update>
+	<!-- 根据ID查询 -->
+	<select id="queryGoodsById" parameterType="long" resultType="top.lothar.sdims.entity.Goods">
+		SELECT
+		goods_id,
+		name,
+		code,
+		type,
+		brand,
+		standard,
+		material,
+		buy_price,
+		sale_price,
+		goods_desc,
+		update_time,
+		picture
+		FROM
+		sd_base_goods
+		WHERE
+		goods_id=#{goodsId}
+	</select>
+	<!-- 查询商品列表 -->
+	<select id="queryGoodsList" resultType="top.lothar.sdims.entity.Goods">
+		SELECT
+		goods_id,
+		name,
+		code,
+		type,
+		brand,
+		standard,
+		material,
+		buy_price,
+		sale_price,
+		goods_desc,
+		update_time,
+		picture
+		FROM
+		sd_base_goods
+		<where>
+			<if test="goodsCondition!=null and goodsCondition.name!=null">
+				and name = #{goodsCondition.name}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.code!=null">
+				and code = #{goodsCondition.code}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.type!=null">
+				and type = #{goodsCondition.type}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.brand!=null">
+				and brand = #{goodsCondition.brand}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.standard!=null">
+				and standard = #{goodsCondition.standard}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.material!=null">
+				and material = #{goodsCondition.material}
+			</if>
+		</where>
+		ORDER BY
+		goods_id ASC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询对应商品数量 -->
+	<select id="queryGoodsCount" resultType="int">
+		SELECT
+		COUNT(goods_id)
+		FROM
+		sd_base_goods
+		<where>
+			<if test="goodsCondition!=null and goodsCondition.name!=null">
+				and name = #{goodsCondition.name}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.code!=null">
+				and code = #{goodsCondition.code}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.type!=null">
+				and type = #{goodsCondition.type}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.brand!=null">
+				and brand = #{goodsCondition.brand}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.standard!=null">
+				and standard = #{goodsCondition.standard}
+			</if>
+			<if test="goodsCondition!=null and goodsCondition.material!=null">
+				and material = #{goodsCondition.material}
+			</if>
+		</where>
+	</select>
+</mapper>

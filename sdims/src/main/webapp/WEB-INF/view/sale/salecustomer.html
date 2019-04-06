@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>客户管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<!-- 检索条件框/按钮 -->
+	<div class="panel panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="left20">名称</label> 
+				<input id="customerName"type="text" class="form-control" placeholder="客户名称">
+				<button onclick="searchCustomer()" type="button"
+					class="btn btn-primary">查询</button>
+				<button onclick="addCustomer()" type="button"
+					class="btn btn-success">添加</button>
+			</div>
+		</form>
+	</div>
+	<!-- 商品展示表 -->
+	<div class="panel panel-primary">
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <td>序号</td>
+                <td>客户名称</td>
+                <td>联系人</td>
+                <td>联系方式</td>
+                <td>客户地址</td>
+                <td>客户描述</td>
+                <td>更新人</td>
+                <td>更新时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="table-customer"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="page_nav_customer"></div>
+	</div>
+	
+	<!-- ----------------------------------------------弹出窗口-插入----------------------------------------------- -->
+	
+	<div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="customerModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">客户名称</label>
+						<input id="customerNameInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="客户名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">联系人</label>
+						<input id="customerManInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="联系人(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">联系方式</label>
+						<input id="customerMobileInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="联系方式"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">客户地址</label>
+						<input id="customerAddressInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="客户地址"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">客户描述</label>
+						<input id="customerDescInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="客户描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">更新人</label>
+						<input id="customerUpdaterInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="更新人"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddCustomer" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <!------------------------------------------------弹出窗口-编辑------------------------------------------------->
+     
+     <script type="text/javascript">
+     $('#btn_YESAddCustomer').click(function() {
+  		var addCustomerUrl = "/sdims/sale/addcustomer";
+ 		//json存放区域
+ 		var customer = {};
+ 		customer.name = $('#customerNameInput').val();
+ 		customer.linkName = $('#customerManInput').val();
+ 		customer.mobile = $('#customerMobileInput').val();
+ 		customer.address = $('#customerAddressInput').val();
+ 		customer.customerDesc = $('#customerDescInput').val();
+ 		customer.updater = $('#customerUpdaterInput').val();
+ 		customer.updateTime = new Date();
+ 		//判断必填项是否没填
+ 		if (customer.name == "" || customer.linkName == "" || customer.mobile == "" || customer.address == "" || customer.updater == "") {
+ 			alert('名称/联系人/手机号/地址/更新人不能为空');
+ 			return;
+ 		}
+ 		// 生成表单对象，用于接收参数并传递给后台
+ 		var formData = new FormData();
+ 		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+ 		formData.append('customerStr', JSON.stringify(customer));
+ 		//携带数据请求后台
+ 		$.ajax({
+ 			url : addCustomerUrl,
+ 			type : 'POST',
+ 			data : formData,
+ 			contentType : false,
+ 			processData : false,
+ 			cache : false,
+ 			success : function(data) {
+ 				if (data.success) {
+ 					alert('添加成功');
+ 					to_page_customer(totalRecord);
+ 				} else {
+ 					alert('添加失败');
+ 				}
+ 			}
+ 		});
+ 	});
+     </script>
+</body>
+</html>
