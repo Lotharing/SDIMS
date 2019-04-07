@@ -17,7 +17,11 @@ import top.lothar.sdims.entity.Repository;
 import top.lothar.sdims.service.RepositoryService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 仓库
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 public class RepositoryController {

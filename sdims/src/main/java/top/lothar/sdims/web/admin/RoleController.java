@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.lothar.sdims.entity.Role;
 import top.lothar.sdims.service.RoleService;
-
+/**
+ * 角色
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 public class RoleController {

@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
-import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.SaleCustomerService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 客户
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/sale")
 public class SaleCustomerController {

@@ -1,7 +1,7 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
 var totalRecord,currentPage;
 /**
- * 创建仓库管理Lable
+ * 创建商品管理Lable
  */
 function getGoods() {
 	var goodsLable = $('#goodsManager').text();

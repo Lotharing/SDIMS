@@ -17,7 +17,11 @@ import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.PurchaseOrderService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 采购订单
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/purchase")
 public class PurchaseOrderController {

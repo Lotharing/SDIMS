@@ -1,5 +1,9 @@
 package top.lothar.sdims.util;
-
+/**
+ * 页码-查询起始位置计算
+ * @author Lothar
+ *
+ */
 public class PageCalculator {
 	/**
 	 * Service->Dao时页码对应DAO中的检索范围

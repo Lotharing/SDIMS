@@ -38,16 +38,14 @@
 					<li>
 						<a href="#"><i class="glyphicon glyphicon-th-large"></i>首页</a>
 					</li>
-					<!-- ----------------基础信息管理---------------- -->
+					<!------------------基础管理---------------- -->
 					<li>
-						<a href="#baseSetting" class="nav-header collapsed"
-							data-toggle="collapse"> <i class="glyphicon glyphicon-star"></i>
-							基础信息管理 <span
-							class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+						<a href="#baseSetting" class="nav-header collapsed" data-toggle="collapse">
+						<i class="glyphicon glyphicon-star"></i>基础信息管理
+						<span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
 						</a> 
 						<!-- nav nav-list secondmenu collapse后加in属性表示默认打开 -->
-						<ul id="baseSetting" class="nav nav-list secondmenu collapse"
-							style="height: 0px;">
+						<ul id="baseSetting" class="nav nav-list secondmenu collapse" style="height: 0px;">
 							<li>
 								<a href="javascript:void(0);" onclick="getGoods()">
 									<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span id="goodsManager">商品管理</span>
@@ -69,19 +67,50 @@
 							</li>
 						</ul>
 					</li>
-					<!-- ----------------库存管理---------------- -->
+					<!------------------订单审核---------------- -->
+					<li>
+						<a href="#orderSetting" class="nav-header collapsed" data-toggle="collapse">
+							<i class="glyphicon glyphicon-star"></i>订单审核
+							<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+						</a>
+						<ul id="orderSetting" class="nav nav-list secondmenu collapse">
+							<li class="">
+								<a href="javascript:void(0);" onclick="getPurchaseOrderCheck()">
+									<i class="glyphicon glyphicon-ok-circle"></i>&nbsp;<span id="purchaseOrderCheckLableName">采购单审核</span>
+								</a>
+							</li>
+							<li class="">
+								<a href="javascript:void(0);" onclick="getSaleOrderCheck()">
+									<i class="glyphicon glyphicon-ok-circle"></i>&nbsp;<span id="saleOrderCheckLableName">销售单审核</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!------------------库存管理---------------- -->
 					<li>
 						<a href="#stockSetting" class="nav-header collapsed" data-toggle="collapse">
 							<i class="glyphicon glyphicon-star"></i>库存管理 
 							<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
 						</a>
 						<ul id="stockSetting" class="nav nav-list secondmenu collapse in">
-							<li class=""><a href="#"><i
-									class="glyphicon glyphicon-inbox"></i>&nbsp;库存管理</a></li>
-							<li class=""><a href="#"><i
-									class="glyphicon glyphicon-ok-circle"></i>&nbsp;订单审核</a></li>
-						</ul></li>
-					<!-- ----------------采购管理---------------- -->
+							<li class="">
+								<a href="#">
+									<i class="glyphicon glyphicon-inbox"></i>&nbsp;库存管理
+								</a>
+							</li>
+							<li class="">
+								<a href="#">
+									<i class="glyphicon glyphicon-registration-mark"></i>&nbsp;入库审核
+								</a>
+							</li>
+							<li class="">
+								<a href="#">
+									<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;出库审核
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!------------------采购管理---------------- -->
 					<li>
 						<a href="#supplierSetting" class="nav-header collapsed"data-toggle="collapse">
 							<i class="glyphicon glyphicon-star"></i>采购管理 
@@ -100,11 +129,11 @@
 							</li>
 						</ul>
 					</li>
-
-					<!-- ----------------销售管理---------------- -->
-					<li><a href="#customerSetting" class="nav-header collapsed"
-						data-toggle="collapse"> <i class="glyphicon glyphicon-star"></i>
-							销售管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+					<!------------------销售管理---------------- -->
+					<li>
+						<a href="#customerSetting" class="nav-header collapsed" data-toggle="collapse">
+							<i class="glyphicon glyphicon-star"></i>销售管理
+							<span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
 						</a>
 						<ul id="customerSetting" class="nav nav-list secondmenu collapse">
 							<li>
@@ -119,31 +148,29 @@
 							</li>
 						</ul>
 					</li>
-
-					<!-- ----------------账户管理---------------- -->
-					<li><a href="#accountSetting" class="nav-header collapsed"
-						data-toggle="collapse"> <i class="glyphicon glyphicon-star"></i>
-							账户管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
-					</a>
+					<!------------------账户管理---------------- -->
+					<li>
+						<a href="#accountSetting" class="nav-header collapsed" data-toggle="collapse">
+							<i class="glyphicon glyphicon-star"></i>账户管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+						</a>
 						<ul id="accountSetting" class="nav nav-list secondmenu collapse">
 							<li><a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;用户管理</a></li>
-							<li><a href="https://www.baidu.com"><i
-									class="glyphicon glyphicon-lock"></i>&nbsp;修改密码</a></li>
-						</ul></li>
-
-					<!-- ----------------关于系统---------------- -->
-					<li><a href="#"> <i class="glyphicon glyphicon-star"></i>
-							关于系统 <span class="badge pull-right">1</span>
-					</a></li>
+							<li><a href="https://www.baidu.com"><i class="glyphicon glyphicon-lock"></i>&nbsp;修改密码</a></li>
+						</ul>
+					</li>
+					<!------------------关于系统---------------- -->
+					<li>
+						<a href="http://blog.lothar.top/2019/04/06/SDIMS关于系统/" target="_Blank">
+							<i class="glyphicon glyphicon-star"></i>关于系统
+							<span class="badge pull-right">1</span>
+						</a>
+					</li>
 				</ul>
 			</div>
-			
 			<!-- 左右分割线 -->
-			<!-- <hr style="filter: alpha(opacity = 100, finishopacity = 0, style = 2)" width="80%" color="#6f5499" size="10" /> -->
 			<div class="col-md-1"style="width: 3px;">
 				<hr id="centerLine" style="width: 2px;height: 600px;background-color: #636363"/>		
 			</div>
-			
 			<!-- 中间右侧 -->
  			<div class="col-md-9">
  				<!-- 标题名称 -->
@@ -181,5 +208,9 @@
 	<script src="../resources/js/sale/saleCustomerLable.js"></script>
 	<!-- 销售管理标签栏.js控制文件 -->
 	<script src="../resources/js/sale/saleOrderLable.js"></script>
+	<!-- 采购单审核管理标签栏.js控制文件 -->
+	<script src="../resources/js/ordercheck/purchaseOrderCheckLable.js"></script>
+	<!-- 销售单审核管理标签栏.js控制文件 -->
+	<script src="../resources/js/ordercheck/saleOrderCheckLable.js"></script>
 </body>
 </html>

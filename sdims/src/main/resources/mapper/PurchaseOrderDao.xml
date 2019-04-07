@@ -176,13 +176,13 @@
 		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.repository!=null and purchaseOrderCondition.repository.name!=null">
 			and br.name = #{purchaseOrderCondition.repository.name}
 		</if>
-		<if test="purchaseOrderCondition.orderNumber!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.orderNumber!=null">
 			and po.order_number = #{purchaseOrderCondition.orderNumber}
 		</if>
-		<if test="purchaseOrderCondition.checkState!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.checkState!=null">
 			and po.check_state = #{purchaseOrderCondition.checkState}
 		</if>
-		<if test="purchaseOrderCondition.stockState!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.stockState!=null">
 			and po.stock_state = #{purchaseOrderCondition.stockState}
 		</if>
 		AND
@@ -218,14 +218,14 @@
 			test="purchaseOrderCondition!=null and purchaseOrderCondition.repository!=null and purchaseOrderCondition.repository.name!=null">
 			and br.name = #{purchaseOrderCondition.repository.name}
 		</if>
-		<if test="purchaseOrderCondition.orderNumber!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.orderNumber!=null">
 			and po.order_number =
 			#{purchaseOrderCondition.orderNumber}
 		</if>
-		<if test="purchaseOrderCondition.checkState!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.checkState!=null">
 			and po.check_state = #{purchaseOrderCondition.checkState}
 		</if>
-		<if test="purchaseOrderCondition.stockState!=null">
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.stockState!=null">
 			and po.stock_state = #{purchaseOrderCondition.stockState}
 		</if>
 		AND

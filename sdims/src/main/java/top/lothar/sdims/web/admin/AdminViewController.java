@@ -23,6 +23,7 @@ public class AdminViewController {
 	public String welcome() {
 		return "comment/welcome";
 	}
+	/*-------------------------------------------基础信息页----------------------------------------------*/
 	/**
 	 * 角色信息展示页
 	 * @return
@@ -55,6 +56,7 @@ public class AdminViewController {
 	public String goods() {
 		return "admin/goods";
 	}
+	/*-------------------------------------------采购管理页----------------------------------------------*/
 	/**
 	 * 供应商管理页
 	 * @return
@@ -71,8 +73,9 @@ public class AdminViewController {
 	public String purchaseOrder() {
 		return "purchase/purchaseorder";
 	}
+	/*-------------------------------------------销售管理页----------------------------------------------*/
 	/**
-	 * 销售商管理页(销售管理员专用路由)
+	 * 销售商管理页
 	 * @return
 	 */
 	@RequestMapping(value="salecustomer", method=RequestMethod.GET)
@@ -86,5 +89,22 @@ public class AdminViewController {
 	@RequestMapping(value="saleorder", method=RequestMethod.GET)
 	public String saleOrder() {
 		return "sale/saleorder";
+	}
+	/*-------------------------------------------订单审核管理页----------------------------------------------*/
+	/**
+	 * 采购单审核管理页
+	 * @return
+	 */
+	@RequestMapping(value="purchaseordercheck", method=RequestMethod.GET)
+	public String purchaseOrderCheck() {
+		return "ordercheck/purchaseordercheck";
+	}
+	/**
+	 * 销售单审核管理页
+	 * @return
+	 */
+	@RequestMapping(value="saleordercheck", method=RequestMethod.GET)
+	public String saleOrderCheck() {
+		return "ordercheck/saleordercheck";
 	}
 }

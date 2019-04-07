@@ -2,27 +2,26 @@ package top.lothar.sdims.web.sale;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
 import top.lothar.sdims.entity.Goods;
-import top.lothar.sdims.entity.PurchaseOrder;
 import top.lothar.sdims.entity.Repository;
 import top.lothar.sdims.entity.SaleOrder;
 import top.lothar.sdims.service.SaleOrderService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 销售单
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/sale")
 public class SaleOrderController {

@@ -19,7 +19,11 @@ import top.lothar.sdims.entity.Employee;
 import top.lothar.sdims.service.EmployeeService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 员工
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 public class EmployeeController {

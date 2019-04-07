@@ -1,7 +1,7 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
 var totalRecord,currentPage;
 /**
- * 创建订单管理Lable
+ * 创建采购单管理Lable
  */
 function getPurchaseOrder() {
 	var purchaseOrderLable = $('#purchaseOrderManager').text();

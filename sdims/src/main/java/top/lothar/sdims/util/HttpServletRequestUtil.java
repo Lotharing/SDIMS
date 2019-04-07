@@ -1,13 +1,12 @@
 package top.lothar.sdims.util;
 
 import javax.servlet.http.HttpServletRequest;
-
 /**
  * 处理HttpServletRequest参数对象
  * @author Lothar
  *
  */
-public class HttpServletRequestUtil { 
+public class HttpServletRequestUtil {
 	/**
 	 * 转整型
 	 * @param request

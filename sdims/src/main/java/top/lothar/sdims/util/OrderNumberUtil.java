@@ -3,7 +3,11 @@ package top.lothar.sdims.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-
+/**
+ * 订单编号生成工具
+ * @author Lothar
+ *
+ */
 public class OrderNumberUtil {
 	//随机数（5位数配合文件名）
 	private static final Random r = new Random();

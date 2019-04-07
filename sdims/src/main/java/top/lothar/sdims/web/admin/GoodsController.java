@@ -18,7 +18,11 @@ import top.lothar.sdims.entity.Goods;
 import top.lothar.sdims.service.GoodsService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
-
+/**
+ * 商品
+ * @author Lothar
+ *
+ */
 @Controller
 @RequestMapping("/admin")
 public class GoodsController {
