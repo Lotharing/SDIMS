@@ -67,6 +67,30 @@
 							</li>
 						</ul>
 					</li>
+					<!------------------库存管理---------------- -->
+					<li>
+						<a href="#stockSetting" class="nav-header collapsed" data-toggle="collapse">
+							<i class="glyphicon glyphicon-star"></i>库存管理 
+							<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+						</a>
+						<ul id="stockSetting" class="nav nav-list secondmenu collapse in">
+							<li class="">
+								<a href="javascript:void(0);" onclick="getStock()">
+									<i class="glyphicon glyphicon-inbox"></i>&nbsp;<span id="stockManagerName">库存管理</span>
+								</a>
+							</li>
+							<li class="">
+								<a href="javascript:void(0);" onclick="getIntoStock()">
+									<i class="glyphicon glyphicon-registration-mark"></i>&nbsp;<span id="intoStockManagerName">入库审核</span>
+								</a>
+							</li>
+							<li class="">
+								<a href="#">
+									<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;出库审核
+								</a>
+							</li>
+						</ul>
+					</li>
 					<!------------------订单审核---------------- -->
 					<li>
 						<a href="#orderSetting" class="nav-header collapsed" data-toggle="collapse">
@@ -82,30 +106,6 @@
 							<li class="">
 								<a href="javascript:void(0);" onclick="getSaleOrderCheck()">
 									<i class="glyphicon glyphicon-ok-circle"></i>&nbsp;<span id="saleOrderCheckLableName">销售单审核</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<!------------------库存管理---------------- -->
-					<li>
-						<a href="#stockSetting" class="nav-header collapsed" data-toggle="collapse">
-							<i class="glyphicon glyphicon-star"></i>库存管理 
-							<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
-						</a>
-						<ul id="stockSetting" class="nav nav-list secondmenu collapse in">
-							<li class="">
-								<a href="#">
-									<i class="glyphicon glyphicon-inbox"></i>&nbsp;库存管理
-								</a>
-							</li>
-							<li class="">
-								<a href="#">
-									<i class="glyphicon glyphicon-registration-mark"></i>&nbsp;入库审核
-								</a>
-							</li>
-							<li class="">
-								<a href="#">
-									<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;出库审核
 								</a>
 							</li>
 						</ul>
@@ -212,5 +212,9 @@
 	<script src="../resources/js/ordercheck/purchaseOrderCheckLable.js"></script>
 	<!-- 销售单审核管理标签栏.js控制文件 -->
 	<script src="../resources/js/ordercheck/saleOrderCheckLable.js"></script>
+	<!-- 仓库管理标签栏.js控制文件 -->
+	<script src="../resources/js/stock/stockLable.js"></script>
+	<!-- 入库管理标签栏.js控制文件 -->
+	<script src="../resources/js/stock/intoStockLable.js"></script>
 </body>
 </html>

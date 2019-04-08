@@ -82,4 +82,28 @@ public class StockDaoTest extends BaseTest{
 		int deleteStockById = stockDao.deleteStockById(stockId, goodsId);
 		System.out.println(deleteStockById);
 	}
+	
+	@Test
+	public void test() {
+		String goodsName = "智能防盗门";
+		String repositoryName = "洛阳市仓库";
+		Stock a = stockDao.queryStockByGoodsNameAndRepositoryName(goodsName, repositoryName);
+//		System.out.println(a.getStockId());
+//		System.out.println(a.getGoods().getName());
+//		System.out.println(a.getRepository().getName());
+//		System.out.println(a.getTotalCount());
+//		System.out.println(a.getSaleCount());
+//		System.out.println(a.getBuyPrice());
+//		System.out.println(a.getSalePrice());
+//		System.out.println(a.getTotalBuyPrice());
+//		System.out.println(a.getTotalSalePrice());
+//		System.out.println(a.getUpdateTime());
+		if (a!=null) {
+			System.out.println("不为空");
+		}else if (a==null) {
+			System.out.println("为空");
+		}{
+			
+		}
+	}
 }

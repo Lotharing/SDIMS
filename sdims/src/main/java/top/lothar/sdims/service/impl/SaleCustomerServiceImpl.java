@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import top.lothar.sdims.dao.SaleCustomerDao;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
-import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.SaleCustomerService;
 import top.lothar.sdims.util.PageCalculator;
 

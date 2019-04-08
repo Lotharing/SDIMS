@@ -124,4 +124,36 @@
 			ss.repo_id=br.repo_id
 		</where>
 	</select>
+	<!-- 根据商品名和仓库名查询库存记录 -->
+	<select id="queryStockByGoodsNameAndRepositoryName" resultMap="StockMap">
+		SELECT
+		stock_id,
+		bg.goods_id,
+		bg.name,
+		br.repo_id,
+		br.name "br_name",
+		ss.total_count,
+		ss.buy_price,
+		ss.sale_price,
+		ss.sale_count,
+		ss.total_buy_price,
+		ss.total_sale_price,
+		ss.update_time
+		FROM
+		sd_stock ss,
+		sd_base_goods bg,
+		sd_base_repo br
+		<where>
+			<if test="goodsName!=null">
+				and bg.name=#{goodsName}
+			</if>
+			<if test="repositoryName!=null">
+				and br.name=#{repositoryName}
+			</if>
+			AND
+			ss.goods_id=bg.goods_id
+			AND
+			ss.repo_id=br.repo_id
+		</where>
+	</select>
 </mapper>

@@ -11,7 +11,9 @@ import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.PurchaseOrder;
 import top.lothar.sdims.service.PurchaseOrderCheckService;
 import top.lothar.sdims.util.PageCalculator;
-
+/*
+ * 用于一次审核
+ */
 @Service
 public class PurchaseOrderCheckServiceImpl implements PurchaseOrderCheckService {
 	

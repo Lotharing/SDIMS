@@ -107,4 +107,21 @@ public class AdminViewController {
 	public String saleOrderCheck() {
 		return "ordercheck/saleordercheck";
 	}
+	/*-------------------------------------------库存管理页----------------------------------------------*/
+	/**
+	 * 仓库管理页(仓库管理员专用路由)
+	 * @return
+	 */
+	@RequestMapping(value="stock", method=RequestMethod.GET)
+	public String stock() {
+		return "stock/stock";
+	}
+	/**
+	 * 入库管理页(仓库管理员专用路由)
+	 * @return
+	 */
+	@RequestMapping(value="intostock", method=RequestMethod.GET)
+	public String intoStock() {
+		return "stock/intostock";
+	}
 }

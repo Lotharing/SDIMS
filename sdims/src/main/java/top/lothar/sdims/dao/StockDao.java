@@ -21,7 +21,7 @@ public interface StockDao {
 	 */
 	int updateStock(Stock stock);
 	/**
-	 * 删除库存记录
+	 * 删除库存记录(商品清除时候用)
 	 * @param stockId
 	 * @return
 	 */
@@ -36,4 +36,11 @@ public interface StockDao {
 	 * @return
 	 */
 	int queryStockCount(@Param("stockCondition")Stock stockCondition);
+	/**
+	 * 订单入库时候，根据商品名和仓库名找到库存记录
+	 * @param goodsName
+	 * @param repositoryName
+	 * @return
+	 */
+	Stock queryStockByGoodsNameAndRepositoryName(@Param("goodsName")String goodsName,@Param("repositoryName")String repositoryName);
 }
