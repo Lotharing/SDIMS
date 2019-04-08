@@ -19,7 +19,7 @@ function getPurchaseOrder() {
 /*
  *商品载入选择框
  */
-function getGoodsInfoToSelect() {
+function getGoodsInfoToPurchaseSelect() {
 	//商品信息
 	var goodsUrl = "/sdims/admin/getgoodslist?pageIndex="+1;
 	//商品信息放置select中
@@ -37,7 +37,7 @@ function getGoodsInfoToSelect() {
 /*
  *供应商载入选择框
  */
-function getSupplierInfoToSelect() {
+function getSupplierInfoToPurchaseSelect() {
 	var supplierUrl = "/sdims/purchase/getpurchasesupplierlist?pageIndex="+1;
 	//商品信息放置select中
 	$.getJSON(supplierUrl,function(data){
@@ -54,7 +54,7 @@ function getSupplierInfoToSelect() {
 /*
  *仓库载入选择框
  */
-function getRepositoryInfoToSelect() {
+function getRepositoryInfoToPurchaseSelect() {
 	var supplierUrl = "/sdims/admin/getrepositorylist?pageIndex="+1;
 	//商品信息放置select中
 	$.getJSON(supplierUrl,function(data){
@@ -272,11 +272,11 @@ function addSupplierOrder() {
 	$('.modal-dialog').css({"margin":"120px auto"});
 	$('.modal-header').css({"background-color":"#449D44"});
 	//模态框载入商品
-	getGoodsInfoToSelect();
+	getGoodsInfoToPurchaseSelect();
 	//模态框载入供应商
-	getSupplierInfoToSelect()
+	getSupplierInfoToPurchaseSelect()
 	//模态框载入仓库
-	getRepositoryInfoToSelect();
+	getRepositoryInfoToPurchaseSelect();
 	$('#purchaseOrderModal').modal();
 }
 /**
