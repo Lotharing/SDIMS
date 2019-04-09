@@ -124,4 +124,21 @@ public class AdminViewController {
 	public String intoStock() {
 		return "stock/intostock";
 	}
+	/**
+	 * 出库管理页(仓库管理员专用路由)
+	 * @return
+	 */
+	@RequestMapping(value="outostock", method=RequestMethod.GET)
+	public String outoStock() {
+		return "stock/outostock";
+	}
+	/*-------------------------------------------用户管理页----------------------------------------------*/
+	/**
+	 * 用户管理页(仓库管理员专用路由)
+	 * @return
+	 */
+	@RequestMapping(value="user", method=RequestMethod.GET)
+	public String user() {
+		return "admin/user";
+	}
 }

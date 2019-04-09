@@ -19,8 +19,8 @@ public class User {
 	private Employee employee;
 	//更新时间
 	private Date updateTime;
-	//状态1.系统管理员 2.库存管理员 3.采购员 4.销售员
-	private Integer state;
+	//角色1.系统管理员 2.库存管理员 3.采购员 4.销售员
+	private Role role;
 	
 	public Long getUserId() {
 		return userId;
@@ -58,11 +58,11 @@ public class User {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	public Integer getState() {
-		return state;
+	public Role getRole() {
+		return role;
 	}
-	public void setState(Integer state) {
-		this.state = state;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>用户管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<!-- Lable -->
+	<div class="panel panel-primary">
+		<!-- 检索条件框 -->
+		<div class="panel panel-body">
+			<form class="form-inline">
+				<div class="form-group">
+					<label class="left20">用户账户</label>
+					<input id="employeeAccount" type="text" class="form-control" placeholder="员工姓名"> 
+					<label class="left20">角色类型</label> 
+					<select id="employeeTypeOfUser" class="form-control">
+						
+					</select>
+					<button onclick="searchUser()" type="button" class="btn btn-primary">查询</button>
+					<button onclick="addUser()" type="button" class="btn btn-success">添加</button>
+				</div>
+			</form>
+		</div>
+		<!-- 信息展示区表格 -->
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+				<td>序号</td>
+				<td>账户名</td>
+				<td>角色名称</td>
+				<td>员工姓名</td>
+				<td>员工编号</td>
+				<td>角色权限</td>
+				<td>更新时间</td>
+				<td>操作</td>
+			</tr>
+            </thead>
+            <tbody id="table-user"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="user_page_nav"></div>
+	</div> 
+	
+	<!-- ----------------------------------------------弹出窗口-插入------------------------------------------------->
+	<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="UserModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">账户名</label>
+						<input id="accountInout" style="width: 80%;float: right" type="text" class="form-control" placeholder="账户名(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">员工信息</label>
+						<select id="employeeInfoInput" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">角色类型</label>
+						<select id="roleTypeInput" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddUser" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script type="text/javascript">
+		//添加员工信息
+		$('#btn_YESAddUser').click(
+				function() {
+					var employeeOptions = $('#employeeInfoInput option:selected');
+					var roleOptions = $('#roleTypeInput option:selected');
+					alert(employeeOptions.val());
+					alert(employeeOptions.text())
+					alert(roleOptions.val());
+					alert(roleOptions.text())
+					//后台添加信息URL
+					/*var addEmployeeUrl = "/sdims/admin/addemployee";
+					//json存放区域
+					var employee = {};
+					employee.name = $('#employeeNameInput').val();
+					employee.code = $('#employeeCode').val();
+					employee.idCard = $('#employeeIdCard').val();
+					employee.mobile = $('#employeeMobile').val();
+					var sex = $('#employeeSexDialog').val();
+					if (sex == "男") {
+						employee.sex = "1"
+					} else if (sex == "女") {
+						employee.sex = "2"
+					}
+					employee.address = $('#employeeAddress').val();
+					employee.email = $('#employeeEmail').val();
+					employee.type = $('#employeeTypeDialog').val();
+					employee.updateTime = new Date();
+					//判断必填项是否没填
+					if (employee.name == "" || employee.code == ""
+							|| employee.type == "") {
+						alert('姓名，编号，类型不能为空');
+						return;
+					}
+					// 生成表单对象，用于接收参数并传递给后台
+					var formData = new FormData();
+					// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+					formData.append('employeeStr', JSON.stringify(employee));
+					//携带数据请求后台
+					$.ajax({
+						url : addEmployeeUrl,
+						type : 'POST',
+						data : formData,
+						contentType : false,
+						processData : false,
+						cache : false,
+						success : function(data) {
+							if (data.success) {
+								alert('添加成功');
+								to_page_emp(totalRecord);
+							} else {
+								alert('添加失败');
+							}
+						}
+					});*/
+				});
+	</script>
+</body>
+</html>

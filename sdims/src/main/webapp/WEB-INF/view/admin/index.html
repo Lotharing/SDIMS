@@ -85,8 +85,8 @@
 								</a>
 							</li>
 							<li class="">
-								<a href="#">
-									<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;出库审核
+								<a href="javascript:void(0);" onclick="getOutoStock()">
+									<i class="glyphicon glyphicon-copyright-mark"></i>&nbsp;<span id="outoStockManagerName">出库审核</span>
 								</a>
 							</li>
 						</ul>
@@ -154,7 +154,11 @@
 							<i class="glyphicon glyphicon-star"></i>账户管理 <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
 						</a>
 						<ul id="accountSetting" class="nav nav-list secondmenu collapse">
-							<li><a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp;用户管理</a></li>
+							<li>
+								<a  href="javascript:void(0);" onclick="getUser()">
+									<i class="glyphicon glyphicon-user"></i>&nbsp;<span id="userManager">用户管理</span>
+								</a>
+							</li>
 							<li><a href="https://www.baidu.com"><i class="glyphicon glyphicon-lock"></i>&nbsp;修改密码</a></li>
 						</ul>
 					</li>
@@ -216,5 +220,9 @@
 	<script src="../resources/js/stock/stockLable.js"></script>
 	<!-- 入库管理标签栏.js控制文件 -->
 	<script src="../resources/js/stock/intoStockLable.js"></script>
+	<!-- 出库管理标签栏.js控制文件 -->
+	<script src="../resources/js/stock/outoStockLable.js"></script>
+	<!-- 用户管理标签栏.js控制文件 -->
+	<script src="../resources/js/admin/user.js"></script>
 </body>
 </html>

@@ -1,43 +1,43 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,intostockcurrentPage;
+var totalRecord,outostokcurrentPage;
 /**
  * 创建入库管理Lable
  */
-function getIntoStock() {
-	var intoStockManagerName = $('#intoStockManagerName').text();
+function getOutoStock() {
+	var outoStockManagerName = $('#outoStockManagerName').text();
 	var item = {
-			'id' : '13',
-			'name' : intoStockManagerName,
-			'url' : 'intostock.html',
+			'id' : '14',
+			'name' : outoStockManagerName,
+			'url' : 'outostock.html',
 			'closable' : true
 		};
 		//调出模态框
 		closableTab.addTab(item);
 		//默认展示第一页
-		to_page_intoStock(1);
+		to_page_outoStock(1);
 }
 /**
  * 页面跳转
  * @param pageIndex
  * @returns
  */
-function to_page_intoStock(pageIndex,checkOrderNumber,stockStateNumber) {
+function to_page_outoStock(pageIndex,checkSaleOrderNumber,stockStateNumber) {
 	$.ajax({
-		url : "/sdims/stock/getintopurchaseorderchecklist",
+		url : "/sdims/stock/getoutosaleorderchecklist",
 		dataType : 'json',
 		data : {
 			pageIndex : pageIndex,
-			checkOrderNumber : checkOrderNumber,
+			checkSaleOrderNumber : checkSaleOrderNumber,
 			stockStateNumber : stockStateNumber
 		},
 		tpye : "GET",
 		success : function(data) {
 			// 1.解析并显示采购单数据
-			getIntoStockPurchaseOrderCheckInfoToTables(data);
+			getOutoStockSaleOrderCheckInfoToTables(data);
 			// 2.解析并显示分页信息（只用到记录全局属性）
-			build_IntoStockPurchaseOrderCheckpage_info(data);
+			build_OutoStockSaleOrderCheckpage_info(data);
 			// 3.解析显示分页条
-			build_IntoStockPurchaseOrderCheckpage_nav(data);
+			build_OutoStockSaleOrderCheckpage_nav(data);
 		}
 	});
 }
@@ -46,21 +46,21 @@ function to_page_intoStock(pageIndex,checkOrderNumber,stockStateNumber) {
  * @param data
  * @returns
  */
-function getIntoStockPurchaseOrderCheckInfoToTables(data) {
-	$("#table-intoStockPurchaseOrderCheck").empty();
+function getOutoStockSaleOrderCheckInfoToTables(data) {
+	$("#table-outoStockSaleOrderCheck").empty();
 	data.pageBean.datas.map(function(item, index) {
 		//操作-删除按钮
 		var AdoptCheckBtn = $("<button></button>").addClass(
-				"btn btn-success btn-xs IntopOrderAdoptCheck_btn").append(
+				"btn btn-success btn-xs OutopOrderAdoptCheck_btn").append(
 				$("<span></span>")
 						.addClass("glyphicon glyphicon-ok")).append(" ").append("通过");
 		//给按钮添加一个自定义属性来标识当前通过审核的采购单
-		AdoptCheckBtn.attr("adopt-id", item.porderId);
+		AdoptCheckBtn.attr("adopt-id", item.sorderId);
 		//存放按钮的TD
 		var checkTd = $("<td></td>").append(AdoptCheckBtn);
-		var porderId = $("<td></td>").append(item.porderId);
+		var sorderId = $("<td></td>").append(item.sorderId);
 		var goodsName = $("<td></td>").append(item.goods.name);
-		var supplierName = $("<td></td>").append(item.supplier.name);
+		var customerName = $("<td></td>").append(item.customer.name);
 		var repositoryName = $("<td></td>").append(item.repository.name);
 		var orderNumber = $("<td></td>").append(item.orderNumber);
 		var count = $("<td></td>").append(item.count);
@@ -77,9 +77,9 @@ function getIntoStockPurchaseOrderCheckInfoToTables(data) {
 			var stockTime = $("<td></td>").append(new Date(item.stockTime).format('Y-m-d H:i:s'));
 		}
 		$("<tr></tr>")
-		.append(porderId)
+		.append(sorderId)
 		.append(goodsName)
-		.append(supplierName)
+		.append(customerName)
 		.append(repositoryName)
 		.append(orderNumber)
 		.append(count)
@@ -92,7 +92,7 @@ function getIntoStockPurchaseOrderCheckInfoToTables(data) {
 		.append(stockMan)
 		.append(stockTime)
 		.append(checkTd)
-		.appendTo("#table-intoStockPurchaseOrderCheck");
+		.appendTo("#table-outoStockSaleOrderCheck");
 	});
 }
 /**
@@ -100,19 +100,19 @@ function getIntoStockPurchaseOrderCheckInfoToTables(data) {
  * @param data
  * @returns
  */
-function build_IntoStockPurchaseOrderCheckpage_info(data) {
+function build_OutoStockSaleOrderCheckpage_info(data) {
 	//最大页数
 	totalRecord = data.pageBean.sumPages;
 	//当前页数
-	intostockcurrentPage = data.pageBean.curPage;
+	outostokcurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
  * @param result
  * @returns
  */
-function build_IntoStockPurchaseOrderCheckpage_nav(data) {
-	$("#page_nav_intoStockPurchaseOrderCheck").empty();
+function build_OutoStockSaleOrderCheckpage_nav(data) {
+	$("#page_nav_outoStockSaleOrderCheck").empty();
 	var ul = $("<ul></ul>").addClass("pagination");
 	
 	var firstPageLi = $("<li></li>").append(
@@ -127,10 +127,10 @@ function build_IntoStockPurchaseOrderCheckpage_nav(data) {
 	} else {
 		//为元素添加点击翻页的事件
 		firstPageLi.click(function() {
-			to_page_intoStock(1);
+			to_page_outoStock(1);
 		});
 		prePageLi.click(function() {
-			to_page_intoStock(data.pageBean.curPage - 1);
+			to_page_outoStock(data.pageBean.curPage - 1);
 		});
 	}
 	var nextPageLi = $("<li></li>").append(
@@ -144,10 +144,10 @@ function build_IntoStockPurchaseOrderCheckpage_nav(data) {
 		lastPageLi.addClass("disabled");
 	} else {
 		nextPageLi.click(function() {
-			to_page_intoStock(data.pageBean.curPage + 1);
+			to_page_outoStock(data.pageBean.curPage + 1);
 		});
 		lastPageLi.click(function() {
-			to_page_intoStock(data.pageBean.sumPages);
+			to_page_outoStock(data.pageBean.sumPages);
 		});
 	}
 	//添加首页和前一页 的提示
@@ -159,39 +159,38 @@ function build_IntoStockPurchaseOrderCheckpage_nav(data) {
 			numLi.addClass("active");
 		}
 		numLi.click(function() {
-			to_page_intoStock(item);
+			to_page_outoStock(item);
 		});
 		ul.append(numLi);
 	});
 	//添加下一页和末页 的提示
 	ul.append(nextPageLi).append(lastPageLi);
 	var navEle = $("<nav></nav>").append(ul);
-	navEle.appendTo("#page_nav_intoStockPurchaseOrderCheck");
+	navEle.appendTo("#page_nav_outoStockSaleOrderCheck");
 }
 /**
  * 条件查询
  * @returns
  */
-function searchIntoStockPurchaseOrderOfCheck() {
-	var checkOrderNumber = $('#intoStockPurchaseOrderCheckNumber').val();
-	var tempIntoStockPurchaseOrderCheckState = $('#intoStockPurchaseOrderCheckState').val();
+function searchOutoStockPurchaseOrderOfCheck() {
+	var checkOrderNumber = $('#outoStockSaleOrderCheckNumber').val();
+	var tempOutoStockSaleOrderCheckState = $('#outoStockSaleOrderCheckState').val();
 	var stockStateNumber;
-	if (tempIntoStockPurchaseOrderCheckState=="审核通过") {
+	if (tempOutoStockSaleOrderCheckState=="审核通过") {
 		stockStateNumber=1;
-	}else if (tempIntoStockPurchaseOrderCheckState=="待审核") {
+	}else if (tempOutoStockSaleOrderCheckState=="待审核") {
 		stockStateNumber=0;
 	}
-	to_page_intoStock(1,checkOrderNumber,stockStateNumber);
-}
-/**
- * 审核通过采购单-入库
+	to_page_outoStock(1,checkOrderNumber,stockStateNumber);
+}/**
+ * 审核通过销售单-出库
  * @returns
  */
-$(document).on("click",".IntopOrderAdoptCheck_btn",function(){
-	//当前采购单ID
-	var porderId = $(this).attr("adopt-id");
+$(document).on("click",".OutopOrderAdoptCheck_btn",function(){
+	//当前销售单ID
+	var sorderId = $(this).attr("adopt-id");
 	//请求通过审核订单
-	var intoStockPurchaseOrderCheckUrl = "/sdims/stock/modifyintostockpurchaseordercheck?porderId="+porderId;
+	var outoStockSaleOrderCheckUrl = "/sdims/stock/modifyoutostocksaleordercheck?sorderId="+sorderId;
 	//获取审核状态文字
 	var checkStateDom = $(this).parent().prev().prev().prev();
 	var checkFont = checkStateDom.text();
@@ -199,11 +198,11 @@ $(document).on("click",".IntopOrderAdoptCheck_btn",function(){
 	if (checkFont=="审核通过") {
 		alert("已审核!!!");
 	}else{
-		$.getJSON(intoStockPurchaseOrderCheckUrl,function(data){
+		$.getJSON(outoStockSaleOrderCheckUrl,function(data){
 			if (data.success) {
 				alert(data.successMsg);
 				//返回当前页
-				to_page_intoStock(intostockcurrentPage);
+				to_page_outoStock(outostokcurrentPage);
 			}else {
 				alert(data.errMsg);
 			}

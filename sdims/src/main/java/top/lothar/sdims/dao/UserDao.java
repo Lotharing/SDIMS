@@ -29,7 +29,7 @@ public interface UserDao {
 	 */
 	int updateUser(User user);
 	/**
-	 * 分页条件查询所有用户（用户账号，用户角色，两项信息具有唯一性不必分页）实体为空查询所有
+	 * 分页条件查询所有用户（用户账号，用户角色）实体为空查询所有
 	 * @param rowIndex
 	 * @param pageSize
 	 * @return

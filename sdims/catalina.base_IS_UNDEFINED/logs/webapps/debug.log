@@ -1,18 +1,52 @@
-2019-04-08 19:23:05.795 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:23:05.870 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 实木防盗门(String), 洛阳市仓库(String)
-2019-04-08 19:23:05.897 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 1
-2019-04-08 19:23:28.882 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:23:28.978 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 智能防盗门(String), 洛阳市仓库(String)
-2019-04-08 19:23:28.998 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 1
-2019-04-08 19:25:43.967 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:25:44.014 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 智能防盗门(String), 洛阳市仓库(String)
-2019-04-08 19:25:44.033 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 1
-2019-04-08 19:27:10.639 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:27:10.719 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 智能防盗(String), 洛阳市仓库(String)
-2019-04-08 19:27:10.739 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 0
-2019-04-08 19:29:31.117 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:29:31.160 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 智能防盗(String), 洛阳市仓库(String)
-2019-04-08 19:29:31.178 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 0
-2019-04-08 19:29:42.632 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==>  Preparing: SELECT stock_id, bg.goods_id, bg.name, br.repo_id, br.name "br_name", ss.total_count, ss.buy_price, ss.sale_price, ss.sale_count, ss.total_buy_price, ss.total_sale_price, ss.update_time FROM sd_stock ss, sd_base_goods bg, sd_base_repo br WHERE bg.name=? and br.name=? AND ss.goods_id=bg.goods_id AND ss.repo_id=br.repo_id 
-2019-04-08 19:29:42.683 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - ==> Parameters: 智能防盗门(String), 洛阳市仓库(String)
-2019-04-08 19:29:42.712 [main] DEBUG t.l.s.d.S.queryStockByGoodsNameAndRepositoryName - <==      Total: 1
+2019-04-09 17:11:26.837 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, su.state FROM sd_sys_user su, sd_base_employee be WHERE su.employee_id=be.employee_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:11:26.905 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:11:26.936 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:12:13.541 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, su.state FROM sd_sys_user su, sd_base_employee be WHERE su.employee_id=be.employee_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:12:13.591 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:12:13.620 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:12:27.467 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, su.state FROM sd_sys_user su, sd_base_employee be WHERE su.employee_id=be.employee_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:12:27.523 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:12:27.554 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:35:30.292 [main] DEBUG top.lothar.sdims.dao.UserDao.insertUser - ==>  Preparing: INSERT INTO sd_sys_user(user_id,account,password,role_name,employee_id,update_time,state) VALUES(?,?,?,?,?,?,?) 
+2019-04-09 17:35:30.420 [main] DEBUG top.lothar.sdims.dao.UserDao.insertUser - ==> Parameters: null, xiaodan(String), 111111(String), 订单审核员(String), 5(Long), 2019-04-09 17:35:29.762(Timestamp), 5(Long)
+2019-04-09 17:35:30.444 [main] DEBUG top.lothar.sdims.dao.UserDao.insertUser - <==    Updates: 1
+2019-04-09 17:36:21.241 [main] DEBUG top.lothar.sdims.dao.UserDao.deleteUserById - ==>  Preparing: DELETE FROM sd_sys_user WHERE user_id=? 
+2019-04-09 17:36:21.338 [main] DEBUG top.lothar.sdims.dao.UserDao.deleteUserById - ==> Parameters: 8(Long)
+2019-04-09 17:36:21.347 [main] DEBUG top.lothar.sdims.dao.UserDao.deleteUserById - <==    Updates: 1
+2019-04-09 17:37:29.963 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==>  Preparing: UPDATE sd_sys_user SET password=?, employee_id=? state=? WHERE user_id=? 
+2019-04-09 17:37:30.048 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==> Parameters: 111111(String), 3(Long), 4(Long), 7(Long)
+2019-04-09 17:39:16.803 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==>  Preparing: UPDATE sd_sys_user SET password=?, employee_id=? state=? WHERE user_id=? 
+2019-04-09 17:39:16.856 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==> Parameters: 111111(String), 5(Long), 4(Long), 7(Long)
+2019-04-09 17:39:51.303 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==>  Preparing: UPDATE sd_sys_user SET password=?, employee_id=?, state=? WHERE user_id=? 
+2019-04-09 17:39:51.362 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - ==> Parameters: 111111(String), 5(Long), 4(Long), 7(Long)
+2019-04-09 17:39:51.379 [main] DEBUG top.lothar.sdims.dao.UserDao.updateUser - <==    Updates: 1
+2019-04-09 17:40:26.337 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.repo_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:40:26.382 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:42:04.323 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.state sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.repo_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:42:04.369 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:42:39.505 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.repo_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:42:39.562 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:43:09.551 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.role_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:43:09.590 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:43:09.615 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:44:04.072 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.role_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:44:04.129 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:44:04.162 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:44:43.944 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.role_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:44:43.988 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:44:44.018 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:45:54.492 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.employee_id=be.employee_id AND su.state=sr.role_id ORDER BY su.user_id ASC LIMIT ?,?; 
+2019-04-09 17:45:54.539 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - ==> Parameters: 0(Integer), 10(Integer)
+2019-04-09 17:45:54.577 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserList - <==      Total: 6
+2019-04-09 17:46:20.021 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user su, sd_base_employee be WHERE su.account=? AND su.employee_id=be.employee_id 
+2019-04-09 17:46:20.070 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==> Parameters: admin(String)
+2019-04-09 17:46:20.095 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - <==      Total: 1
+2019-04-09 17:46:31.227 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user su, sd_base_employee be WHERE su.role_name=? and su.account=? AND su.employee_id=be.employee_id 
+2019-04-09 17:46:31.284 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==> Parameters: 系统管理员(String), admin(String)
+2019-04-09 17:46:31.304 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - <==      Total: 1
+2019-04-09 17:46:56.926 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user su, sd_base_employee be WHERE su.role_name=? AND su.employee_id=be.employee_id 
+2019-04-09 17:46:56.972 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - ==> Parameters: 订单审核员(String)
+2019-04-09 17:46:56.993 [main] DEBUG top.lothar.sdims.dao.UserDao.queryUserCount - <==      Total: 1
+2019-04-09 17:47:35.720 [main] DEBUG top.lothar.sdims.dao.UserDao.updatePasswordById - ==>  Preparing: UPDATE sd_sys_user SET password=?, update_time=? WHERE user_id=? AND account=? AND password=? 
+2019-04-09 17:47:35.759 [main] DEBUG top.lothar.sdims.dao.UserDao.updatePasswordById - ==> Parameters: 222222(String), 2019-04-09 17:47:35.186(Timestamp), 7(Long), xiaodan(String), 111111(String)
+2019-04-09 17:47:35.777 [main] DEBUG top.lothar.sdims.dao.UserDao.updatePasswordById - <==    Updates: 1

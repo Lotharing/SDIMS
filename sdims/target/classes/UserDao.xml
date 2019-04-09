@@ -13,6 +13,11 @@
 		<association property="employee" column="employeeId" javaType="top.lothar.sdims.entity.Employee">
 			<id column="employee_id" property="employeeId"/>
 			<result column="name" property="name"/>
+			<result column="code" property="code"/>
+		</association>
+		<association property="role" column="roleId" javaType="top.lothar.sdims.entity.Role">
+			<id column="role_id" property="roleId"/>
+			<result column="role_desc" property="roleDesc"/>
 		</association>
 	</resultMap>
 	<!-- 添加用户 -->
@@ -20,7 +25,7 @@
 		INSERT
 		INTO
 		sd_sys_user(user_id,account,password,role_name,employee_id,update_time,state)
-		VALUES(#{userId},#{account},#{password},#{roleName},#{employee.employeeId},#{updateTime},#{state})
+		VALUES(#{userId},#{account},#{password},#{roleName},#{employee.employeeId},#{updateTime},#{role.roleId})
 	</insert>
 	<!-- 删除用户 -->
 	<delete id="deleteUserById" parameterType="Long">
@@ -38,9 +43,9 @@
 			<if test="account!=null">account=#{account},</if>
 			<if test="password!=null">password=#{password},</if>
 			<if test="roleName!=null">role_name=#{roleName},</if>
-			<if test="employee!=null and employee.employeeId!=null">employee_id=#{employee.employeeId}</if>
+			<if test="employee!=null and employee.employeeId!=null">employee_id=#{employee.employeeId},</if>
 			<if test="updateTime!=null">update_time=#{updateTime},</if>
-			<if test="state!=null">state=#{state}</if>
+			<if test="role.roleId!=null">state=#{role.roleId}</if>
 		</set>
 		WHERE
 		user_id=#{userId}
@@ -54,11 +59,14 @@
 		su.role_name,
 		be.employee_id,
 		be.name,
+		be.code,
 		su.update_time,
-		su.state
+		sr.role_id,
+		sr.role_desc
 		FROM
 		sd_sys_user su,
-		sd_base_employee be
+		sd_base_employee be,
+		sd_sys_role sr
 		<where>
 			<if test="user!=null and user.roleName!=null">
 				and su.role_name=#{user.roleName}
@@ -68,6 +76,8 @@
 			</if>
 			AND
 			su.employee_id=be.employee_id
+			AND
+			su.state=sr.role_id
 		</where>
 		ORDER BY
 		su.user_id ASC
