@@ -69,7 +69,7 @@ function getUserInfoToTables(data) {
 	data.pageBean.datas.map(function(item, index) {
 		//操作-删除按钮
 		var delBtn = $("<button></button>").addClass(
-				"btn btn-danger btn-xs delete_btn").append(
+				"btn btn-danger btn-xs user_delete_btn").append(
 				$("<span></span>").addClass("glyphicon glyphicon-trash"))
 				.append(" ").append("删除");
 		//给删除按钮添加一个自定义属性来标识当前删除的员工
@@ -237,3 +237,20 @@ function getUserRoleType() {
 		}
 	});
 }
+/**
+ * 创建按钮的时候绑定点击事件(删除按钮)-根据ID删除用户并刷新当前页
+ * @returns
+ */
+$(document).on("click",".user_delete_btn",function(){
+	var userId = $(this).attr("del-id");
+	var delUserUrl = "/sdims/user/removeuser?userId="+userId;
+	$.getJSON(delUserUrl,function(data){
+		if (data.success) {
+			alert(data.successMsg);
+			//删除成功，返回当前页
+			to_page_user(UsercurrentPage);
+		}else {
+			alert(data.errMsg);
+		}
+	});
+});

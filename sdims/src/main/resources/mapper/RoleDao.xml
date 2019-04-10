@@ -13,4 +13,16 @@
 		FROM
 		sd_sys_role
 	</select>
+	
+	<select id="queryRoleById" resultType="Role">
+		SELECT
+		role_id,
+		role_name,
+		create_time,
+		role_desc
+		FROM
+		sd_sys_role
+		WHERE
+		role_id = #{roleId}
+	</select>
 </mapper>

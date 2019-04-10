@@ -2,6 +2,7 @@ package top.lothar.sdims.dao;
 
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class RoleDaoTest extends BaseTest{
 	
 	private static Logger log = LoggerFactory.getLogger(RoleDaoTest.class);
 	
-	@Test
+	@Ignore
 	public void testQueryRoleLilst() {
 		
 		log.debug("测试开始");
@@ -31,5 +32,12 @@ public class RoleDaoTest extends BaseTest{
 		}
 		
 		log.debug("测试结束");
+	}
+	
+	@Test
+	public void test() {
+		long roleId = 3;
+		Role queryRoleById = roleDao.queryRoleById(roleId);
+		System.out.println(queryRoleById.getRoleName());
 	}
 }

@@ -111,7 +111,7 @@ public class EmployeeController {
 			//非空判断
 			if (employee!=null) {
 				int effectNum = employeeService.addEmployee(employee);
-				if (effectNum < 0) {
+				if (effectNum < 1) {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", "插入失败");
 				}else {
@@ -138,7 +138,7 @@ public class EmployeeController {
 		long employeeId = HttpServletRequestUtil.getLong(request, "employeeId");
 		try {
 			int effectNum = employeeService.removeEmployee(employeeId);
-			if (effectNum < 0) {
+			if (effectNum < 1) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", "删除失败");
 			}else {

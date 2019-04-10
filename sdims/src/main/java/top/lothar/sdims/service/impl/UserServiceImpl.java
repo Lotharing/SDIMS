@@ -1,15 +1,19 @@
 package top.lothar.sdims.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import top.lothar.sdims.dao.RoleDao;
 import top.lothar.sdims.dao.UserDao;
 import top.lothar.sdims.dto.TExecution;
+import top.lothar.sdims.entity.Role;
 import top.lothar.sdims.entity.Stock;
 import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.UserService;
+import top.lothar.sdims.util.MD5;
 import top.lothar.sdims.util.PageCalculator;
 
 @Service
@@ -18,16 +22,28 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private RoleDao roleDao;
+	
 	@Override
 	public int addUser(User user) {
 		// TODO Auto-generated method stub
-		return 0;
+		//设置默认密码(MD5加密)
+		user.setPassword(MD5.getMd5("111111"));
+		//建立时间
+		user.setUpdateTime(new Date());
+		//根据ID得到角色名
+		long roleId = user.getRole().getRoleId();
+		Role currentRole= roleDao.queryRoleById(roleId);
+		//存放角色名
+		user.setRoleName(currentRole.getRoleName());
+		return userDao.insertUser(user);
 	}
 
 	@Override
 	public int removeUser(long userId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userDao.deleteUserById(userId);
 	}
 
 	@Override
@@ -56,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int modifyPasswordById(long userId, String account, String password, String newPassword) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userDao.updatePasswordById(userId, account, password, newPassword, new Date());
 	}
 
 }

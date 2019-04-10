@@ -12,6 +12,12 @@ public interface RoleDao {
 	 * @return
 	 */
 	List<Role> queryRoleList();
+	/**
+	 * 根据id查询角色信息
+	 * @param roleId
+	 * @return
+	 */
+	Role queryRoleById(long roleId);
 	
 	/**
 	 * 由于对于需求来说只有四个角色用例，所以这是固定数据，只需要查看展示就可以，此数据提供给添加User时候指定用户角色
@@ -20,4 +26,5 @@ public interface RoleDao {
 	 * 
 	 * 我了解了Ext.js 和 shiro 的目录树去控制角色以及权限，但实现过程难度较高，经验不足
 	 */
+	
 }

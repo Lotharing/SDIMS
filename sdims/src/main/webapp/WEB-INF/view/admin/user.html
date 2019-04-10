@@ -92,43 +92,38 @@
 		//添加员工信息
 		$('#btn_YESAddUser').click(
 				function() {
+					var account = $('#accountInout').val();
 					var employeeOptions = $('#employeeInfoInput option:selected');
 					var roleOptions = $('#roleTypeInput option:selected');
-					alert(employeeOptions.val());
-					alert(employeeOptions.text())
-					alert(roleOptions.val());
-					alert(roleOptions.text())
+					//alert(account)
+					//alert(employeeOptions.val());
+					//alert(employeeOptions.text())
+					//alert(roleOptions.val());
+					//alert(roleOptions.text())
 					//后台添加信息URL
-					/*var addEmployeeUrl = "/sdims/admin/addemployee";
+					var addUserUrl = "/sdims/user/adduser";
 					//json存放区域
+					var user = {};
 					var employee = {};
-					employee.name = $('#employeeNameInput').val();
-					employee.code = $('#employeeCode').val();
-					employee.idCard = $('#employeeIdCard').val();
-					employee.mobile = $('#employeeMobile').val();
-					var sex = $('#employeeSexDialog').val();
-					if (sex == "男") {
-						employee.sex = "1"
-					} else if (sex == "女") {
-						employee.sex = "2"
-					}
-					employee.address = $('#employeeAddress').val();
-					employee.email = $('#employeeEmail').val();
-					employee.type = $('#employeeTypeDialog').val();
-					employee.updateTime = new Date();
+					var role = {};
+					user.account = account;
+					employee.employeeId = employeeOptions.val();
+					user.employee = employee;
+					role.roleId = roleOptions.val();
+					user.role = role;
 					//判断必填项是否没填
-					if (employee.name == "" || employee.code == ""
-							|| employee.type == "") {
-						alert('姓名，编号，类型不能为空');
+					if (user.account == "" || employee.employeeId == ""
+							|| role.roleId == "") {
+						alert('账户，员工信息绑定，角色不能为空');
 						return;
 					}
 					// 生成表单对象，用于接收参数并传递给后台
 					var formData = new FormData();
 					// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
-					formData.append('employeeStr', JSON.stringify(employee));
+					formData.append('userStr', JSON.stringify(user));
 					//携带数据请求后台
 					$.ajax({
-						url : addEmployeeUrl,
+						url : addUserUrl,
 						type : 'POST',
 						data : formData,
 						contentType : false,
@@ -137,12 +132,12 @@
 						success : function(data) {
 							if (data.success) {
 								alert('添加成功');
-								to_page_emp(totalRecord);
+								to_page_user(totalRecord);
 							} else {
-								alert('添加失败');
+								alert('添加失败'+data.errMsg);
 							}
 						}
-					});*/
+					});
 				});
 	</script>
 </body>

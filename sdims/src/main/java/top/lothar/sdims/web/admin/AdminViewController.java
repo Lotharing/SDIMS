@@ -134,11 +134,19 @@ public class AdminViewController {
 	}
 	/*-------------------------------------------用户管理页----------------------------------------------*/
 	/**
-	 * 用户管理页(仓库管理员专用路由)
+	 * 用户管理页(管理员专用路由)
 	 * @return
 	 */
 	@RequestMapping(value="user", method=RequestMethod.GET)
 	public String user() {
 		return "admin/user";
+	}
+	/**
+	 * 用户修改密码页(所有用户共有功能)
+	 * @return
+	 */
+	@RequestMapping(value="modifypassword", method=RequestMethod.GET)
+	public String modifyPassword() {
+		return "comment/modifypassword";
 	}
 }
