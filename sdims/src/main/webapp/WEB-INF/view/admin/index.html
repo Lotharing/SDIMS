@@ -18,10 +18,10 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li role="presentation">
-						<a href="#">当前用户 <span class="badge">Admin</span></a>
+						<a href="#">当前用户 <span id="sessionAccount"></span></a>
 					</li>
 					<li>
-						<a href="#"> <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;退出登录</a>
+						<a href="#" onclick="loginOut()"> <span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;退出登录</a>
 					</li>
 				</ul>
 			</div>
@@ -192,8 +192,30 @@
 	<div id="bottomLine">
 		<span class="bottomFont">&copy2019&nbsp;SDIMS&nbsp;By LuTong.Zhao 豫ICP备19006791号</span>
 	</div>
-	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>	
 	<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		//当前用户名默认加载函数
+		$(function(){ 
+	     	var sessionOfAccountUrl = "/sdims/user/getsessionofaccount";
+	     	$.getJSON(sessionOfAccountUrl,function (data) {
+				if (data) {
+					$('#sessionAccount').text(data.account);
+				}else{
+					$('#sessionAccount').text(ACCOUNT-ERR);
+				}
+			});	 
+		});	
+		//注销登录
+		function loginOut() {
+			var loginOutUrl = "/sdims/user/loginout";
+			$.getJSON(loginOutUrl,function (data) {
+				if (data.success) {
+					 window.location.href="/sdims"; 
+				}
+			});
+		}
+	</script>
 	<!-- 动态标签栏工具 -->
 	<script src="../resources/js/util/closable-tab-div.js"></script>
 	<!-- 时间转换工具 -->

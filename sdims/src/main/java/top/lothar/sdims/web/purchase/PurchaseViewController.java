@@ -8,19 +8,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/purchase", method=RequestMethod.GET)
 public class PurchaseViewController {
 	/**
-	 * 供应商管理页(采购管理员专用路由)
+	 * 采购管理页(采购员专用路由)
+	 * @return
+	 */
+	@RequestMapping(value="index", method=RequestMethod.GET)
+	public String index() {
+		return "purchase/index";
+	}
+	/**
+	 * 系统欢迎展示页
+	 * @return
+	 */
+	@RequestMapping(value="welcome", method=RequestMethod.GET)
+	public String welcome() {
+		return "comment/welcome";
+	}
+	/*-------------------------------------------采购管理功能----------------------------------------------*/
+	/**
+	 * 供应商管理页(采购员专用路由)
 	 * @return
 	 */
 	@RequestMapping(value="purchasesupplier", method=RequestMethod.GET)
 	public String purchaseSupplier() {
-		return "purchase/purchaseSupplier";
+		return "purchase/purchasesupplier";
 	}
 	/**
-	 * 采购订单管理页
+	 * 采购订单管理页(采购员专用路由)
 	 * @return
 	 */
 	@RequestMapping(value="purchaseorder", method=RequestMethod.GET)
 	public String purchaseOrder() {
 		return "purchase/purchaseorder";
+	}
+	/*-------------------------------------------账户管理页----------------------------------------------*/
+	/**
+	 * 用户修改密码页(所有用户共有功能)
+	 * @return
+	 */
+	@RequestMapping(value="modifypassword", method=RequestMethod.GET)
+	public String modifyPassword() {
+		return "comment/modifypassword";
 	}
 }

@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,UsercurrentPage;
+var UsertotalRecord,UsercurrentPage;
 /**
  * 创建商品管理Lable
  */
@@ -103,7 +103,7 @@ function getUserInfoToTables(data) {
  */
 function build_Userpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	UsertotalRecord = data.pageBean.sumPages;
 	//当前页数
 	UsercurrentPage = data.pageBean.curPage;
 }

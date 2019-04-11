@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var PordertotalRecord,PordercurrentPage;
 /**
  * 创建采购单审核管理Lable
  */
@@ -109,9 +109,9 @@ function getPurchaseOrderCheckInfoToTables(data) {
  */
 function build_PurchaseOrderCheckpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	PordertotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	PordercurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -201,7 +201,7 @@ $(document).on("click",".pOrderAdoptCheck_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_purchaseOrderCheck(currentPage);
+			to_page_purchaseOrderCheck(PordercurrentPage);
 		}else {
 			alert(data.errMsg);
 		}
@@ -218,7 +218,7 @@ $(document).on("click",".pOrderRevokeCheck_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_purchaseOrderCheck(currentPage);
+			to_page_purchaseOrderCheck(PordercurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

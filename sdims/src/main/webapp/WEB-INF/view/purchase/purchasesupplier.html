@@ -191,7 +191,7 @@
 			success : function(data) {
 				if (data.success) {
 					alert('添加成功');
-					to_page_supplier(totalRecord);
+					to_page_supplier(PStotalRecord);
 				} else {
 					alert('添加失败');
 				}
@@ -229,7 +229,7 @@
 				if (data.success) {
 					alert('更新成功');
 					//返回当前页
-					to_page_supplier(currentPage);
+					to_page_supplier(PScurrentPage);
 				}else {
 					alert("更新失败");
 				}

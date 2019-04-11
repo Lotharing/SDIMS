@@ -11,6 +11,7 @@ import top.lothar.sdims.BaseTest;
 import top.lothar.sdims.entity.Employee;
 import top.lothar.sdims.entity.Role;
 import top.lothar.sdims.entity.User;
+import top.lothar.sdims.util.MD5;
 
 public class UserDaoTest extends BaseTest{
 	
@@ -78,9 +79,26 @@ public class UserDaoTest extends BaseTest{
 		System.out.println(queryUserCount);
 	}
 	
-	@Test
+	@Ignore
 	public void FUpdatePasswordById() {
 		int updatePasswordById = userDao.updatePasswordById(7, "xiaodan", "111111", "222222", new Date());
 		System.out.println(updatePasswordById);
+	}
+	
+	@Ignore
+	public void test() {
+		String account = "admin";
+		String password = "111111";
+		String MDPassword = MD5.getMd5(password);
+		User checkLoginInfo = userDao.checkLoginInfo(account, MDPassword);
+		System.out.println(checkLoginInfo.getRole().getRoleId());
+		System.out.println(checkLoginInfo.getEmployee().getName());
+	}
+	
+	@Test
+	public void tests() {
+		String account = "xiaokuddd";
+		int registerCheckUserAccount = userDao.registerCheckUserAccount(account);
+		System.out.println(registerCheckUserAccount);
 	}
 }

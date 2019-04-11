@@ -5,6 +5,12 @@ import top.lothar.sdims.entity.User;
 
 public interface UserService {
 	/**
+	 * 验证添加的用户是否已近存在
+	 * @param account
+	 * @return
+	 */
+	int checkRegisterUserByAccount(String account);
+	/**
 	 * 添加用户
 	 * @param user
 	 * @return
@@ -16,12 +22,6 @@ public interface UserService {
 	 * @return
 	 */
 	int removeUser(long userId);
-	/**
-	 * 更新用户
-	 * @param user
-	 * @return
-	 */
-	int modify(User user);
 	/**
 	 * 得到用户列表
 	 * @param userCondition
@@ -39,4 +39,11 @@ public interface UserService {
 	 * @return
 	 */
 	int modifyPasswordById(long userId,String account,String password,String newPassword);
+	/**
+	 * 登录验证
+	 * @param account
+	 * @param password
+	 * @return
+	 */
+	User checkLoginInfo(String account, String password);
 }

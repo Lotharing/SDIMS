@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var PStotalRecord,PScurrentPage;
 /**
  * 创建供应商管理Lable
  */
@@ -90,9 +90,9 @@ function getSupplierInfoToTables(data) {
  */
 function build_Supploerpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	PStotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	PScurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -186,7 +186,7 @@ $(document).on("click",".delete_supplier_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_supplier(currentPage);
+			to_page_supplier(PScurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

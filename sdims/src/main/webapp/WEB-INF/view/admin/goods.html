@@ -248,7 +248,7 @@
 			success : function(data) {
 				if (data.success) {
 					alert('添加成功');
-					to_page_goods(totalRecord);
+					to_page_goods(GoodstotalRecord);
 				} else {
 					alert('添加失败');
 				}
@@ -291,7 +291,7 @@
 				if (data.success) {
 					alert('更新成功');
 					//返回当前页
-					to_page_goods(currentPage);
+					to_page_goods(GoodscurrentPage);
 				}else {
 					alert('更新失败');
 				}

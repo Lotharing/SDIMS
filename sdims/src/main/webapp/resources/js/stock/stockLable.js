@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var StocktotalRecord,StockcurrentPage;
 /**
  * 创建仓库管理Lable
  */
@@ -80,9 +80,9 @@ function getStockInfoToTables(data) {
  */
 function build_Stock_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	StocktotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	StockcurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条

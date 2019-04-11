@@ -1,18 +1,19 @@
 package top.lothar.sdims.web.admin;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.UserService;
@@ -77,7 +78,7 @@ public class UserController {
 		return modelMap;
 	}
 	/**
-	 * 添加商品信息
+	 * 添加用户信息
 	 * @return
 	 */
 	@ResponseBody
@@ -95,7 +96,6 @@ public class UserController {
 			user = objectMapper.readValue(userStr, User.class);
 			System.out.println(user.getAccount());
 		} catch (Exception e) {
-			System.out.println("err1");
 			// TODO: handle exception
 			modelMap.put("success", false);
 			modelMap.put("errMsg", e.getMessage());
@@ -104,9 +104,16 @@ public class UserController {
 		try {
 			//非空判断
 			if (user!=null) {
+				//账户不能重复判断
+				String account = user.getAccount();
+				int tempCount = userService.checkRegisterUserByAccount(account);
+				if (tempCount > 0) {
+					modelMap.put("success", false);
+					modelMap.put("errMsg", "-已有此用户名");
+					return modelMap;
+				}
 				int effectNum = userService.addUser(user);
 				if (effectNum < 1) {
-					System.out.println("err1.5555");
 					modelMap.put("success", false);
 					modelMap.put("errMsg", "插入失败");
 				}else {
@@ -159,20 +166,23 @@ public class UserController {
 	private Map<String, Object> modifyPassword(HttpServletRequest request){
 		Map<String, Object> modelMap = new HashMap<String,Object>();
 		//id从登陆后的session中获取
-		long userId = HttpServletRequestUtil.getLong(request, "userId");
+		User user = (User) request.getSession().getAttribute("loginUser");
+		long userId = user.getUserId();
 		String account = HttpServletRequestUtil.getString(request, "account");
 		String password = HttpServletRequestUtil.getString(request, "password");
 		String MDPassword = MD5.getMd5(password);
 		String newPassword = HttpServletRequestUtil.getString(request, "newPassword");
 		String MDNewPassword = MD5.getMd5(newPassword);
 		try {
-			int effectNum = userService.modifyPasswordById(7, account, MDPassword, MDNewPassword);
-			System.out.println(effectNum);
+			int effectNum = userService.modifyPasswordById(userId, account, MDPassword, MDNewPassword);
 			if (effectNum < 1) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", "账户名/旧密码输入错误");
 			}else {
 				modelMap.put("success", true);
+				//注销当前session
+				request.getSession().removeAttribute("loginUser");
+				request.getSession().invalidate();
 				modelMap.put("successMsg", "密码更新成功");
 			}
 		} catch (Exception e) {
@@ -181,6 +191,74 @@ public class UserController {
 			modelMap.put("errMsg", e.getMessage());
 			return modelMap;
 		}
+		return modelMap;
+	}
+	/**
+	 * 登录验证
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/checkLoginInfo",method=RequestMethod.GET)
+	private Map<String, Object> checkLoginInfo(HttpServletRequest request){
+		Map<String, Object> modelMap = new HashMap<String,Object>();
+		String account = HttpServletRequestUtil.getString(request, "account");
+		String password = HttpServletRequestUtil.getString(request, "password");
+		User loginUser = null;
+		try {
+			loginUser = userService.checkLoginInfo(account, password);
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			modelMap.put("errMsg", "验证错误"+e.getMessage());
+		}
+		if (loginUser!=null) {
+			//当前用户展示，修改密码时候账户的填充--某些添加信息的名称获得
+			request.getSession().setAttribute("loginUser", loginUser);
+			//角色类型-跳转不同主页依据
+			int state = (int) loginUser.getRole().getRoleId();
+			modelMap.put("success", true);
+			modelMap.put("state",state);
+		}else {
+			modelMap.put("success", false);
+			modelMap.put("errMsg","没有此用户名和密码或输入错误");
+		}
+		return modelMap;
+	}
+	/**
+	 * 登录验证
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getsessionofaccount",method=RequestMethod.GET)
+	private Map<String, Object> getSessionOfAccount(HttpServletRequest request){
+		Map<String, Object> modelMap = new HashMap<String,Object>();
+		//因为是通过拦截器（拦截器中对session中的user进行判断）后到主页，所以session必有用户
+		User user = (User) request.getSession().getAttribute("loginUser");
+		if (user!=null) {
+			modelMap.put("success",true);
+			modelMap.put("account", user.getAccount());
+		}else {
+			modelMap.put("success",false);
+			modelMap.put("errMsg", "获取用户名错误");
+		}
+		return modelMap;
+	}
+	/**
+	 * 注销登录
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/loginout",method=RequestMethod.GET)
+	private Map<String, Object> loginOut(HttpServletRequest request,HttpServletResponse response){
+		Map<String, Object> modelMap = new HashMap<String,Object>();		
+		HttpSession session = request.getSession();//防止创建session
+		session.removeAttribute("loginUser");
+		session.invalidate();
+		modelMap.put("success", true);
+		modelMap.put("successMsg", "注销成功");
 		return modelMap;
 	}
 	/**

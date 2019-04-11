@@ -31,7 +31,8 @@ function updatePassword() {
 	$.getJSON(modifyPassword, function(data) {
 		if (data.success) {
 			alert("修改成功");
-			//返回登录页
+			//返回登录页-注销session
+			window.location.href="/sdims"; 
 		}else{
 			alert("修改失败，请联系管理员"+data.errMsg);
 		}

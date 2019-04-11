@@ -17,7 +17,7 @@ public interface UserDao {
 	 */
 	int insertUser(User user);
 	/**
-	 * 根据ID查询用户
+	 * 根据ID删除用户
 	 * @param userId
 	 * @return
 	 */
@@ -50,4 +50,17 @@ public interface UserDao {
 	 * @return
 	 */
 	int updatePasswordById(@Param("userId")long userId,@Param("account")String account,@Param("password")String password,@Param("newPassword")String newPassword,@Param("updateTime")Date updateTime);
+	/**
+	 * 登录验证
+	 * @param account
+	 * @param password
+	 * @return
+	 */
+	User checkLoginInfo(@Param("account")String account,@Param("password")String password);
+	/**
+	 * 查询账户是否已经存在
+	 * @param account
+	 * @return
+	 */
+	int registerCheckUserAccount(@Param("account")String account);
 }

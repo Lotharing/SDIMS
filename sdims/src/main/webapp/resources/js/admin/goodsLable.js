@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var GoodstotalRecord,GoodscurrentPage;
 /**
  * 创建商品管理Lable
  */
@@ -106,9 +106,9 @@ function getGoodsInfoToTables(data) {
  */
 function build_goodspage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	GoodstotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	GoodscurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -207,7 +207,7 @@ $(document).on("click",".delete_goods_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_goods(currentPage);
+			to_page_goods(GoodscurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

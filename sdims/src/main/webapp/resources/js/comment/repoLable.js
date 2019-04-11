@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var RepototalRecord,RepocurrentPage;
 /**
  * 创建仓库管理Lable
  */
@@ -48,9 +48,9 @@ function build_page_info(data) {
 //	$("#page_info_area").empty();
 //	$("#page_info_area").append("当前第" + data.pageBean.curPage+ "页,总共"+ data.pageBean.sumPages + "页,总共"+ data.pageBean.allRowCounts + "条记录");
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	RepototalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	RepocurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -189,7 +189,7 @@ $(document).on("click",".delete_repo_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page(currentPage);
+			to_page(RepocurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

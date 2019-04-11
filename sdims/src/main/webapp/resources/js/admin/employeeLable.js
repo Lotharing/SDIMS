@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var EmptotalRecord,EMpcurrentPage;
 /*
  *onclick创建员工管理显示页面
  */
@@ -110,9 +110,9 @@ function getEmployeeInfoToTables(data) {
  */
 function build_Emppage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	EmptotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	EMpcurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -224,7 +224,7 @@ $(document).on("click",".delete_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//删除成功，返回当前页
-			to_page_emp(currentPage);
+			to_page_emp(EMpcurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

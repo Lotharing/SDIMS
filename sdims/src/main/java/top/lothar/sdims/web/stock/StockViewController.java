@@ -11,6 +11,23 @@ public class StockViewController {
 	 * 仓库管理页(仓库管理员专用路由)
 	 * @return
 	 */
+	@RequestMapping(value="index", method=RequestMethod.GET)
+	public String index() {
+		return "stock/index";
+	}
+	/**
+	 * 系统欢迎展示页
+	 * @return
+	 */
+	@RequestMapping(value="welcome", method=RequestMethod.GET)
+	public String welcome() {
+		return "comment/welcome";
+	}
+	/*-------------------------------------------库存管理页----------------------------------------------*/
+	/**
+	 * 仓库管理页(仓库管理员专用路由)
+	 * @return
+	 */
 	@RequestMapping(value="stock", method=RequestMethod.GET)
 	public String stock() {
 		return "stock/stock";
@@ -30,5 +47,47 @@ public class StockViewController {
 	@RequestMapping(value="outostock", method=RequestMethod.GET)
 	public String outoStock() {
 		return "stock/outostock";
+	}
+	/*-------------------------------------------基础信息页----------------------------------------------*/
+	/**
+	 * 角色信息展示页
+	 * @return
+	 */
+	@RequestMapping(value="role", method=RequestMethod.GET)
+	public String role() {
+		return "admin/role";
+	}
+	/**
+	 * 员工展示页
+	 * @return
+	 */
+	@RequestMapping(value="employee", method=RequestMethod.GET)
+	public String employee() {
+		return "admin/employee";
+	}
+	/**
+	 * 仓库展示页(角色共有部分)
+	 * @return
+	 */
+	@RequestMapping(value="repo", method=RequestMethod.GET)
+	public String repo() {
+		return "comment/repo";
+	}
+	/**
+	 * 商品展示页
+	 * @return
+	 */
+	@RequestMapping(value="goods", method=RequestMethod.GET)
+	public String goods() {
+		return "admin/goods";
+	}
+	/*-------------------------------------------账户管理页----------------------------------------------*/
+	/**
+	 * 用户修改密码页(所有用户共有功能)
+	 * @return
+	 */
+	@RequestMapping(value="modifypassword", method=RequestMethod.GET)
+	public String modifyPassword() {
+		return "comment/modifypassword";
 	}
 }

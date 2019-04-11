@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var PtotalRecord,PcurrentPage;
 /**
  * 创建采购单管理Lable
  */
@@ -86,7 +86,7 @@ function to_page_pOrder(pageIndex,goodsName,supplierName,repositoryName,orderNum
 			checkState : checkState,
 			stockState : stockState
 		},
-		tpye : "GET",
+		type : "GET",
 		success : function(data) {
 			// 1.解析并显示员工数据
 			getPurchaseOrderInfoToTables(data);
@@ -175,9 +175,9 @@ function getPurchaseOrderInfoToTables(data) {
  */
 function build_PurchaseOrderpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	PtotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	PcurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -290,7 +290,7 @@ $(document).on("click",".delete_pOrder_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_pOrder(currentPage);
+			to_page_pOrder(PcurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

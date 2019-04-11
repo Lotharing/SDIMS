@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,outostokcurrentPage;
+var outototalRecord,outostokcurrentPage;
 /**
  * 创建入库管理Lable
  */
@@ -102,7 +102,7 @@ function getOutoStockSaleOrderCheckInfoToTables(data) {
  */
 function build_OutoStockSaleOrderCheckpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	outototalRecord = data.pageBean.sumPages;
 	//当前页数
 	outostokcurrentPage = data.pageBean.curPage;
 }

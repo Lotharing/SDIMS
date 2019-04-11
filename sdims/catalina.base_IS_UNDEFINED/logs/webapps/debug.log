@@ -4,3 +4,30 @@
 2019-04-10 11:02:51.537 [main] DEBUG top.lothar.sdims.dao.RoleDao.queryRoleById - ==>  Preparing: SELECT role_id, role_name, create_time, role_desc FROM sd_sys_role WHERE role_id = ? 
 2019-04-10 11:02:51.614 [main] DEBUG top.lothar.sdims.dao.RoleDao.queryRoleById - ==> Parameters: 3(Long)
 2019-04-10 11:02:51.633 [main] DEBUG top.lothar.sdims.dao.RoleDao.queryRoleById - <==      Total: 1
+2019-04-10 15:18:18.597 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? and su.password=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:18:18.649 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==> Parameters: xiaoku(String), 111111(String)
+2019-04-10 15:18:18.682 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - <==      Total: 0
+2019-04-10 15:19:20.834 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? and su.password=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:19:20.881 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==> Parameters: xiaoku(String), q6s2q505q69sl25eq5b92qss9b665005(String)
+2019-04-10 15:19:20.903 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - <==      Total: 2
+2019-04-10 15:20:25.923 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? and su.password=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:20:25.960 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==> Parameters: xiaoku(String), q6s2q505q69sl25eq5b92qss9b665005(String)
+2019-04-10 15:20:25.980 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - <==      Total: 2
+2019-04-10 15:21:20.420 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? and su.password=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:21:20.460 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==> Parameters: xiaodan(String), q6s2q505q69sl25eq5b92qss9b665005(String)
+2019-04-10 15:21:20.483 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - <==      Total: 2
+2019-04-10 15:21:43.239 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? and su.password=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:21:43.281 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - ==> Parameters: admin(String), q6s2q505q69sl25eq5b92qss9b665005(String)
+2019-04-10 15:21:43.300 [main] DEBUG top.lothar.sdims.dao.UserDao.checkLoginInfo - <==      Total: 1
+2019-04-10 15:28:42.943 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==>  Preparing: SELECT user_id, su.account, su.password, su.role_name, be.employee_id, be.name, be.code, su.update_time, sr.role_id, sr.role_desc FROM sd_sys_user su, sd_base_employee be, sd_sys_role sr WHERE su.account=? AND su.employee_id=be.employee_id AND su.state=sr.role_id 
+2019-04-10 15:28:42.982 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==> Parameters: xiaocai(String)
+2019-04-10 15:28:43.002 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - <==      Total: 1
+2019-04-10 15:31:24.974 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user WHERE account = ? 
+2019-04-10 15:31:25.023 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==> Parameters: xiaocai(String)
+2019-04-10 15:31:25.043 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - <==      Total: 1
+2019-04-10 15:31:38.181 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user WHERE account = ? 
+2019-04-10 15:31:38.220 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==> Parameters: xiaoku(String)
+2019-04-10 15:31:38.238 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - <==      Total: 1
+2019-04-10 15:32:08.415 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==>  Preparing: SELECT COUNT(user_id) FROM sd_sys_user WHERE account = ? 
+2019-04-10 15:32:08.541 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - ==> Parameters: xiaokuddd(String)
+2019-04-10 15:32:08.568 [main] DEBUG t.l.sdims.dao.UserDao.registerCheckUserAccount - <==      Total: 1

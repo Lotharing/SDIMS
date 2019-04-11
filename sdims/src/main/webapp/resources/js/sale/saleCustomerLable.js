@@ -1,5 +1,5 @@
 //总记录数，当前页数，用于删除，添加时候，跳转指定页
-var totalRecord,currentPage;
+var SCtotalRecord,SCcurrentPage;
 /**
  * 创建客户管理Lable
  */
@@ -90,9 +90,9 @@ function getCustomerInfoToTables(data) {
  */
 function build_Customerpage_info(data) {
 	//最大页数
-	totalRecord = data.pageBean.sumPages;
+	SCtotalRecord = data.pageBean.sumPages;
 	//当前页数
-	currentPage = data.pageBean.curPage;
+	SCcurrentPage = data.pageBean.curPage;
 }
 /**
  * 解析显示分页条
@@ -185,7 +185,7 @@ $(document).on("click",".delete_customer_btn",function(){
 		if (data.success) {
 			alert(data.successMsg);
 			//返回当前页
-			to_page_customer(currentPage);
+			to_page_customer(SCcurrentPage);
 		}else {
 			alert(data.errMsg);
 		}

@@ -24,6 +24,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleDao roleDao;
+
+	@Override
+	public int checkRegisterUserByAccount(String account) {
+		// TODO Auto-generated method stub
+		return userDao.registerCheckUserAccount(account);
+	}
 	
 	@Override
 	public int addUser(User user) {
@@ -47,11 +53,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int modify(User user) {
+	public User checkLoginInfo(String account, String password) {
 		// TODO Auto-generated method stub
-		return 0;
+		String MDPassword = MD5.getMd5(password);
+		return userDao.checkLoginInfo(account, MDPassword);
 	}
-
+	
 	@Override
 	public TExecution<User> getUserList(User userCondition, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
