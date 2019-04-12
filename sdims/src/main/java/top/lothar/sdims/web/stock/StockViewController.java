@@ -50,22 +50,6 @@ public class StockViewController {
 	}
 	/*-------------------------------------------基础信息页----------------------------------------------*/
 	/**
-	 * 角色信息展示页
-	 * @return
-	 */
-	@RequestMapping(value="role", method=RequestMethod.GET)
-	public String role() {
-		return "admin/role";
-	}
-	/**
-	 * 员工展示页
-	 * @return
-	 */
-	@RequestMapping(value="employee", method=RequestMethod.GET)
-	public String employee() {
-		return "admin/employee";
-	}
-	/**
 	 * 仓库展示页(角色共有部分)
 	 * @return
 	 */

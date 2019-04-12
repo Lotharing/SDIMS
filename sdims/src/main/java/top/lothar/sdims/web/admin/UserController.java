@@ -1,6 +1,5 @@
 package top.lothar.sdims.web.admin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -226,7 +225,7 @@ public class UserController {
 		return modelMap;
 	}
 	/**
-	 * 登录验证
+	 * 当前用户
 	 * @param request
 	 * @return
 	 */

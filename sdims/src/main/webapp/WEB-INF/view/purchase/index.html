@@ -38,7 +38,21 @@
 					<li>
 						<a href="#"><i class="glyphicon glyphicon-th-large"></i>首页</a>
 					</li>
-
+					<!------------------基础管理---------------- -->
+					<li>
+						<a href="#baseSetting" class="nav-header collapsed" data-toggle="collapse">
+						<i class="glyphicon glyphicon-star"></i>基础信息管理
+						<span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+						</a> 
+						<!-- nav nav-list secondmenu collapse后加in属性表示默认打开 -->
+						<ul id="baseSetting" class="nav nav-list secondmenu collapse" style="height: 0px;">
+							<li>
+								<a href="javascript:void(0);" onclick="getGoods()">
+									<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<span id="goodsManager">商品管理</span>
+								</a>
+							</li>
+						</ul>
+					</li>
 
 					<!------------------采购管理---------------- -->
 					<li>
@@ -128,6 +142,8 @@
 	<script src="../resources/js/util/date.format.js"></script>
 	<!-- 欢迎页 -->
 	<script src="../resources/js/comment/welcome.js"></script>
+	<!-- 商品管理标签栏.js控制文件 -->
+	<script src="../resources/js/admin/goodsLable.js"></script>
 	<!-- 供销商管理标签栏.js控制文件 -->
 	<script src="../resources/js/purchase/purchaseSupplierLable.js"></script>
 	<!-- 采购订单管理标签栏.js控制文件 -->

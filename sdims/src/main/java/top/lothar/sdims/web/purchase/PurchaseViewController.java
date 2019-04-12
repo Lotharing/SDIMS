@@ -23,6 +23,15 @@ public class PurchaseViewController {
 	public String welcome() {
 		return "comment/welcome";
 	}
+	/*-------------------------------------------基础信息页----------------------------------------------*/
+	/**
+	 * 商品展示页
+	 * @return
+	 */
+	@RequestMapping(value="goods", method=RequestMethod.GET)
+	public String goods() {
+		return "admin/goods";
+	}
 	/*-------------------------------------------采购管理功能----------------------------------------------*/
 	/**
 	 * 供应商管理页(采购员专用路由)

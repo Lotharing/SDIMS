@@ -7,8 +7,18 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
     
     <!-- 配置整合Mybatis过程 -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
-    <!-- 2.数据库连接池 -->
+    <!-- <context:property-placeholder location="classpath:jdbc.properties"/> -->
+    
+    <!-- .数据库连接池 -->
+    <!-- 调用加密功能 -->
+	<bean class="top.lothar.sdims.util.EncryptPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8"></property>
+	</bean>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     	<!-- 配置连接池属性 -->
     	<property name="driverClass" value="${jdbc.driver}" />
