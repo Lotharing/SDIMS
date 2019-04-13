@@ -68,6 +68,12 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
+	public List<Goods> getAllGoodsList() {
+		// TODO Auto-generated method stub
+		return goodsDao.queryAllGoodsList();
+	}
+	
+	@Override
 	public TExecution<Goods> getGoodsList(Goods goodsCondition, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
 		int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);
@@ -83,5 +89,6 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		return goodsExecution;
 	}
+
 
 }

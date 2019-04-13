@@ -1,5 +1,7 @@
 package top.lothar.sdims.service;
 
+import java.util.List;
+
 import top.lothar.sdims.dto.RepositoryExecution;
 import top.lothar.sdims.entity.Repository;
 
@@ -28,6 +30,11 @@ public interface RepositoryService {
 	 * @return
 	 */
 	Repository getRepositoryById(long repoId);
+	/**
+	 * 查询所有仓库列表，并在前台渲染在订单生成的select中的仓库信息
+	 * @return
+	 */
+	List<Repository> getAllRepositoryList();
 	/**
 	 * 条件分页查询仓库
 	 * @param repositoryName

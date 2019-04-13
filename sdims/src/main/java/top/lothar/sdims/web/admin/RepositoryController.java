@@ -2,6 +2,7 @@ package top.lothar.sdims.web.admin;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import top.lothar.sdims.dto.RepositoryExecution;
 import top.lothar.sdims.entity.Repository;
+import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.RepositoryService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -74,6 +76,26 @@ public class RepositoryController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "pageIndex or pageSize is Null");
 		}
+		return modelMap;
+	}
+	/**
+	 * 得到所有仓库信息，展示在前台添加订单的select中，用与创建采购单
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getallrepositorylist",method=RequestMethod.GET)
+	private Map<String, Object> getAllRepositoryList(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<Repository> allRepositoryList = null;
+		try {
+			allRepositoryList = repositoryService.getAllRepositoryList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			e.printStackTrace();
+		}
+		modelMap.put("success", true);
+		modelMap.put("allRepositoryList", allRepositoryList);
 		return modelMap;
 	}
 	/**

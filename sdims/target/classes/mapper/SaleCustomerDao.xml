@@ -55,7 +55,7 @@
 		WHERE
 		customer_id=#{customerId}
 	</select>
-	<!-- 查询所有客户，条件查询 -->
+	<!-- 查询所有客户，条件查询 分页-->
 	<select id="querySaleCustomerList"
 	resultType="top.lothar.sdims.entity.Customer">
 		SELECT
@@ -77,6 +77,17 @@
 		ORDER BY
 		customer_id ASC
 		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询所有客户，条件查询  用于想染销售单select-->
+	<select id="queryAllCustomerList"
+	resultType="top.lothar.sdims.entity.Customer">
+		SELECT
+		customer_id,
+		name
+		FROM
+		sd_sale_customer
+		ORDER BY
+		customer_id ASC
 	</select>
 	<!-- 查询对应客户数量 -->
 	<select id="querySaleCustomerCount" resultType="int">

@@ -55,7 +55,7 @@
 		WHERE
 		employee_id=#{employeeId}
 	</select>
-	<!-- 得到对应信息员工列表 -->
+	<!-- 得到对应信息员工列表 分页-->
 	<select id="queryEmployeeList" resultType="top.lothar.sdims.entity.Employee">
 		SELECT
 		employee_id,
@@ -81,6 +81,16 @@
 		ORDER BY
 		employee_id ASC
 		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 得到对应信息员工列表 用于select框展示，只需要ID(进行绑定)Name(进行展示)-->
+	<select id="queryAllEmployeeList" resultType="top.lothar.sdims.entity.Employee">
+		SELECT
+		employee_id,
+		name
+		FROM
+		sd_base_employee
+		ORDER BY
+		employee_id ASC
 	</select>
 	<!-- 查询对应员工总数量 -->
 	<select id="queryEmployeeCount" resultType="int">

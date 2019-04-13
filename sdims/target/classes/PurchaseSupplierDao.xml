@@ -54,7 +54,7 @@
 		WHERE
 		supplier_id=#{supplierId}
 	</select>
-	<!-- 查询供应商列表 -->
+	<!-- 查询供应商列表 分页 -->
 	<select id="queryPurchaseSupplierList" resultType="top.lothar.sdims.entity.Supplier">
 		SELECT
 		supplier_id,
@@ -75,6 +75,16 @@
 		ORDER BY
 		supplier_id ASC
 		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询供应商列表 用于渲染采购单中select供应商信息-->
+	<select id="queryAllSupplierList" resultType="top.lothar.sdims.entity.Supplier">
+		SELECT
+		supplier_id,
+		name
+		FROM
+		sd_purchase_supplier
+		ORDER BY
+		supplier_id ASC
 	</select>
 	<!-- 查询对应数量 -->
 	<select id="queryPurchaseSupplierCount" resultType="int">

@@ -33,6 +33,11 @@ public interface GoodsDao {
 	 */
 	Goods queryGoodsById(long goodsId);
 	/**
+	 * 查询所有的商品，在销售单和采购单创建时候select中填充商品信息
+	 * @return
+	 */
+	List<Goods> queryAllGoodsList();
+	/**
 	  * 分页查询商品，模糊名（商品名称，商品编号，商品类别，商品品牌，商品规格，商品材质）
 	 * @param goodsCondition
 	 * @param rowIndex

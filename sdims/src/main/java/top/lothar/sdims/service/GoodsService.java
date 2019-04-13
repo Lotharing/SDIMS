@@ -1,5 +1,7 @@
 package top.lothar.sdims.service;
 
+import java.util.List;
+
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Goods;
 
@@ -28,6 +30,11 @@ public interface GoodsService {
 	 * @return
 	 */
 	Goods getGoodsById(long goodsId);
+	/**
+	 * 得到所有的商品，在添加订单的select中渲染
+	 * @return
+	 */
+	List<Goods> getAllGoodsList();
 	/**
 	 * 条件查询商品列表，泛型返回商品集合
 	 * @param goodsCondition

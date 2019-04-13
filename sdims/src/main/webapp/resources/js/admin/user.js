@@ -186,7 +186,7 @@ function searchUser() {
  * @returns
  */
 function addUser() {
-	$('#UserModalLabel').text("添加信息");
+	$('#UserModalLabel').text("添加用户");
 	$('.modal-dialog').css({"margin":"200px auto"});
 	$('.modal-header').css({"background-color":"#449D44"});
 	//加载员工信息
@@ -201,14 +201,14 @@ function addUser() {
  */
 function getEmployeeInfo() {
 	//员工信息
-	var EmployeeInfoUrlSelect = "/sdims/admin/getemployeelist?pageIndex="+1;
+	var EmployeeInfoUrlSelect = "/sdims/admin/getallemployeelist";
 	//员工信息放置Dialog的select中
 	$.getJSON(EmployeeInfoUrlSelect,function(data){
 		//防止模态框下拉数据累加
 		$('#employeeInfoInput').empty();
 		$('#employeeInfoInput').append($("<option></option>"));
 		if (data.success) {
-			data.pageBean.datas.map(function(item, index){
+			data.allEmployeeList.map(function(item, index){
 				//员工ID和Name都绑定在option上
 				var employeeNameInfo = $("<option value="+item.employeeId+">"+item.name+"</option>");
 				$('#employeeInfoInput').append(employeeNameInfo);

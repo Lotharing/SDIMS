@@ -60,7 +60,7 @@
 		WHERE
 		goods_id=#{goodsId}
 	</select>
-	<!-- 查询商品列表 -->
+	<!-- 查询商品列表  分页-->
 	<select id="queryGoodsList" resultType="top.lothar.sdims.entity.Goods">
 		SELECT
 		goods_id,
@@ -100,6 +100,16 @@
 		ORDER BY
 		goods_id ASC
 		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询商品列表  查询所有提供给创建采购单和销售单时候select中的商品数据-->
+	<select id="queryAllGoodsList" resultType="top.lothar.sdims.entity.Goods">
+		SELECT
+		goods_id,
+		name
+		FROM
+		sd_base_goods
+		ORDER BY
+		goods_id ASC
 	</select>
 	<!-- 查询对应商品数量 -->
 	<select id="queryGoodsCount" resultType="int">

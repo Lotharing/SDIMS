@@ -101,4 +101,11 @@ public class EmployeeDaoTest extends BaseTest{
 		Employee employee = employeeDao.queryEmployeeById(employeeId);
 		System.out.println(employee.getName());
 	}
+	@Test
+	public void testGetAllEmployeeList() {
+		List<Employee> queryAllEmployeeList = employeeDao.queryAllEmployeeList();
+		for (Employee employee : queryAllEmployeeList) {
+			System.out.println(employee.getEmployeeId());
+		}
+	}
 }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import top.lothar.sdims.entity.User;
 
-public class GetGoodsAndRepoListInterceptor extends HandlerInterceptorAdapter{
+public class GetSupplierInterceptor extends HandlerInterceptorAdapter{
 	/*
 	 * 主要做事前拦截，即用户操作发生前，改写preHandle里的逻辑，进行拦截 个人理解 ：在调用指定的controller前进行身份拦截
 	 */
@@ -22,7 +22,7 @@ public class GetGoodsAndRepoListInterceptor extends HandlerInterceptorAdapter{
 			User user = (User) objectUser;
 			// 对user进行判断userId和角色类型
 			if (user != null && user.getUserId()> 0) {
-				if (user.getRole().getRoleId()==3 || user.getRole().getRoleId()==4) {
+				if (user.getRole().getRoleId()==3) {
 					// 如果通过上述的验证步骤，则返回true，可以进行接下来操作
 					return true;
 				}else {
@@ -34,5 +34,4 @@ public class GetGoodsAndRepoListInterceptor extends HandlerInterceptorAdapter{
 		response.sendRedirect(request.getContextPath());  
 		return false;
 	}
-
 }

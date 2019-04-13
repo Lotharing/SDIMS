@@ -2,6 +2,7 @@ package top.lothar.sdims.web.purchase;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import top.lothar.sdims.dto.TExecution;
+import top.lothar.sdims.entity.Goods;
 import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.PurchaseSupplierService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
@@ -74,6 +76,26 @@ public class PurchaseSupplierController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "pageIndex or pageSize is Null");
 		}
+		return modelMap;
+	}
+	/**
+	 * 得到所有供应商信息，展示在前台添加采购单的select中，用与创建采购单
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getallsupplierlist",method=RequestMethod.GET)
+	private Map<String, Object> getAllSupplierList(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<Supplier> allSupplierList = null;
+		try {
+			allSupplierList = purchaseSupplierService.getAllSupplierList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			e.printStackTrace();
+		}
+		modelMap.put("success", true);
+		modelMap.put("allSupplierList", allSupplierList);
 		return modelMap;
 	}
 	/**

@@ -2,6 +2,7 @@ package top.lothar.sdims.web.admin;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import top.lothar.sdims.dto.TExecution;
+import top.lothar.sdims.entity.Employee;
 import top.lothar.sdims.entity.Goods;
 import top.lothar.sdims.service.GoodsService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
@@ -87,6 +89,26 @@ public class GoodsController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "pageIndex or pageSize is Null");
 		}
+		return modelMap;
+	}
+	/**
+	 * 得到所有商品信息，展示在前台添加点单的select中，用与创建订单
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getallgoodslist",method=RequestMethod.GET)
+	private Map<String, Object> getAllGoodsList(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<Goods> allGoodsList = null;
+		try {
+			allGoodsList = goodsService.getAllGoodsList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			e.printStackTrace();
+		}
+		modelMap.put("success", true);
+		modelMap.put("allGoodsList", allGoodsList);
 		return modelMap;
 	}
 	/**

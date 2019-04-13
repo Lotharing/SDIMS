@@ -1,5 +1,7 @@
 package top.lothar.sdims.service;
 
+import java.util.List;
+
 import top.lothar.sdims.dto.EmployeeExecution;
 import top.lothar.sdims.entity.Employee;
 
@@ -12,6 +14,11 @@ public interface EmployeeService {
 	 * @return
 	 */
 	EmployeeExecution getEmployeeList(Employee employeeCondition,int pageIndex,int pageSize);
+	/**
+	 * 得到所有员工信息用于展示select
+	 * @return
+	 */
+	List<Employee> getAllEmployeeList();
 	/**
 	 * 添加员工信息
 	 * @param employee

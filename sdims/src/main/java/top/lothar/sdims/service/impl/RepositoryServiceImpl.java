@@ -42,6 +42,12 @@ public class RepositoryServiceImpl implements RepositoryService {
 	}
 
 	@Override
+	public List<Repository> getAllRepositoryList() {
+		// TODO Auto-generated method stub
+		return repositoryDao.queryAllRepositoryList();
+	}
+
+	@Override
 	public RepositoryExecution getRepositoryList(String repositoryName, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
 		int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);

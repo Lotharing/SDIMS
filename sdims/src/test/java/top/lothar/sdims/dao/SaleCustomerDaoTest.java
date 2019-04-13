@@ -61,9 +61,17 @@ public class SaleCustomerDaoTest extends BaseTest{
 		}
 	}
 	
-	@Test
+	@Ignore
 	public void testFQuerySaleCustomerCount() {
 		int querySaleCustomerCount = saleCustomerDao.querySaleCustomerCount("伊滨李村零售商");
 		System.out.println(querySaleCustomerCount);
+	}
+	
+	@Test
+	public void testGetAllCustomerList() {
+		List<Customer> queryAllCustomerList = saleCustomerDao.queryAllCustomerList();
+		for (Customer customer : queryAllCustomerList) {
+			System.out.println(customer.getCustomerId());
+		}
 	}
 }

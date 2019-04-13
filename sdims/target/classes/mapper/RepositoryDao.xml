@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.lothar.sdims.dao.RepositoryDao">
 	<!-- 返回类型定义 -->
-	<resultMap type="top.lothar.sdims.entity.Repository" id="EmployeeMap">
+	<resultMap type="top.lothar.sdims.entity.Repository" id="RepositoryMap">
 		<id column="repo_id" property="repoId"/>
 		<result column="name" property="name"/>
 		<result column="code" property="code"/>
@@ -51,8 +51,8 @@
 		WHERE
 		repo_id=#{repoId}
  	</update>
- 	
- 	<select id="queryRepositoryById" parameterType="Long" resultMap="EmployeeMap">
+ 	<!-- 根据ID查询仓库信息 -->
+ 	<select id="queryRepositoryById" parameterType="Long" resultMap="RepositoryMap">
  		SELECT
  		br.repo_id,
  		br.name,
@@ -71,8 +71,8 @@
  		AND
  		br.employee_id=be.employee_id
  	</select>
- 	<!-- 查询仓库列表 -->
- 	<select id="queryRepositoryList" resultMap="EmployeeMap">
+ 	<!-- 查询仓库列表  分页-->
+ 	<select id="queryRepositoryList" resultMap="RepositoryMap">
  		SELECT
  		br.repo_id,
  		br.name,
@@ -96,6 +96,16 @@
  		ORDER BY
 		br.repo_id ASC
 		LIMIT #{rowIndex},#{pageSize};
+ 	</select>
+ 	 	<!-- 查询仓库列表  用于渲染订单生成时候的select仓库信息 -->
+ 	<select id="queryAllRepositoryList" resultType="top.lothar.sdims.entity.Repository">
+ 		SELECT
+ 		repo_id,
+ 		name
+ 		FROM
+ 		sd_base_repo
+ 		ORDER BY
+		repo_id ASC
  	</select>
  	<!-- 查询数量 -->
  	<select id="queryRepositoryCount" resultType="int">

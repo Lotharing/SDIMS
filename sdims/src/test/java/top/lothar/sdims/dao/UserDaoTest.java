@@ -95,10 +95,12 @@ public class UserDaoTest extends BaseTest{
 		System.out.println(checkLoginInfo.getEmployee().getName());
 	}
 	
-	@Test
+	@Ignore
 	public void tests() {
 		String account = "xiaokuddd";
 		int registerCheckUserAccount = userDao.registerCheckUserAccount(account);
 		System.out.println(registerCheckUserAccount);
 	}
+	
+	
 }

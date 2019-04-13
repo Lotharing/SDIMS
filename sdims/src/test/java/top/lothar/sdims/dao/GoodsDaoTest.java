@@ -57,7 +57,7 @@ public class GoodsDaoTest extends BaseTest{
 		System.out.println(queryGoodsById.getName());
 	}
 	
-	@Test
+	@Ignore
 	public void testEQueryGoodsList() {
 		Goods goodsCondition = new Goods();
 		goodsCondition.setName("实木防盗门");
@@ -68,12 +68,19 @@ public class GoodsDaoTest extends BaseTest{
 		}
 	}
 	
-	@Test
+	@Ignore
 	public void testFQueryGoodsCount() {
 		Goods goodsCondition = new Goods();
 		goodsCondition.setName("烤漆防盗门");
 		goodsCondition.setCode("FD-1002");
 		int queryGoodsCount = goodsDao.queryGoodsCount(goodsCondition);
 		System.out.println(queryGoodsCount);
+	}
+	@Test
+	public void testGetAllGoodsList() {
+		List<Goods> queryAllGoodsList = goodsDao.queryAllGoodsList();
+		for (Goods goods : queryAllGoodsList) {
+			System.out.println(goods.getGoodsId());
+		}
 	}
 }

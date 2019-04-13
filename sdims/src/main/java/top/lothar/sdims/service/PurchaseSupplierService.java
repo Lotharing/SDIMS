@@ -1,5 +1,7 @@
 package top.lothar.sdims.service;
 
+import java.util.List;
+
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Supplier;
 
@@ -28,6 +30,11 @@ public interface PurchaseSupplierService {
 	 * @return
 	 */
 	Supplier getPurchaseSupplierById(long supplierId);
+	/**
+	 * 得到所有供应商，并去渲染采购单生成时候select的供应商信息
+	 * @return
+	 */
+	List<Supplier> getAllSupplierList();
 	/**
 	 * 条件查询供货商列表，泛型返回供货商集合
 	 * @param supplierName

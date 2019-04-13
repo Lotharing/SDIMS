@@ -33,6 +33,11 @@ public interface RepositoryDao {
 	 */
 	Repository queryRepositoryById(long repoId);
 	/**
+	 * 得到所有仓库信息列表，用于渲染订单select的仓库选择
+	 * @return
+	 */
+	List<Repository> queryAllRepositoryList();
+	/**
 	  * 分页查询所有仓库信息(包括携带条件)
 	 * @param repositoryName
 	 * @param rowIndex

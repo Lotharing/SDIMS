@@ -35,6 +35,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
+	public List<Employee> getAllEmployeeList() {
+		// TODO Auto-generated method stub
+		return employeeDao.queryAllEmployeeList();
+	}
+	
+	@Override
 	public int addEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		return employeeDao.insertEmployee(employee);

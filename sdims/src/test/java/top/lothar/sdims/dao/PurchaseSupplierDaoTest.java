@@ -16,7 +16,7 @@ public class PurchaseSupplierDaoTest extends BaseTest{
 	@Autowired
 	private PurchaseSupplierDao purchaseSupplierDao;
 	
-	@Test
+	@Ignore
 	public void testAInsertPurchaseSupplie() {
 		Supplier supplier = new Supplier();
 		supplier.setName("真是强供销商");
@@ -64,5 +64,13 @@ public class PurchaseSupplierDaoTest extends BaseTest{
 	public void testFQueryPurchaseSupplierCount() {
 		int queryPurchaseSupplierCount = purchaseSupplierDao.queryPurchaseSupplierCount("冠仕供应商");
 		System.out.println(queryPurchaseSupplierCount);
+	}
+	
+	@Test
+	public void testGetAllSupplierList() {
+		List<Supplier> queryAllSupplierList = purchaseSupplierDao.queryAllSupplierList();
+		for (Supplier supplier : queryAllSupplierList) {
+			System.out.println(supplier.getName());
+		}
 	}
 }

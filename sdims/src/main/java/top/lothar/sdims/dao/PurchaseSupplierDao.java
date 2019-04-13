@@ -34,6 +34,11 @@ public interface PurchaseSupplierDao {
 	 */
 	Supplier queryPurchaseSupplierById(long supplierId);
 	/**
+	 * 查询所有供应商，在生成采购订单时候，渲染select
+	 * @return
+	 */
+	List<Supplier> queryAllSupplierList();
+	/**
 	 * 查询所有供应商(名称查询)
 	 * @return
 	 */

@@ -2,6 +2,7 @@ package top.lothar.sdims.web.admin;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +82,26 @@ public class EmployeeController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "pageIndex or pageSize is Null");
 		}
+		return modelMap;
+	}
+	/**
+	 * 得到所有员工信息，展示在前台添加用户的select中，用于用户个人信息绑定
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getallemployeelist",method=RequestMethod.GET)
+	private Map<String, Object> getAllEmployeeList(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<Employee> allEmployeeList = null;
+		try {
+			 allEmployeeList = employeeService.getAllEmployeeList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			e.printStackTrace();
+		}
+		modelMap.put("success", true);
+		modelMap.put("allEmployeeList", allEmployeeList);
 		return modelMap;
 	}
 	/**

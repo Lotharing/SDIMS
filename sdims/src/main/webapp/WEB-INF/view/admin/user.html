@@ -71,6 +71,7 @@
                     <div class="form-group">
                     	<span style="color: red;font-weight: bold">＊</span>
                         <label style="margin-top: 7px">员工信息</label>
+                        <!-- <input type="text" id="employeeInfoInput" class="" placeholder="请输入查询关键字" > -->
 						<select id="employeeInfoInput" style="width: 80%;float: right" class="form-control"></select>
                     </div>
                     <div class="form-group">
@@ -95,11 +96,6 @@
 					var account = $('#accountInout').val();
 					var employeeOptions = $('#employeeInfoInput option:selected');
 					var roleOptions = $('#roleTypeInput option:selected');
-					//alert(account)
-					//alert(employeeOptions.val());
-					//alert(employeeOptions.text())
-					//alert(roleOptions.val());
-					//alert(roleOptions.text())
 					//后台添加信息URL
 					var addUserUrl = "/sdims/user/adduser";
 					//json存放区域

@@ -34,6 +34,11 @@ public interface SaleCustomerDao {
 	 */
 	Customer querySaleCustomerById(long customerId);
 	/**
+	 * 得到所有客户列表，用于前台销售单创建时候，select中的客户信息
+	 * @return
+	 */
+	List<Customer> queryAllCustomerList();
+	/**
 	 * 分页查询所有客户（下级经销商)信息
 	 * 根据客户名称（下级经销商)查询
 	 * @param rowIndex

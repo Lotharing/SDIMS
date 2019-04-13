@@ -40,6 +40,12 @@ public interface EmployeeDao {
 	 */
 	List<Employee> queryEmployeeList(@Param("employeeCondition")Employee employeeCondition,@Param("rowIndex")int rowIndex, @Param("pageSize")int pageSize);
 	/**
+	 * 
+	 * 查询所有员工列表-用于添加用户时候对员工信息绑定数据加载select
+	 * @return
+	 */
+	List<Employee> queryAllEmployeeList();
+	/**
 	  * 查询员工数量
 	 * @return
 	 */

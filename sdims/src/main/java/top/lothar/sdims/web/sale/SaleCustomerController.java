@@ -2,6 +2,7 @@ package top.lothar.sdims.web.sale;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
+import top.lothar.sdims.entity.Repository;
 import top.lothar.sdims.service.SaleCustomerService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -72,6 +74,26 @@ public class SaleCustomerController {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "pageIndex or pageSize is Null");
 		}
+		return modelMap;
+	}
+	/**
+	 * 得到所有客户信息，展示在前台添加订单的select中，用与创建采购单
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getallcustomerlist",method=RequestMethod.GET)
+	private Map<String, Object> getAllCustomerList(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		List<Customer> allCustomerList = null;
+		try {
+			allCustomerList = saleCustomerService.getAllCustomerList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			modelMap.put("success", false);
+			e.printStackTrace();
+		}
+		modelMap.put("success", true);
+		modelMap.put("allCustomerList", allCustomerList);
 		return modelMap;
 	}
 	/**

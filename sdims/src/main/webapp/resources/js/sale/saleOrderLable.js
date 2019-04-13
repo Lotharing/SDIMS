@@ -232,14 +232,14 @@ function addSaleOrder() {
  */
 function getGoodsInfoToSelect() {
 	//商品信息
-	var goodsUrl = "/sdims/admin/getgoodslist?pageIndex="+1;
+	var goodsUrl = "/sdims/admin/getallgoodslist";
 	//商品信息放置select中
 	$.getJSON(goodsUrl,function(data){
 		$('#saleOrderGoods').empty();
 		$('#saleOrderGoods').append($("<option></option>"));
 		if (data.success) {
-			data.pageBean.datas.map(function(item, index){
-				var goodsItem = $('<option></option>').append(item.goodsId);
+			data.allGoodsList.map(function(item, index){
+				var goodsItem = $("<option value="+item.goodsId+">"+item.name+"</option>");
 				$('#saleOrderGoods').append(goodsItem);
 			});
 		}
@@ -249,14 +249,14 @@ function getGoodsInfoToSelect() {
  *客户载入选择框
  */
 function getCustomerInfoToSelect() {
-	var customerUrl = "/sdims/sale/getsalecustomerlist?pageIndex="+1;
+	var customerUrl = "/sdims/sale/getallcustomerlist";
 	//商品信息放置select中
 	$.getJSON(customerUrl,function(data){
 		$('#saleOrderCustomer').empty();
 		$('#saleOrderCustomer').append($("<option></option>"));
 		if (data.success) {
-			data.pageBean.datas.map(function(item, index){
-				var customerItem = $('<option></option>').append(item.customerId);
+			data.allCustomerList.map(function(item, index){
+				var customerItem = $("<option value="+item.customerId+">"+item.name+"</option>");
 				$('#saleOrderCustomer').append(customerItem);
 			});
 		}
@@ -266,14 +266,14 @@ function getCustomerInfoToSelect() {
  *仓库载入选择框
  */
 function getRepositoryInfoToSelect() {
-	var supplierUrl = "/sdims/admin/getrepositorylist?pageIndex="+1;
+	var repositoryUrl = "/sdims/admin/getallrepositorylist";
 	//商品信息放置select中
-	$.getJSON(supplierUrl,function(data){
+	$.getJSON(repositoryUrl,function(data){
 		$('#saleOrderRepository').empty();
 		$('#saleOrderRepository').append($("<option></option>"));
 		if (data.success) {
-			data.pageBean.datas.map(function(item, index){
-				var repositoryItem = $('<option></option>').append(item.repoId);
+			data.allRepositoryList.map(function(item, index){
+				var repositoryItem = $("<option value="+item.repoId+">"+item.name+"</option>");
 				$('#saleOrderRepository').append(repositoryItem);
 			});
 		}

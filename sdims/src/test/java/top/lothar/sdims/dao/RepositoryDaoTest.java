@@ -49,7 +49,7 @@ public class RepositoryDaoTest extends BaseTest{
 		int effectNum = repositoryDao.updateRepository(repository);
 		System.out.println(effectNum);
 	}
-	@Test
+	@Ignore
 	public void testDQueryRepositoryList() {
 		List<Repository> repositoryList = repositoryDao.queryRepositoryList(null, 0, 2);
 		for (Repository repository : repositoryList) {
@@ -61,11 +61,19 @@ public class RepositoryDaoTest extends BaseTest{
 		int effectNum = repositoryDao.queryRepositoryCount(null);
 		System.out.println("共有"+effectNum+"条");
 	}
-	@Test
+	@Ignore
 	public void testFQueryRepositoryById() {
 		long repoId = 1L;
 		Repository queryRepositoryById = repositoryDao.queryRepositoryById(repoId);
 		System.out.println(queryRepositoryById.getEmployee().getName());
+	}
+	
+	@Test
+	public void testGetRepositoryList() {
+		List<Repository> allRepositoryList = repositoryDao.queryAllRepositoryList();
+		for (Repository repository : allRepositoryList) {
+			System.out.println(repository.getRepoId());
+		}
 	}
 
 }

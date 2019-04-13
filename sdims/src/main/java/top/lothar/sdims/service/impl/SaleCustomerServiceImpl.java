@@ -42,6 +42,12 @@ public class SaleCustomerServiceImpl implements SaleCustomerService {
 	}
 
 	@Override
+	public List<Customer> getAllCustomerList() {
+		// TODO Auto-generated method stub
+		return saleCustomerDao.queryAllCustomerList();
+	}
+
+	@Override
 	public TExecution<Customer> getSaleCustomerList(String customerName, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
 		int rowIndex = PageCalculator.calculatorRowIndex(pageIndex, pageSize);

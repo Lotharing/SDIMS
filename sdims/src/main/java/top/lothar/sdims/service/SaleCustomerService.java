@@ -1,5 +1,7 @@
 package top.lothar.sdims.service;
 
+import java.util.List;
+
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Customer;
 
@@ -28,6 +30,11 @@ public interface SaleCustomerService {
 	 * @return
 	 */
 	Customer getCustomerById(long customerId);
+	/**
+	 * 得到所有客户列表，并在前台渲染销售单select中的客户信息
+	 * @return
+	 */
+	List<Customer> getAllCustomerList();
 	/**
 	 * 得到客户列表，返回泛型（列表,总数,状态信息）
 	 * @param customerName

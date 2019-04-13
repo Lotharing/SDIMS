@@ -38,6 +38,12 @@ public class PurchaseSupplierServiceImpl implements PurchaseSupplierService {
 		// TODO Auto-generated method stub
 		return purchaseSupplierDao.queryPurchaseSupplierById(supplierId);
 	}
+	
+	@Override
+	public List<Supplier> getAllSupplierList() {
+		// TODO Auto-generated method stub
+		return purchaseSupplierDao.queryAllSupplierList();
+	}
 
 	@Override
 	public TExecution<Supplier> getPurchaseSupplierList(String supplierName, int pageIndex, int pageSize) {

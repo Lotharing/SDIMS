@@ -50,7 +50,7 @@
 		WHERE
 		user_id=#{userId}
 	</update>
-	<!-- 查询用户列表 -->
+	<!-- 查询用户列表 分页-->
 	<select id="queryUserList" resultMap="userMap">
 		SELECT
 		user_id,
