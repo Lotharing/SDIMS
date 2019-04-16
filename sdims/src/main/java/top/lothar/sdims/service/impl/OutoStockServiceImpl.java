@@ -2,15 +2,12 @@ package top.lothar.sdims.service.impl;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import top.lothar.sdims.dao.SaleOrderDao;
 import top.lothar.sdims.dao.StockDao;
 import top.lothar.sdims.dto.TExecution;
-import top.lothar.sdims.entity.PurchaseOrder;
 import top.lothar.sdims.entity.SaleOrder;
 import top.lothar.sdims.entity.Stock;
 import top.lothar.sdims.service.OutoStockService;

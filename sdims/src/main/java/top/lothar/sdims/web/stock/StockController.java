@@ -8,15 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import top.lothar.sdims.dao.PurchaseOrderDao;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Goods;
-import top.lothar.sdims.entity.PurchaseOrder;
 import top.lothar.sdims.entity.Repository;
 import top.lothar.sdims.entity.Stock;
-import top.lothar.sdims.service.PurchaseOrderCheckService;
-import top.lothar.sdims.service.PurchaseOrderService;
 import top.lothar.sdims.service.StockService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -45,7 +40,7 @@ public class StockController {
 		// 获取页码
 		int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
 		// 获取每页展示的数据量
-		int pageSize = 5;
+		int pageSize = 8;
 		// 获取查询条件商品名
 		String goodsName = HttpServletRequestUtil.getString(request, "goodsName");
 		//获取仓库名
@@ -61,7 +56,7 @@ public class StockController {
 			// 仓库列表
 			pageBean.setDatas(stockExecution.getData());
 			// 每页记录数
-			pageBean.setPageSize(5);
+			pageBean.setPageSize(8);
 			// 当前页
 			pageBean.setCurPage(pageIndex);
 			int sumPages = PageBean.getSumPages(stockExecution.getCount(), pageSize);

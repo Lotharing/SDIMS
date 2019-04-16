@@ -40,6 +40,15 @@ public class SaleViewController {
 	public String saleOrder() {
 		return "sale/saleorder";
 	}
+	/*-------------------------------------------统计分析页----------------------------------------------*/
+	/**
+	 * 销售统计
+	 * @return
+	 */
+	@RequestMapping(value="salestatistics", method=RequestMethod.GET)
+	public String saleStatistics() {
+		return "statistics/salestatistics";
+	}
 	/*-------------------------------------------账户管理页----------------------------------------------*/
 	/**
 	 * 用户修改密码页(所有用户共有功能)

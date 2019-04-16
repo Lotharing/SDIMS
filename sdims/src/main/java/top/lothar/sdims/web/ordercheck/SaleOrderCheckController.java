@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.lothar.sdims.dto.TExecution;
-import top.lothar.sdims.entity.PurchaseOrder;
 import top.lothar.sdims.entity.SaleOrder;
 import top.lothar.sdims.service.SaleOrderCheckService;
 import top.lothar.sdims.util.HttpServletRequestUtil;

@@ -2,15 +2,12 @@ package top.lothar.sdims.service.impl;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import top.lothar.sdims.dao.RoleDao;
 import top.lothar.sdims.dao.UserDao;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Role;
-import top.lothar.sdims.entity.Stock;
 import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.UserService;
 import top.lothar.sdims.util.MD5;

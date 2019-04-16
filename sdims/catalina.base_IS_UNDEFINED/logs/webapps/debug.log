@@ -1,38 +1,36 @@
-2019-04-13 16:40:27.920 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - ==>  Preparing: SELECT employee_id, name FROM sd_base_employee ORDER BY employee_id ASC 
-2019-04-13 16:40:28.002 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - ==> Parameters: 
-2019-04-13 16:40:28.031 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - <==      Total: 21
-2019-04-13 16:42:29.946 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - ==>  Preparing: SELECT employee_id, name FROM sd_base_employee ORDER BY employee_id ASC 
-2019-04-13 16:42:29.994 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - ==> Parameters: 
-2019-04-13 16:42:30.016 [main] DEBUG t.l.sdims.dao.EmployeeDao.queryAllEmployeeList - <==      Total: 21
-2019-04-13 20:20:00.558 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - ==>  Preparing: SELECT goods_id, name FROM sd_base_goods ORDER BY goods_id ASC 
-2019-04-13 20:20:00.612 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - ==> Parameters: 
-2019-04-13 20:20:00.641 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - <==      Total: 10
-2019-04-13 20:20:27.563 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - ==>  Preparing: SELECT goods_id, name FROM sd_base_goods ORDER BY goods_id ASC 
-2019-04-13 20:20:27.634 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - ==> Parameters: 
-2019-04-13 20:20:27.663 [main] DEBUG top.lothar.sdims.dao.GoodsDao.queryAllGoodsList - <==      Total: 10
-2019-04-13 20:39:13.795 [main] DEBUG t.l.s.dao.PurchaseSupplierDao.queryAllSupplierList - ==>  Preparing: SELECT supplier_id, name, FROM sd_purchase_supplier ORDER BY supplier_id ASC 
-2019-04-13 20:39:13.841 [main] DEBUG t.l.s.dao.PurchaseSupplierDao.queryAllSupplierList - ==> Parameters: 
-2019-04-13 20:40:26.481 [main] DEBUG t.l.s.dao.PurchaseSupplierDao.queryAllSupplierList - ==>  Preparing: SELECT supplier_id, name FROM sd_purchase_supplier ORDER BY supplier_id ASC 
-2019-04-13 20:40:26.516 [main] DEBUG t.l.s.dao.PurchaseSupplierDao.queryAllSupplierList - ==> Parameters: 
-2019-04-13 20:40:26.571 [main] DEBUG t.l.s.dao.PurchaseSupplierDao.queryAllSupplierList - <==      Total: 7
-2019-04-13 20:55:43.411 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==>  Preparing: SELECT br.repo_id, br.name, FROM ORDER BY br.repo_id ASC 
-2019-04-13 20:55:43.452 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==> Parameters: 
-2019-04-13 20:56:08.096 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==>  Preparing: SELECT repo_id, name FROM ORDER BY br.repo_id ASC 
-2019-04-13 20:56:08.142 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==> Parameters: 
-2019-04-13 20:56:31.231 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==>  Preparing: SELECT repo_id, name FROM ORDER BY repo_id ASC 
-2019-04-13 20:56:31.279 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==> Parameters: 
-2019-04-13 20:57:13.652 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==>  Preparing: SELECT repo_id, name FROM sd_base_repo ORDER BY repo_id ASC 
-2019-04-13 20:57:13.690 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==> Parameters: 
-2019-04-13 20:57:13.709 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - <==      Total: 6
-2019-04-13 20:58:01.219 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==>  Preparing: SELECT repo_id, name FROM sd_base_repo ORDER BY repo_id ASC 
-2019-04-13 20:58:01.267 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - ==> Parameters: 
-2019-04-13 20:58:01.291 [main] DEBUG t.l.sdims.dao.RepositoryDao.getAllRepositoryList - <==      Total: 6
-2019-04-13 21:01:04.023 [main] DEBUG t.l.sdims.dao.RepositoryDao.queryAllRepositoryList - ==>  Preparing: SELECT repo_id, name FROM sd_base_repo ORDER BY repo_id ASC 
-2019-04-13 21:01:04.072 [main] DEBUG t.l.sdims.dao.RepositoryDao.queryAllRepositoryList - ==> Parameters: 
-2019-04-13 21:01:04.095 [main] DEBUG t.l.sdims.dao.RepositoryDao.queryAllRepositoryList - <==      Total: 6
-2019-04-13 21:21:18.807 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - ==>  Preparing: SELECT customer_id, name FROM sd_sale_customer ORDER BY customer_id ASC 
-2019-04-13 21:21:18.851 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - ==> Parameters: 
-2019-04-13 21:21:18.873 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - <==      Total: 6
-2019-04-13 21:21:46.435 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - ==>  Preparing: SELECT customer_id, name FROM sd_sale_customer ORDER BY customer_id ASC 
-2019-04-13 21:21:46.489 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - ==> Parameters: 
-2019-04-13 21:21:46.513 [main] DEBUG t.l.sdims.dao.SaleCustomerDao.queryAllCustomerList - <==      Total: 6
+2019-04-16 10:07:44.362 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.411 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-1-01(String), 2019-2-01(String)
+2019-04-16 10:07:44.429 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.438 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.438 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-2-01(String), 2019-3-01(String)
+2019-04-16 10:07:44.466 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.467 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.468 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-3-01(String), 2019-4-01(String)
+2019-04-16 10:07:44.471 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 1
+2019-04-16 10:07:44.472 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.472 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-4-01(String), 2019-5-01(String)
+2019-04-16 10:07:44.473 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 2
+2019-04-16 10:07:44.474 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.474 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-5-01(String), 2019-6-01(String)
+2019-04-16 10:07:44.476 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.477 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.478 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-6-01(String), 2019-7-01(String)
+2019-04-16 10:07:44.479 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.479 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.480 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-7-01(String), 2019-8-01(String)
+2019-04-16 10:07:44.481 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.481 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.482 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-8-01(String), 2019-9-01(String)
+2019-04-16 10:07:44.483 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.484 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.484 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-9-01(String), 2019-10-01(String)
+2019-04-16 10:07:44.485 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.486 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.486 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-10-01(String), 2019-11-01(String)
+2019-04-16 10:07:44.487 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.488 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.488 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-11-01(String), 2019-12-01(String)
+2019-04-16 10:07:44.489 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0
+2019-04-16 10:07:44.489 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==>  Preparing: SELECT count, total_price FROM sd_sale_order WHERE stock_time>=? and stock_time<=? and stock_state=1 
+2019-04-16 10:07:44.490 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - ==> Parameters: 2019-12-01(String), 2019-12-31(String)
+2019-04-16 10:07:44.490 [main] DEBUG t.l.s.dao.EchartsDataDao.querySaleOrderListByDate - <==      Total: 0

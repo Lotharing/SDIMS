@@ -148,6 +148,25 @@
 							</li>
 						</ul>
 					</li>
+					<!------------------统计分析---------------- -->
+					<li>
+						<a href="#statisticsSetting" class="nav-header collapsed" data-toggle="collapse">
+							<i class="glyphicon glyphicon-star"></i>统计分析
+							<span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+						</a>
+						<ul id="statisticsSetting" class="nav nav-list secondmenu collapse">
+							<li>
+								<a href="javascript:void(0);" onclick="PurchaseStatistics()">
+									<i class="glyphicon glyphicon-tasks"></i>&nbsp;<span id="PurchaseStatisticsManager">采购统计</span>
+								</a>
+							</li>
+							<li>
+								<a  href="javascript:void(0);" onclick="SaleStatistics()">
+									<i class="glyphicon glyphicon-tasks"></i>&nbsp;<span id="SaleStatisticsManager">销售统计</span>
+								</a>
+							</li>
+						</ul>
+					</li>
 					<!------------------账户管理---------------- -->
 					<li>
 						<a href="#accountSetting" class="nav-header collapsed" data-toggle="collapse">
@@ -252,5 +271,9 @@
 	<script src="../resources/js/admin/user.js"></script>
 	<!-- 用户管理标签栏.js控制文件 -->
 	<script src="../resources/js/comment/modifyPasswordLable.js"></script>
+	<!-- 采购统计标签栏.js控制文件 -->
+	<script src="../resources/js/statistics/purchaseStatisticsLable.js"></script>
+	<!-- 销售统计标签栏.js控制文件 -->
+	<script src="../resources/js/statistics/saleStatisticsLable.js"></script>
 </body>
 </html>

@@ -83,8 +83,8 @@ public class DESUtil {
 	}
 	
 	public static void main(String args[]){
-		String encryptString1 = getEncryptString("root");
-		String encryptString2 = getEncryptString("root");
+		String encryptString1 = getEncryptString("lutong");
+		String encryptString2 = getEncryptString("Lutong~918");
 		System.out.println(encryptString1);
 		System.out.println(encryptString2);
 	}

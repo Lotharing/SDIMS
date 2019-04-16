@@ -49,6 +49,15 @@ public class PurchaseViewController {
 	public String purchaseOrder() {
 		return "purchase/purchaseorder";
 	}
+	/*-------------------------------------------统计分析页----------------------------------------------*/
+	/**
+	 * 采购统计
+	 * @return
+	 */
+	@RequestMapping(value="purchasestatistics", method=RequestMethod.GET)
+	public String purchaseStatistics() {
+		return "statistics/purchasestatistics";
+	}
 	/*-------------------------------------------账户管理页----------------------------------------------*/
 	/**
 	 * 用户修改密码页(所有用户共有功能)

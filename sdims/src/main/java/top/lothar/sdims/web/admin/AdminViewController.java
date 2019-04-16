@@ -132,6 +132,23 @@ public class AdminViewController {
 	public String outoStock() {
 		return "stock/outostock";
 	}
+	/*-------------------------------------------统计分析页----------------------------------------------*/
+	/**
+	 * 采购统计
+	 * @return
+	 */
+	@RequestMapping(value="purchasestatistics", method=RequestMethod.GET)
+	public String purchaseStatistics() {
+		return "statistics/purchasestatistics";
+	}
+	/**
+	 * 销售统计
+	 * @return
+	 */
+	@RequestMapping(value="salestatistics", method=RequestMethod.GET)
+	public String saleStatistics() {
+		return "statistics/salestatistics";
+	}
 	/*-------------------------------------------用户管理页----------------------------------------------*/
 	/**
 	 * 用户管理页(管理员专用路由)

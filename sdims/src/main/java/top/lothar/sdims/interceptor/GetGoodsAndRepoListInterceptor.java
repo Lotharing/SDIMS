@@ -22,7 +22,7 @@ public class GetGoodsAndRepoListInterceptor extends HandlerInterceptorAdapter{
 			User user = (User) objectUser;
 			// 对user进行判断userId和角色类型
 			if (user != null && user.getUserId()> 0) {
-				if (user.getRole().getRoleId()==3 || user.getRole().getRoleId()==4) {
+				if (user.getRole().getRoleId()==1 ||user.getRole().getRoleId()==3 || user.getRole().getRoleId()==4) {
 					// 如果通过上述的验证步骤，则返回true，可以进行接下来操作
 					return true;
 				}else {

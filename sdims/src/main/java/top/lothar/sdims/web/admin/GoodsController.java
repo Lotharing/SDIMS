@@ -4,18 +4,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import top.lothar.sdims.dto.TExecution;
-import top.lothar.sdims.entity.Employee;
 import top.lothar.sdims.entity.Goods;
 import top.lothar.sdims.service.GoodsService;
 import top.lothar.sdims.util.HttpServletRequestUtil;

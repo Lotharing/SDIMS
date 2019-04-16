@@ -10,12 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import top.lothar.sdims.dto.RepositoryExecution;
 import top.lothar.sdims.entity.Repository;
-import top.lothar.sdims.entity.Supplier;
 import top.lothar.sdims.service.RepositoryService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -44,7 +41,7 @@ public class RepositoryController {
 		//获取页码
 		int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
 		//获取每页展示的数据量
-		int pageSize = 4;
+		int pageSize = 5;
 		//获取查询条件（仓库名）
 		String repositoryName = HttpServletRequestUtil.getString(request, "repositoryName");
 		//非空判断
@@ -56,7 +53,7 @@ public class RepositoryController {
 			//仓库列表
 			pageBean.setDatas(repositoryExecution.getRepositoryList());
 			//每页记录数
-			pageBean.setPageSize(3);
+			pageBean.setPageSize(5);
 			//当前页
 			pageBean.setCurPage(pageIndex);
 			int sumPages = PageBean.getSumPages(repositoryExecution.getCount(),pageSize);

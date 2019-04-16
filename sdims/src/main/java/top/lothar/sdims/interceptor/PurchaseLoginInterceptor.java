@@ -24,7 +24,9 @@ public class PurchaseLoginInterceptor extends HandlerInterceptorAdapter{
 					// 如果通过上述的验证步骤，则返回true，可以进行接下来操作
 					return true;
 				}else {
+					System.out.println("无权限");
 					return false;
+					
 				}
 			}
 		}
