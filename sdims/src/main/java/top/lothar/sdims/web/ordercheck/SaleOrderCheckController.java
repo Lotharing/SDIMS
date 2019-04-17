@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.SaleOrder;
+import top.lothar.sdims.entity.User;
+import top.lothar.sdims.service.PurchaseOrderService;
 import top.lothar.sdims.service.SaleOrderCheckService;
+import top.lothar.sdims.service.SaleOrderService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
 /**
@@ -21,6 +24,9 @@ import top.lothar.sdims.util.PageBean;
 @Controller
 @RequestMapping("/ordercheck")
 public class SaleOrderCheckController {
+	
+	@Autowired
+	private SaleOrderService saleOrderService;
 	
 	@Autowired
 	private SaleOrderCheckService saleOrderCheckService;
@@ -86,10 +92,12 @@ public class SaleOrderCheckController {
 		Map<String, Object> modelMap = new HashMap<String,Object>();
 		//这里的数据要包含ID因为是根据ID进行更新
 		long sorderId = HttpServletRequestUtil.getLong(request, "sorderId");
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
 		SaleOrder saleOrder = new SaleOrder();
 		saleOrder.setSorderId(sorderId);
 		//后期session获取----------------------------------
-		saleOrder.setCheckMan("xiaodan");
+		saleOrder.setCheckMan(user.getEmployee().getName());
 		try {
 			int effectNum = saleOrderCheckService.modifySaleOrderCheck(saleOrder);
 			if (effectNum < 1) {
@@ -118,11 +126,22 @@ public class SaleOrderCheckController {
 		Map<String, Object> modelMap = new HashMap<String,Object>();
 		//这里的数据要包含ID因为是根据ID进行更新
 		long sorderId = HttpServletRequestUtil.getLong(request, "sorderId");
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
 		SaleOrder saleOrder = new SaleOrder();
 		saleOrder.setSorderId(sorderId);
 		//后期session获取----------------------------------
-		saleOrder.setCheckMan("xiaodan");
+		saleOrder.setCheckMan(user.getEmployee().getName());
 		try {
+			/**
+			 * 已经出库的销售单，不能撤销校验
+			 */
+			SaleOrder currentSaleOrder = saleOrderService.getSaleOrderById(sorderId);
+			if (currentSaleOrder.getStockState()==1) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "此订单已经出库，不能撤销！");
+				return modelMap;
+			}
 			int effectNum = saleOrderCheckService.modifySaleOrderRevoke(saleOrder);
 			if (effectNum < 1) {
 				modelMap.put("success", false);

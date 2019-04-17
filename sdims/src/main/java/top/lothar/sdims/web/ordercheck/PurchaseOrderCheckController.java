@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.PurchaseOrder;
+import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.PurchaseOrderCheckService;
+import top.lothar.sdims.service.PurchaseOrderService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
 /**
@@ -21,6 +23,9 @@ import top.lothar.sdims.util.PageBean;
 @Controller
 @RequestMapping("/ordercheck")
 public class PurchaseOrderCheckController {
+	
+	@Autowired
+	private PurchaseOrderService purchaseOrderService;
 	
 	@Autowired
 	private PurchaseOrderCheckService purchaseOrderCheckService;
@@ -86,10 +91,12 @@ public class PurchaseOrderCheckController {
 		Map<String, Object> modelMap = new HashMap<String,Object>();
 		//这里的数据要包含ID因为是根据ID进行更新
 		long porderId = HttpServletRequestUtil.getLong(request, "porderId");
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPorderId(porderId);
 		//后期session获取----------------------------------
-		purchaseOrder.setCheckMan("xiaodan");
+		purchaseOrder.setCheckMan(user.getEmployee().getName());
 		try {
 			int effectNum = purchaseOrderCheckService.modifyPurchaseOrderCheck(purchaseOrder);
 			if (effectNum < 1) {
@@ -118,11 +125,25 @@ public class PurchaseOrderCheckController {
 		Map<String, Object> modelMap = new HashMap<String,Object>();
 		//这里的数据要包含ID因为是根据ID进行更新
 		long porderId = HttpServletRequestUtil.getLong(request, "porderId");
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPorderId(porderId);
-		//后期session获取----------------------------------
-		purchaseOrder.setCheckMan("xiaodan");
+		//session中获取员工姓名
+		purchaseOrder.setCheckMan(user.getEmployee().getName());
 		try {
+			//如果库管已经入库，则不能撤销
+			/**
+			 * 根据porderId查询采购单，的stock_state信息
+			 * 如果为1则返回此订单已经入库
+			 */
+			PurchaseOrder currentPurchaseOrder = purchaseOrderService.getPurchaseOrderById(porderId);
+			if (currentPurchaseOrder.getStockState()==1) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "此订单已经入库，不能撤销！");
+				return modelMap;
+			}
+			//审核通过更新订单
 			int effectNum = purchaseOrderCheckService.modifyPurchaseOrderRevoke(purchaseOrder);
 			if (effectNum < 1) {
 				modelMap.put("success", false);

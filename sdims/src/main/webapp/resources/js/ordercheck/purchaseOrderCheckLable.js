@@ -197,15 +197,23 @@ function searchPurchaseOrderOfCheck() {
 $(document).on("click",".pOrderAdoptCheck_btn",function(){
 	var porderId = $(this).attr("adopt-id");
 	var purchaseOrderCheckUrl = "/sdims/ordercheck/modifypurchaseordercheck?porderId="+porderId;
-	$.getJSON(purchaseOrderCheckUrl,function(data){
-		if (data.success) {
-			alert(data.successMsg);
-			//返回当前页
-			to_page_purchaseOrderCheck(PordercurrentPage);
-		}else {
-			alert(data.errMsg);
-		}
-	});
+	//获取审核状态文字
+	var checkStateDom = $(this).parent().prev().prev().prev();
+	var checkFont = checkStateDom.text();
+	//已审核的不需要再次去审核
+	if (checkFont=="审核通过") {
+		alert("已审核!!!");
+	}else{
+		$.getJSON(purchaseOrderCheckUrl,function(data){
+			if (data.success) {
+				alert(data.successMsg);
+				//返回当前页
+				to_page_purchaseOrderCheck(PordercurrentPage);
+			}else {
+				alert(data.errMsg);
+			}
+		});
+	}
 });
 /**
  * 撤销通过采购单
