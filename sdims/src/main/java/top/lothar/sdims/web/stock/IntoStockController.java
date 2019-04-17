@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.PurchaseOrder;
+import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.IntoStockService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -91,8 +92,10 @@ public class IntoStockController {
 		long porderId = HttpServletRequestUtil.getLong(request, "porderId");
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPorderId(porderId);
-		//后期session获取----------------------------------入库审核人，库管
-		purchaseOrder.setStockMan("xiaokudan");
+		//后期session获取库管
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
+		purchaseOrder.setStockMan(user.getEmployee().getName());
 		try {
 			int effectNum = intoStockService.modifyIntoStockPurchaseOrderCheck(purchaseOrder);
 			if (effectNum < 1) {

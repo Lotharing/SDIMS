@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.SaleOrder;
+import top.lothar.sdims.entity.User;
 import top.lothar.sdims.service.OutoStockService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
 import top.lothar.sdims.util.PageBean;
@@ -92,8 +93,10 @@ public class OutoStockController {
 		long sorderId = HttpServletRequestUtil.getLong(request, "sorderId");
 		SaleOrder saleOrder = new SaleOrder();
 		saleOrder.setSorderId(sorderId);
-		//后期session获取----------------------------------入库审核人，库管
-		saleOrder.setStockMan("xiaokudan");
+		//后期session获取库管
+		//用户姓名从登陆后的session中获取
+		User user = (User) request.getSession().getAttribute("loginUser");
+		saleOrder.setStockMan(user.getEmployee().getName());
 		try {
 			int effectNum = outoStockService.modifyOutoStockSaleOrderCheck(saleOrder);
 			if (effectNum==STOCK_COUNT_SATATE) {
