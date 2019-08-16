@@ -3,5 +3,5 @@
 
 #### 答辩成绩
 
-![答辩成绩](https://i.loli.net/2019/08/16/IvH6wBsEmzJp3j9.png)
+## https://i.loli.net/2019/08/16/IvH6wBsEmzJp3j9.png
 
