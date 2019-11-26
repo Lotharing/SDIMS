@@ -1,5 +1,39 @@
-# SDIMS
-防盗门进销存管理系统-毕业设计
+# 防盗门进销存管理系统（SDIMS）
+
+2019/09/03/15 - 2019/04/11 毕业设计项目
+
+## 环境配置
+
+- JDK 1.8
+- Tomcat 9.0
+- MySQL 5.1
+- Maven 3.5.4
+
+## 系统架构
+
+- Spring+SpringMVC+Mybatis
+
+## 工具
+
+- LogBack日志 MD5账户加密 DES数据库连接加密
+
+## 第三方插件
+
+- Echarts
+
+## 线上地址
+
+- www.lothar.top:8080/sdims
+
+- 39.96.21.162:8080/sdims
+
+## 账户
+
+- Account : admin
+
+- PassWord : 111111
+
+- 为提供方便浏览，希望浏览的读者不要操作数据，谢谢
 
 #### 答辩成绩
 ## ![afdfads](https://i.loli.net/2019/08/16/IvH6wBsEmzJp3j9.png)
@@ -16,5 +50,4 @@
 #### Echarts数据可视化
 ## ![echarts.png](https://i.loli.net/2019/08/16/PRnlz5JFGbfUC9e.png)
 
-* 数据库笔者未上传，还有相关文档论文等，如有需要 QQ 809676295 联系
-
+* 数据库未上传，还有相关文档论文等，如有需要滴滴~ QQ:809676295 ，性感荷官在线解答。
