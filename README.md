@@ -23,9 +23,7 @@
 
 ## 线上地址
 
-- www.lothar.top:8080/sdims
-
-- http://39.96.21.162:8080/sdims
+- http://sdims.lothar.top:8080/sdims
 
 ## 账户
 
