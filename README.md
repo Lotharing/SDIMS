@@ -52,3 +52,6 @@
 ## ![1111.png](https://i.loli.net/2020/01/27/OwK5X3dQMrl6kus.png)
 
 * 数据库未上传，还有相关文档论文等，如有需要滴滴~ QQ:809676295 ，若是点个Star，性感荷官可以在线解答。
+
+* 另外还写了一个springboot集成各种框架的，初学者可以参考，可以领你快速入门springboot集成各种框架插件，对你搭建项目雏形引入某些工具具有明确指引
+        https://github.com/Lotharing/springboot-integrated-tool , 可以点个star支持一下，持续更新中.......
