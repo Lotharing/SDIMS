@@ -6,12 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sdims (1)" />
+        <module name="sdims" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="sdims (2)" target="1.5" />
-      <module name="sdims (3)" target="1.8" />
+      <module name="sdims" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

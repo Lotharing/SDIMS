@@ -1,0 +1,296 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>员工管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body style="padding:0;border:0;margin:0">
+	<!-- Lable -->
+	<div class="panel panel-primary">
+		<!-- 检索条件框 -->
+		<div class="panel panel-body">
+			<form class="form-inline">
+				<div class="form-group">
+					<label class="left20">员工姓名</label>
+					<input id="employeeName" type="text" class="form-control" placeholder="员工姓名" th:value="${}"> 
+					<label class="left20">角色类型</label> 
+					<select id="employeeType" class="form-control">
+						
+					</select>
+					<button onclick="searchEmployee()" type="button" class="btn btn-primary">查询</button>
+					<button onclick="addEmployee()" type="button" class="btn btn-success">添加</button>
+<!-- 					<button onclick="updateEmployee()" type="button" class="btn btn-info">更新</button>
+					<button onclick="deleteEmployee()" type="button" class="btn btn-danger">删除</button> -->
+					
+				</div>
+			</form>
+		</div>
+		<!-- 信息展示区表格 -->
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+				<td>序号</td>
+				<td>员工姓名</td>
+				<td>员工编号</td>
+				<td>身份证</td>
+				<td>手机号</td>
+				<td>性别</td>
+				<td>地址</td>
+				<td>邮箱</td>
+				<td>角色类型</td>
+				<td>创建时间</td>
+				<td>操作</td>
+			</tr>
+            </thead>
+            <tbody id="table-employee"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="Emp_page_nav_area"></div>
+	</div> 
+	<!-- ----------------------------------------------弹出窗口-插入------------------------------------------------->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">员工姓名</label>
+						<input id="employeeNameInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工姓名(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">员工编号</label>
+						<input id="employeeCode" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工编号(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">身份证号</label>
+						<input id="employeeIdCard" style="width: 80%;float: right" type="text" class="form-control" placeholder="身份证号"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">手机号</label>
+						<input id="employeeMobile" style="width: 80%;float: right" type="text" class="form-control" placeholder="手机号"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">员工性别</label>
+                        <select id="employeeSexDialog" style="width: 80%;float: right" class="form-control">
+                        	<option>男</option>
+                        	<option>女</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">员工住址</label>
+						<input id="employeeAddress" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工住址"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">员工邮箱</label>
+						<input id="employeeEmail" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工邮箱"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">角色类型</label>
+						<!-- <input id="employeeRole" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工姓名"> -->
+						<select id="employeeTypeDialog" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddEmployee" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- ----------------------------------------------弹出窗口-编辑------------------------------------------------->
+	<div class="modal fade" id="EditModal" tabindex="-1" role="dialog"
+		aria-labelledby="EditModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!-- 弹窗头 -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="EditModalLabel"></h4>
+				</div>
+				<!-- 弹窗录入信息区域 -->
+				<div class="modal-body">
+					<div class="form-group">
+						<span style="color: red; font-weight: bold">＊</span>
+						<label style="margin-top: 7px">员工姓名</label>
+						<input id="EditemployeeNameInput" readonly="readonly" style="width: 80%; float: right" type="text" class="form-control" placeholder="员工姓名(必填)">
+					</div>
+					<div class="form-group">
+						<span style="color: red; font-weight: bold">＊</span> <label
+							style="margin-top: 7px">员工编号</label> <input id="EditemployeeCode"
+							readonly="readonly" style="width: 80%; float: right" type="text" class="form-control"
+							placeholder="员工编号(必填)">
+					</div>
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span> <label
+							style="margin-top: 7px">身份证号</label> <input id="EditemployeeIdCard"
+							style="width: 80%; float: right" type="text" class="form-control"
+							placeholder="身份证号">
+					</div>
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span> <label
+							style="margin-top: 7px">手机号</label> <input id="EditemployeeMobile"
+							style="width: 80%; float: right" type="text" class="form-control"
+							placeholder="手机号">
+					</div>
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span> <label
+							style="margin-top: 7px">员工性别</label>
+							<select id="EditemployeeSexDialog" style="width: 80%; float: right" class="form-control">
+
+							</select>
+					</div>
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span> <label
+							style="margin-top: 7px">员工住址</label> <input id="EditemployeeAddress"
+							style="width: 80%; float: right" type="text" class="form-control"
+							placeholder="员工住址">
+					</div>
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span> <label
+							style="margin-top: 7px">员工邮箱</label> <input id="EditemployeeEmail"
+							style="width: 80%; float: right" type="text" class="form-control"
+							placeholder="员工邮箱">
+					</div>
+					<!-- 角色类型不可以修改 -->
+<!-- 					<div class="form-group">
+						<span style="color: red; font-weight: bold">＊</span> <label
+							style="margin-top: 7px">角色类型</label>
+						<input id="employeeRole" style="width: 80%;float: right" type="text" class="form-control" placeholder="员工姓名">
+						<select id="EditemployeeTypeDialog" style="width: 80%; float: right"
+							class="form-control"></select>
+					</div> -->
+					<div class="form-group">
+						<span style="font-weight: bold">＊</span>
+						<label style="margin-top: 7px">ID</label>
+						<input id="EditemployeeId" readonly="readonly" style="width: 80%; float: right" type="text" class="form-control"/>
+					</div>
+				</div>
+				<!-- 弹窗底部 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+					</button>
+					<button type="button" id="btn_YESupdateEmployee"
+						class="btn btn-primary" data-dismiss="modal">
+						<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>更新
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	//添加员工信息
+	$('#btn_YESAddEmployee')
+			.click(
+					function() {
+						//后台添加信息URL
+						var addEmployeeUrl = "/sdims/admin/addemployee";
+						//		var successDialog = $("<div class="alert alert-success" role="alert">+"成功"+</div>");
+						//json存放区域
+						var employee = {};
+						employee.name = $('#employeeNameInput').val();
+						employee.code = $('#employeeCode').val();
+						employee.idCard = $('#employeeIdCard').val();
+						employee.mobile = $('#employeeMobile').val();
+						var sex = $('#employeeSexDialog').val();
+						if (sex == "男") {
+							employee.sex = "1"
+						} else if (sex == "女") {
+							employee.sex = "2"
+						}
+						employee.address = $('#employeeAddress').val();
+						employee.email = $('#employeeEmail').val();
+						employee.type = $('#employeeTypeDialog').val();
+						employee.updateTime = new Date();
+						//判断必填项是否没填
+						if (employee.name == "" || employee.code == ""
+								|| employee.type == "") {
+							alert('姓名，编号，类型不能为空');
+							return;
+						}
+						// 生成表单对象，用于接收参数并传递给后台
+						var formData = new FormData();
+						// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+						formData
+								.append('employeeStr', JSON.stringify(employee));
+						//携带数据请求后台
+						$
+								.ajax({
+									url : addEmployeeUrl,
+									type : 'POST',
+									data : formData,
+									contentType : false,
+									processData : false,
+									cache : false,
+									success : function(data) {
+										if (data.success) {
+											alert('添加成功');
+											to_page_emp(EmptotalRecord);
+										} else {
+											alert('添加失败');
+										}
+									}
+								});
+					});
+	//得到模态框中的信息，并发送给后台更新数据
+	$('#btn_YESupdateEmployee').click(function() {
+		//后台更新信息URL
+		var updateEmployeeUrl = "/sdims/admin/modifyEmployee";
+		//json存放区域
+		var employee = {};
+		employee.employeeId = $('#EditemployeeId').val();
+		employee.idCard = $('#EditemployeeIdCard').val();
+		employee.mobile = $('#EditemployeeMobile').val();
+		employee.address = $('#EditemployeeAddress').val();
+		employee.email = $('#EditemployeeEmail').val();
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('employeeStr', JSON.stringify(employee));
+		$.ajax({
+			url : updateEmployeeUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('更新成功');
+					to_page_emp(EMpcurrentPage);
+				}else {
+					alert('更新失败');
+				}
+			}
+		});
+	});
+</script>
+</body>
+</html>

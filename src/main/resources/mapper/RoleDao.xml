@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lothar.sdims.dao.RoleDao">
+	<!-- 查询角色信息 -->
+	<select id="queryRoleList" resultType="Role">
+		SELECT
+		role_id,
+		role_name,
+		create_time,
+		role_desc
+		FROM
+		sd_sys_role
+	</select>
+	
+	<select id="queryRoleById" resultType="Role">
+		SELECT
+		role_id,
+		role_name,
+		create_time,
+		role_desc
+		FROM
+		sd_sys_role
+		WHERE
+		role_id = #{roleId}
+	</select>
+</mapper>

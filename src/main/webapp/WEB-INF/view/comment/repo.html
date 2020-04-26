@@ -1,0 +1,248 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>仓库管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body style="padding:0;border:0;margin:0">
+	<!-- 检索条件框 -->
+	<div class="panel panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="left20">仓库名称</label> <input id="repoName"
+					type="text" class="form-control" placeholder="仓库名称" th:value="${}">
+				<button onclick="searchRepo()" type="button"
+					class="btn btn-primary">查询</button>
+				<button onclick="addRepo()" type="button"
+					class="btn btn-success">添加</button>
+<!-- 				<button onclick="updateRepo()" type="button"
+					class="btn btn-info">更新</button>
+				<button onclick="deleteRepo" type="button"
+					class="btn btn-danger">删除</button> -->
+			</div>
+		</form>
+	</div>
+	<div class="panel panel-primary">
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <td>序号</td>
+                <td>仓库名称</td>
+                <td>仓库编号</td>
+                <td>仓库地址</td>
+                <td>仓库描述</td>
+                <td>更新人</td>
+                <td>更新时间</td>
+                <td>管理者</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="table-repo"></tbody>
+        </table>
+	</div>
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+<!-- 		<div class="col-md-6" id="page_info_area" style="background-color: red"></div> -->
+		<div class="col-md-6" id="page_nav_area"></div>
+	</div>
+	
+	<!-- ----------------------------------------------弹出窗口-插入----------------------------------------------- -->
+	
+	<div class="modal fade" id="repoModal" tabindex="-1" role="dialog" aria-labelledby="repoModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="repoModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">仓库名称</label>
+						<input id="repoNameInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库编号</label>
+						<input id="repoCode" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库编号(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库地址</label>
+						<input id="repoAddress" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库地址"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库描述</label>
+						<input id="repoDesc" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">更新人</label>
+						<input id="repoUpdater" style="width: 80%;float: right" type="text" class="form-control" placeholder="更新人"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">管理者ID</label>
+						<input id="repoMan" style="width: 80%;float: right" type="text" class="form-control" placeholder="管理者ID"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddRepo" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ----------------------------------------------弹出窗口-编辑----------------------------------------------- -->
+	
+	<div class="modal fade" id="EditrepoModal" tabindex="-1" role="dialog" aria-labelledby="EditrepoModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="EditrepoModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">仓库名称</label>
+						<input id="EditrepoNameInput" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库编号</label>
+						<input id="EditrepoCode" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库编号(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库地址</label>
+						<input id="EditrepoAddress" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库地址"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库描述</label>
+						<input id="EditrepoDesc" style="width: 80%;float: right" type="text" class="form-control" placeholder="仓库描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">更新人</label>
+						<input id="EditrepoUpdater" style="width: 80%;float: right" type="text" class="form-control" placeholder="更新人"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">管理者</label>
+						<input id="EditrepoMan" style="width: 80%;float: right" type="text" class="form-control" placeholder="管理者(以员工序号更新)"> 
+                    </div>
+                    <div class="form-group">
+						<span style="font-weight: bold">＊</span>
+						<label style="margin-top: 7px">管理者ID</label>
+						<input id="EditRepoId" readonly="readonly" style="width: 80%; float: right" type="text" class="form-control"/>
+					</div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESUpdateRepo" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	$('#btn_YESAddRepo').click(function() {
+ 		var addRepoUrl = "/sdims/admin/addrepository";
+		//json存放区域
+		var repository = {};
+		var employee = {};
+		repository.name = $('#repoNameInput').val();
+		repository.code = $('#repoCode').val();
+		repository.address = $('#repoAddress').val();
+		repository.repoDesc = $('#repoDesc').val();
+		repository.updater = $('#repoUpdater').val();
+		repository.updateTime = new Date();
+		employee.employeeId = $('#repoMan').val();
+		repository.employee = employee;
+		//判断必填项是否没填
+		if (repository.name == "" || repository.code == ""
+				|| repository.employee.employeeId == "") {
+			alert('名称，编号，管理员工不能为空');
+			return;
+		}
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('repositoryStr', JSON.stringify(repository));
+		//携带数据请求后台
+		$.ajax({
+			url : addRepoUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('添加成功');
+					to_page(RepototalRecord);
+				} else {
+					alert('添加失败');
+				}
+			}
+		});
+	});
+	/**
+	 * 得到模态框中的信息，并发送给后台更新数据
+	 * @returns
+	 */
+	$('#btn_YESUpdateRepo').click(function() {
+		//后台更新信息URL
+		var updateRepoUrl = "/sdims/admin/modifyrepository";
+		//json存放区域
+		var repository = {};
+		var employee = {};
+		repository.name = $('#EditrepoNameInput').val();
+		repository.code = $('#EditrepoCode').val();
+		repository.address = $('#EditrepoAddress').val();
+		repository.repoDesc = $('#EditrepoDesc').val();
+		repository.updater = $('#EditrepoUpdater').val();
+		employee.employeeId = $('#EditrepoMan').val();
+		repository.employee = employee;
+		repository.repoId = $('#EditRepoId').val();
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('repositoryStr', JSON.stringify(repository));
+		$.ajax({
+			url : updateRepoUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('更新成功');
+					//返回当前页
+					to_page(RepocurrentPage);
+				}else {
+					alert('更新失败');
+				}
+			}
+		});
+	});
+	</script>
+</body>
+</html>

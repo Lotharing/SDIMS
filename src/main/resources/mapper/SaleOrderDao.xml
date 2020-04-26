@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lothar.sdims.dao.SaleOrderDao">
+	<!-- 订单返回类型 -->
+	<resultMap type="top.lothar.sdims.entity.SaleOrder" id="SaleOrderMap">
+		<id column="sorder_id" property="sorderId"/>
+		<result column="customer_name" property="customerName"/>
+		<result column="order_number" property="orderNumber"/>
+		<result column="count" property="count"/>
+		<result column="unit_price" property="unitPrice"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="order_desc" property="orderDesc"/>
+		<result column="create_time" property="createTime"/>
+		<result column="creater" property="creater"/>
+		<result column="check_state" property="checkState"/>
+		<result column="check_result" property="checkResult"/>
+		<result column="check_man" property="checkMan"/>
+		<result column="check_time" property="checkTime"/>
+		<result column="stock_state" property="stockState"/>
+		<result column="stock_man" property="stockMan"/>
+		<result column="stock_time" property="stockTime"/>
+		<!-- 外键写几个属性对应查询后几个属性里边有值，property对应实体中属性名称，column代表列名 -->
+		<association property="goods" column="goods_id" javaType="top.lothar.sdims.entity.Goods">
+			<id column="goods_id" property="goodsId"/>
+			<result column="name" property="name"/>
+		</association>
+		<association property="customer" column="customer_id" javaType="top.lothar.sdims.entity.Customer">
+			<id column="customer_id" property="customerId"/>
+			<result column="sc_name" property="name"/>
+		</association>
+		<association property="repository" column="repo_id" javaType="top.lothar.sdims.entity.Repository">
+			<id column="repo_id" property="repoId"/>
+			<result column="br_name" property="name"/>
+		</association>
+	</resultMap>
+	<!-- 增加订单 -->
+	<insert id="insertSaleOrder" useGeneratedKeys="true"
+		keyColumn="sorder_id" keyProperty="sorderId"
+		parameterType="top.lothar.sdims.entity.SaleOrder">
+		INSERT
+		INTO
+		sd_sale_order(sorder_id,goods_id,customer_id,repo_id,customer_name,order_number,count,unit_price,total_price,
+		order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time)
+		VALUES(#{sorderId},#{goods.goodsId},#{customer.customerId},#{repository.repoId},#{customerName},#{orderNumber},
+		#{count},#{unitPrice},#{totalPrice},#{orderDesc},#{createTime},#{creater},#{checkState},#{checkResult},#{checkMan},
+		#{checkTime},#{stockState},#{stockMan},#{stockTime})
+	</insert>
+	<!-- 根据ID删除指定订单 -->
+	<delete id="deleteSaleOrderById" parameterType="Long">
+		DELETE
+		FROM
+		sd_sale_order
+		<where>
+			<if test="sorderId!=0">
+				and sorder_id = #{sorderId}
+			</if>
+			<if test="goodsId!=0">
+				and goods_id = #{goodsId}
+			</if>
+		</where>
+	</delete>
+	<!-- 更新订单信息 -->
+	<update id="updateSaleOrder"
+		parameterType="top.lothar.sdims.entity.SaleOrder"
+		keyProperty="sorderId">
+		UPDATE
+		sd_sale_order
+		<set>
+			<if test="goods!=null and goods.goodsId!=null">
+				goods_id = #{goods.goodsId},
+			</if>
+			<if test="customer!=null and customer.customerId!=null">
+				customer_id = #{customer.customerId},
+			</if>
+			<if test="repository!=null and repository.repoId!=null">
+				repo_id = #{repository.repoId},
+			</if>
+			<if test="customerName!=null">customer_name=#{customerName},</if>
+			<if test="orderNumber!=null">order_number=#{orderNumber},</if>
+			<if test="count!=null">count=#{count},</if>
+			<if test="unitPrice!=null">unit_price=#{unitPrice},</if>
+			<if test="totalPrice!=null">total_price=#{totalPrice},</if>
+			<if test="orderDesc!=null">order_desc=#{orderDesc},</if>
+			<if test="createTime!=null">create_time=#{createTime},</if>
+			<if test="creater!=null">creater=#{creater},</if>
+			<if test="checkState!=null">check_state=#{checkState},</if>
+			<if test="checkResult!=null">check_result=#{checkResult},</if>
+			<if test="checkMan!=null">check_man=#{checkMan},</if>
+			<if test="checkTime!=null">check_time=#{checkTime},</if>
+			<if test="stockState!=null">stock_state=#{stockState},</if>
+			<if test="stockMan!=null">stock_man=#{stockMan},</if>
+			<if test="stockTime!=null">stock_time=#{stockTime}</if>
+		</set>
+		WHERE
+		sorder_id=#{sorderId}
+	</update>
+	<!-- 根据ID进行查询销售单 -->
+	<select id="querySaleOrderById" parameterType="Long" resultMap="SaleOrderMap">
+		SELECT
+		sorder_id,
+		bg.goods_id,
+		bg.name,
+		sc.customer_id,
+		sc.name "sc_name",
+		br.repo_id,
+		br.name "br_name",
+		so.customer_name,
+		so.order_number,
+		so.count,
+		so.unit_price,
+		so.total_price,
+		so.order_desc,
+		so.create_time,
+		so.creater,
+		so.check_state,
+		so.check_result,
+		so.check_man,
+		so.check_time,
+		so.stock_state,
+		so.stock_man,
+		so.stock_time
+		FROM
+		sd_sale_order so,
+		sd_base_goods bg,
+		sd_sale_customer sc,
+		sd_base_repo br
+		WHERE
+		so.goods_id = bg.goods_id
+		AND
+		so.customer_id = sc.customer_id
+		AND
+		so.repo_id = br.repo_id
+		AND
+		so.sorder_id=#{sorderId}
+	</select>
+	<!-- 条件查询销售单 -->
+	<select id="querySaleOrderList" resultMap="SaleOrderMap">
+		SELECT
+		sorder_id,
+		bg.goods_id,
+		bg.name,
+		sc.customer_id,
+		sc.name "sc_name",
+		br.repo_id,
+		br.name "br_name",
+		so.customer_name,
+		so.order_number,
+		so.count,
+		so.unit_price,
+		so.total_price,
+		so.order_desc,
+		so.create_time,
+		so.creater,
+		so.check_state,
+		so.check_result,
+		so.check_man,
+		so.check_time,
+		so.stock_state,
+		so.stock_man,
+		so.stock_time
+		FROM
+		sd_sale_order so,
+		sd_base_goods bg,
+		sd_sale_customer sc,
+		sd_base_repo br
+		<where>
+			<if test="saleOrderCondition!=null and saleOrderCondition.goods!=null and saleOrderCondition.goods.name!=null">
+				and bg.name = #{saleOrderCondition.goods.name}
+			</if>
+			<if test="saleOrderCondition!=null and saleOrderCondition.customer!=null and saleOrderCondition.customer.name!=null">
+				and sc.name = #{saleOrderCondition.customer.name}
+			</if>
+			<if test="saleOrderCondition!=null and saleOrderCondition.repository!=null and saleOrderCondition.repository.name!=null">
+				and br.name = #{saleOrderCondition.repository.name}
+			</if>
+			<if test="saleOrderCondition.orderNumber!=null">
+				and so.order_number = #{saleOrderCondition.orderNumber}
+			</if>
+			<if test="saleOrderCondition.checkState!=null">
+				and so.check_state = #{saleOrderCondition.checkState}
+			</if>
+			<if test="saleOrderCondition.stockState!=null">
+				and so.stock_state = #{saleOrderCondition.stockState}
+			</if>
+			AND
+			so.goods_id = bg.goods_id
+			AND
+			so.customer_id = sc.customer_id
+			AND
+			so.repo_id = br.repo_id
+		</where>
+		ORDER BY
+		so.sorder_id ASC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询对应销售单数量 -->
+	<select id="querySaleOrderCount" resultType="int">
+		SELECT
+		COUNT(sorder_id)
+		FROM
+		sd_sale_order so,
+		sd_base_goods bg,
+		sd_sale_customer sc,
+		sd_base_repo br
+		<where>
+			<if test="saleOrderCondition!=null and saleOrderCondition.goods!=null and saleOrderCondition.goods.name!=null">
+				and bg.name = #{saleOrderCondition.goods.name}
+			</if>
+			<if test="saleOrderCondition!=null and saleOrderCondition.customer!=null and saleOrderCondition.customer.name!=null">
+				and sc.name = #{saleOrderCondition.customer.name}
+			</if>
+			<if test="saleOrderCondition!=null and saleOrderCondition.repository!=null and saleOrderCondition.repository.name!=null">
+				and br.name = #{saleOrderCondition.repository.name}
+			</if>
+			<if test="saleOrderCondition.orderNumber!=null">
+				and so.order_number = #{saleOrderCondition.orderNumber}
+			</if>
+			<if test="saleOrderCondition.checkState!=null">
+				and so.check_state = #{saleOrderCondition.checkState}
+			</if>
+			<if test="saleOrderCondition.stockState!=null">
+				and so.stock_state = #{saleOrderCondition.stockState}
+			</if>
+			AND
+			so.goods_id = bg.goods_id
+			AND
+			so.customer_id = sc.customer_id
+			AND
+			so.repo_id = br.repo_id
+		</where>
+	</select>
+</mapper>

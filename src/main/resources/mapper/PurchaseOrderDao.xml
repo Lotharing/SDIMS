@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lothar.sdims.dao.PurchaseOrderDao">
+	<!-- 订单返回类型 -->
+	<resultMap type="top.lothar.sdims.entity.PurchaseOrder" id="PurchaseOrderMap">
+		<id column="porder_id" property="porderId"/>
+		<result column="supplier_name" property="supplierName"/>
+		<result column="order_number" property="orderNumber"/>
+		<result column="count" property="count"/>
+		<result column="unit_price" property="unitPrice"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="order_desc" property="orderDesc"/>
+		<result column="create_time" property="createTime"/>
+		<result column="creater" property="creater"/>
+		<result column="check_state" property="checkState"/>
+		<result column="check_result" property="checkResult"/>
+		<result column="check_man" property="checkMan"/>
+		<result column="check_time" property="checkTime"/>
+		<result column="stock_state" property="stockState"/>
+		<result column="stock_man" property="stockMan"/>
+		<result column="stock_time" property="stockTime"/>
+		<!-- 外键写几个属性对应查询后几个属性里边有值，property对应实体中属性名称，column代表列名 -->
+		<association property="goods" column="goods_id" javaType="top.lothar.sdims.entity.Goods">
+			<id column="goods_id" property="goodsId"/>
+			<result column="name" property="name"/>
+		</association>
+		<association property="supplier" column="supplier_id" javaType="top.lothar.sdims.entity.Supplier">
+			<id column="supplier_id" property="supplierId"/>
+			<result column="ps_name" property="name"/>
+		</association>
+		<association property="repository" column="repo_id" javaType="top.lothar.sdims.entity.Repository">
+			<id column="repo_id" property="repoId"/>
+			<result column="br_name" property="name"/>
+		</association>
+	</resultMap>
+	<!-- 生成订单 -->
+	<insert id="insertPurchaseOrder" useGeneratedKeys="true"
+	keyColumn="porder_id" keyProperty="porderId"
+	parameterType="top.lothar.sdims.entity.PurchaseOrder">
+	INSERT
+	INTO
+	sd_purchase_order(porder_id,goods_id,supplier_id,repo_id,supplier_name,order_number,count,unit_price,total_price,
+	order_desc,create_time,creater,check_state,check_result,check_man,check_time,stock_state,stock_man,stock_time)
+	VALUES(#{porderId},#{goods.goodsId},#{supplier.supplierId},#{repository.repoId},#{supplierName},#{orderNumber},
+	#{count},#{unitPrice},#{totalPrice},#{orderDesc},#{createTime},#{creater},#{checkState},#{checkResult},#{checkMan},
+	#{checkTime},#{stockState},#{stockMan},#{stockTime})
+	</insert>
+	<!-- 根据ID删除订单 -->
+	<delete id="deletePurchaseOrderById" parameterType="long">
+		DELETE
+		FROM
+		sd_purchase_order
+		<where>
+			<if test="porderId!=0">
+				and porder_id = #{porderId}
+			</if>
+			<if test="goodsId!=0">
+				and goods_id = #{goodsId}
+			</if>
+		</where>
+	</delete>
+	<!-- 更新订单信息 -->
+	<update id="updatePurchaseOrder"
+		parameterType="top.lothar.sdims.entity.PurchaseOrder"
+		keyProperty="porderId">
+		UPDATE
+		sd_purchase_order
+		<set>
+			<if test="goods!=null and goods.goodsId!=null">
+				goods_id = #{goods.goodsId},
+			</if>
+			<if test="supplier!=null and supplier.supplier_id!=null">
+				supplier_id = #{supplier.supplierId},
+			</if>
+			<if test="repository!=null and repository.repoId!=null">
+				repo_id = #{repository.repoId},
+			</if>
+			<if test="supplierName!=null">supplier_name=#{supplierName},</if>
+			<if test="orderNumber!=null">order_number=#{orderNumber},</if>
+			<if test="count!=null">count=#{count},</if>
+			<if test="unitPrice!=null">unit_price=#{unitPrice},</if>
+			<if test="totalPrice!=null">total_price=#{totalPrice},</if>
+			<if test="orderDesc!=null">order_desc=#{orderDesc},</if>
+			<if test="createTime!=null">create_time=#{createTime},</if>
+			<if test="creater!=null">creater=#{creater},</if>
+			<if test="checkState!=null">check_state=#{checkState},</if>
+			<if test="checkResult!=null">check_result=#{checkResult},</if>
+			<if test="checkMan!=null">check_man=#{checkMan},</if>
+			<if test="checkTime!=null">check_time=#{checkTime},</if>
+			<if test="stockState!=null">stock_state=#{stockState},</if>
+			<if test="stockMan!=null">stock_man=#{stockMan},</if>
+			<if test="stockTime!=null">stock_time=#{stockTime}</if>
+		</set>
+		WHERE
+		porder_id=#{porderId}
+	</update>
+	<!-- 根据ID查询订单 -->
+	<select id="queryPurchaseOrderById" parameterType="Long"
+	resultMap="PurchaseOrderMap">
+	SELECT
+	porder_id,
+	bg.goods_id,
+	bg.name,
+	ps.supplier_id,
+	ps.name "ps_name",
+	br.repo_id,
+	br.name "br_name",
+	po.supplier_name,
+	po.order_number,
+	po.count,
+	po.unit_price,
+	po.total_price,
+	po.order_desc,
+	po.create_time,
+	po.creater,
+	po.check_state,
+	po.check_result,
+	po.check_man,
+	po.check_time,
+	po.stock_state,
+	po.stock_man,
+	po.stock_time
+	FROM
+	sd_purchase_order po,
+	sd_base_goods bg,
+	sd_purchase_supplier ps,
+	sd_base_repo br
+	WHERE
+	po.goods_id = bg.goods_id
+	AND
+	po.supplier_id = ps.supplier_id
+	AND
+	po.repo_id = br.repo_id
+	AND
+	po.porder_id=#{porderId}
+	</select>
+	<!-- 查询订单列表 -->
+	<select id="queryPurchaseOrderList" resultMap="PurchaseOrderMap">
+	SELECT
+	po.porder_id,
+	bg.goods_id,
+	bg.name,
+	ps.supplier_id,
+	ps.name "ps_name",
+	br.repo_id,
+	br.name "br_name",
+	po.supplier_name,
+	po.order_number,
+	po.count,
+	po.unit_price,
+	po.total_price,
+	po.order_desc,
+	po.create_time,
+	po.creater,
+	po.check_state,
+	po.check_result,
+	po.check_man,
+	po.check_time,
+	po.stock_state,
+	po.stock_man,
+	po.stock_time
+	FROM
+	sd_purchase_order po,
+	sd_base_goods bg,
+	sd_purchase_supplier ps,
+	sd_base_repo br
+	<where>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.goods!=null and purchaseOrderCondition.goods.name!=null">
+			and bg.name = #{purchaseOrderCondition.goods.name}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.supplier!=null and purchaseOrderCondition.supplier.name!=null">
+			and ps.name = #{purchaseOrderCondition.supplier.name}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.repository!=null and purchaseOrderCondition.repository.name!=null">
+			and br.name = #{purchaseOrderCondition.repository.name}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.orderNumber!=null">
+			and po.order_number = #{purchaseOrderCondition.orderNumber}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.checkState!=null">
+			and po.check_state = #{purchaseOrderCondition.checkState}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.stockState!=null">
+			and po.stock_state = #{purchaseOrderCondition.stockState}
+		</if>
+		AND
+		po.goods_id = bg.goods_id
+		AND
+		po.supplier_id = ps.supplier_id
+		AND
+		po.repo_id = br.repo_id
+	</where>
+	ORDER BY
+	po.porder_id ASC
+	LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 根据信息查询数量 -->
+	<select id="queryPurchaseOrderCount" resultType="int">
+	SELECT
+	COUNT(porder_id)
+	FROM
+	sd_purchase_order po,
+	sd_base_goods bg,
+	sd_purchase_supplier ps,
+	sd_base_repo br
+	<where>
+		<if
+			test="purchaseOrderCondition!=null and purchaseOrderCondition.goods!=null and purchaseOrderCondition.goods.name!=null">
+			and bg.name = #{purchaseOrderCondition.goods.name}
+		</if>
+		<if
+			test="purchaseOrderCondition!=null and purchaseOrderCondition.supplier!=null and purchaseOrderCondition.supplier.name!=null">
+			and ps.name = #{purchaseOrderCondition.supplier.name}
+		</if>
+		<if
+			test="purchaseOrderCondition!=null and purchaseOrderCondition.repository!=null and purchaseOrderCondition.repository.name!=null">
+			and br.name = #{purchaseOrderCondition.repository.name}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.orderNumber!=null">
+			and po.order_number =
+			#{purchaseOrderCondition.orderNumber}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.checkState!=null">
+			and po.check_state = #{purchaseOrderCondition.checkState}
+		</if>
+		<if test="purchaseOrderCondition!=null and purchaseOrderCondition.stockState!=null">
+			and po.stock_state = #{purchaseOrderCondition.stockState}
+		</if>
+		AND
+		po.goods_id = bg.goods_id
+		AND
+		po.supplier_id = ps.supplier_id
+		AND
+		po.repo_id = br.repo_id
+	</where>
+	</select>
+</mapper>

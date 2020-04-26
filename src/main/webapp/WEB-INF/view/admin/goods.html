@@ -1,0 +1,303 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>商品管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body style="padding:0;border:0;margin:0">
+	<!-- 检索条件框/按钮 -->
+	<div class="panel panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="left20">名称</label> 
+				<input id="goodsName"type="text" class="form-control" placeholder="商品名称">
+				<label class="left20">编号</label> 
+				<input id="goodsCode"type="text" class="form-control" placeholder="商品编号">
+				<label class="left20">类型</label> 
+				<input id="goodsType"type="text" class="form-control" placeholder="商品类型">
+				<label class="left20">品牌</label> 
+				<input id="goodsBrand"type="text" class="form-control" placeholder="商品品牌"><br>
+				<label class="left20">规格</label> 
+				<input id="goodsStandard"type="text" class="form-control" placeholder="商品规格" style="margin-top: 5px">
+				<label class="left20">材质</label> 
+				<input id="goodsMaterial"type="text" class="form-control" placeholder="商品材质" style="margin-top: 5px">
+				<button style="margin-left: 32px;margin-top: 5px" onclick="searchGoods()" type="button"
+					class="btn btn-primary">查询</button>
+				<button style="margin-left: 5px;margin-top: 5px" onclick="addGoods()" type="button"
+					class="btn btn-success">添加</button>
+			</div>
+		</form>
+	</div>
+	<!-- 商品展示表 -->
+	<div class="panel panel-primary">
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <td>序号</td>
+                <td>名称</td>
+                <td>编号</td>
+                <td>类型</td>
+                <td>品牌</td>
+                <td>规格</td>
+                <td>材质</td>
+                <td>进价</td>
+                <td>售价</td>
+                <td>商品描述</td>
+                <td>更新时间</td>
+                <td>图片</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody id="table-goods"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="page_nav_goods"></div>
+	</div>
+	
+	<!-- ----------------------------------------------弹出窗口-插入----------------------------------------------- -->
+	
+	<div class="modal fade" id="goodsModal" tabindex="-1" role="dialog" aria-labelledby="goodsModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="goodsModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">商品名称</label>
+						<input id="goodsNameInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品编号</label>
+						<input id="goodsCodeInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品编号(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品类型</label>
+						<input id="goodsTypeInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品类型"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">品牌</label>
+						<input id="goodsBrandInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="品牌"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">规格</label>
+						<input id="goodsStandardInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="规格"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">材质</label>
+						<input id="goodsMaterialInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="材质"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">进价</label>
+						<input id="goodsBuyPriceInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="进价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">售价</label>
+						<input id="goodsSalePriceInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="售价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品描述</label>
+						<input id="goodsDescInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品描述"> 
+                    </div>
+                    <div class="form-group">
+                        <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">缩略图</label>
+						<input id="goodsPictureInput" style="width: 80%;float: right" type="text" class="form-control" placeholder="缩略图"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddGoods" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!------------------------------------------------弹出窗口-编辑------------------------------------------------->
+    
+    	<div class="modal fade" id="EditgoodsModal" tabindex="-1" role="dialog" aria-labelledby="EditgoodsModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="EditgoodsModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                	<div class="form-group">
+                		<span style="color: red;font-weight: bold">＊</span>
+                		<label style="margin-top: 7px">商品名称</label>
+						<input id="goodsNameEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品名称(必填)"> 
+                	</div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品编号</label>
+						<input id="goodsCodeEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品编号(必填)"> 
+                    </div>
+                    <div class="form-group">
+                    <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品类型</label>
+						<input id="goodsTypeEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品类型"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">品牌</label>
+						<input id="goodsBrandEdit"readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="品牌"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">规格</label>
+						<input id="goodsStandardEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="规格"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">材质</label>
+						<input id="goodsMaterialEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="材质"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">进价</label>
+						<input id="goodsBuyPriceEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="进价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">售价</label>
+						<input id="goodsSalePriceEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="售价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品描述</label>
+						<input id="goodsDescEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="商品描述"> 
+                    </div>
+                    <div class="form-group">
+                        <span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">缩略图</label>
+						<input id="goodsPictureEdit" style="width: 80%;float: right" type="text" class="form-control" placeholder="缩略图"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">Id</label>
+						<input id="goodsIdEdit" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="Id"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESUpdateGoods" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+	$('#btn_YESAddGoods').click(function() {
+ 		var addGoodsUrl = "/sdims/admin/addgoods";
+		//json存放区域
+		var goods = {};
+		goods.name = $('#goodsNameInput').val();
+		goods.code = $('#goodsCodeInput').val();
+		goods.type = $('#goodsTypeInput').val();
+		goods.brand = $('#goodsBrandInput').val();
+		goods.standard = $('#goodsStandardInput').val();
+		goods.material = $('#goodsMaterialInput').val();
+		goods.buyPrice = $('#goodsBuyPriceInput').val();
+		goods.salePrice = $('#goodsSalePriceInput').val();
+		goods.goodsDesc = $('#goodsDescInput').val();
+		goods.picture = $('#goodsPictureInput').val();
+		goods.updateTime = new Date();
+		//判断必填项是否没填
+		if (goods.name == "" || goods.code == "") {
+			alert('名称/编号不能为空');
+			return;
+		}
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('goodsStr', JSON.stringify(goods));
+		//携带数据请求后台
+		$.ajax({
+			url : addGoodsUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('添加成功');
+					to_page_goods(GoodstotalRecord);
+				} else {
+					alert('添加失败');
+				}
+			}
+		});
+	});
+	/**
+	 * 得到模态框中的信息，并发送给后台更新数据
+	 * @returns
+	 */
+	$('#btn_YESUpdateGoods').click(function() {
+//		var goodsId = $('.edit_goods_btn').attr("edit-id");
+		//后台更新信息URL
+		var updateGoodsUrl = "/sdims/admin/modifygoods";
+		//json存放区域
+		var goods = {};
+		goods.goodsId = $('#goodsIdEdit').val();
+//		goods.name = $('#goodsNameEdit').val();
+//		goods.code = $('#goodsCodeEdit').val();
+//		goods.type = $('#goodsTypeEdit').val();
+//		goods.brand = $('#goodsBrandEdit').val();
+		goods.standard = $('#goodsStandardEdit').val();
+		goods.material = $('#goodsMaterialEdit').val();
+		goods.buyPrice = $('#goodsBuyPriceEdit').val();
+		goods.salePrice = $('#goodsSalePriceEdit').val();
+		goods.goodsDesc = $('#goodsDescEdit').val();
+		goods.picture = $('#goodsPictureEdit').val();
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('goodsStr', JSON.stringify(goods));
+		$.ajax({
+			url : updateGoodsUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('更新成功');
+					//返回当前页
+					to_page_goods(GoodscurrentPage);
+				}else {
+					alert('更新失败');
+				}
+			}
+		});
+	});
+    </script>
+</body>
+</html>

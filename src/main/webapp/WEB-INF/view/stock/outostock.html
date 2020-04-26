@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>出库管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<!-- 检索条件框/按钮 -->
+	<div class="panel panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="left20">销售单编号</label> 
+				<input id="outoStockSaleOrderCheckNumber"type="text" class="form-control" placeholder="销售单编号">
+				<label class="left20">审核状态</label> 
+				<select id="outoStockSaleOrderCheckState" class="form-control">
+						<option>全部订单</option>
+						<option>待审核</option>
+						<option>审核通过</option>
+				</select>
+				<button onclick="searchOutoStockPurchaseOrderOfCheck()" type="button"
+					class="btn btn-primary">查询</button>
+			</div>
+		</form>
+	</div>
+	<!-- 入库采购单展示表 -->
+	<div class="panel panel-primary">
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <td style="font-size: 12px">序号</td>
+                <td style="font-size: 12px">商品</td>
+                <td style="font-size: 12px">客户</td>
+                <td style="font-size: 12px">仓库</td>
+                <td style="font-size: 12px">订单编号</td>
+                <td style="font-size: 12px">数量</td>
+                <td style="font-size: 12px">单价</td>
+                <td style="font-size: 12px">总价</td>
+                <td style="font-size: 12px">订单描述</td>
+                <td style="font-size: 12px">创建时间</td>
+                <td style="font-size: 12px">创建者</td>
+                <td style="font-size: 12px">SM审核状态</td>
+                <td style="font-size: 12px">审核/撤销人</td>
+                <td style="font-size: 12px">审核/撤销时间</td>
+                <td style="font-size: 12px">审核操作</td>
+            </tr>
+            </thead>
+            <tbody id="table-outoStockSaleOrderCheck"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="page_nav_outoStockSaleOrderCheck"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+    <!-- 配置SpringMVC -->
+	<!-- 1.开启SpringMVC注解模式 -->
+	<mvc:annotation-driven />
+	<!-- 2.静态资源默认servlet配置 
+	(1)加入对静态资源的处理：js,gif,png 
+	(2)允许使用"/"做整体映射 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:default-servlet-handler />
+	<!-- 3.定义视图解析器 -->
+  	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".html"></property>
+	</bean>
+	<!-- 4.扫描web相关的bean -->
+	<context:component-scan base-package="top.lothar.sdims.web" />
+	<!-- 5.上传图片解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="defaultEncoding" value="utf-8"></property>
+    	<!-- 最大上传图片大小为1024*1024*20 -->
+   		<property name="maxUploadSize" value="20971520"></property>
+    	<property name="maxInMemorySize" value="209715020"></property>
+    </bean>
+  	<!--6. 拦截权限验证 1.state: 1.管理员 2.库管 3.采购员 4.销售员 5.订单经理-->
+    <mvc:interceptors>
+    	<!-- 1.校验ADMIN是否已登录了系统的拦截器 -->
+		<mvc:interceptor>
+			<!-- 拦截admin下所有请求 -->
+			<mvc:mapping path="/admin/**" />
+			<!-- 过滤商品（crud）请求 ,对过滤的请求在下边再次拦截并分配不同权限只有-1管理员（全部权限），3采购员（部分权限-->
+			<mvc:exclude-mapping path="/admin/getgoodslist"/>
+			<mvc:exclude-mapping path="/admin/addgoods"/>
+			<mvc:exclude-mapping path="/admin/removegoods"/>
+			<mvc:exclude-mapping path="/admin/getgoodsbyid"/>
+			<mvc:exclude-mapping path="/admin/modifygoods"/>
+			<!--  仓库和商品-获取所有-的请求，只对 3 采购员 4 销售员开放 -->
+			<mvc:exclude-mapping path="/admin/getallgoodslist" />
+			<mvc:exclude-mapping path="/admin/getallrepositorylist" />
+			<!-- 过滤统计分析请求-在下边给采购统计1 3 权限，销售统计1 .4 权限 -->
+			<mvc:exclude-mapping path="/admin/getechartsdatalist"/>
+			<mvc:exclude-mapping path="/admin/getsaleorderechartsdatalist"/>
+			<bean id="AdminInterceptor" class="top.lothar.sdims.interceptor.AdminLoginInterceptor" />
+		</mvc:interceptor>
+		<!-- 2.校验STOCK是否已登录了系统的拦截器 -->
+		<mvc:interceptor>
+			<!--state 1  2-->
+			<!-- 拦截stock下所有请求，只对管理员和库管开放，在此请求下有对采购单和销售单获取以及审核的方法state 1 2 -->
+			<mvc:mapping path="/stock/**" />
+			<bean id="StockInterceptor" class="top.lothar.sdims.interceptor.StockLoginInterceptor" />
+		</mvc:interceptor>
+		<!-- 3.校验采购员是否已登录了系统的拦截器 -->
+		<mvc:interceptor>
+			<!--state 1  3-->
+			<!-- 拦截purchase下所有请求，对于商品管理，和订单所需要的（商品和仓库）在下边三个拦截器中已经开放权限 -->
+			<mvc:mapping path="/purchase/**" />
+			<!-- 拦截admin过滤的采购统计请求只对-1 3 开放 -->
+			<mvc:mapping path="/admin/getechartsdatalist"/>
+			<!-- 这个请求在下下下个拦截器中再次拦截，只对采购员开放 -->
+			<mvc:exclude-mapping path="/purchase/getallsupplierlist"/>
+			<bean id="PurchaseInterceptor" class="top.lothar.sdims.interceptor.PurchaseLoginInterceptor" />
+		</mvc:interceptor>
+		<!-- comment(商品管理)-校验采购员，管理员登录有此权限 -->
+	 	<mvc:interceptor>
+	 		<!--state 1  3--><!-- 商品管理 -->
+	 		<!-- 管理员过滤的请求-进行拦截-商品管理的请求，分发给 1.管理员，3.采购员 -->
+	 		<mvc:mapping path="/admin/getgoodslist"/>
+ 			<mvc:mapping path="/admin/addgoods" />
+			<mvc:mapping path="/admin/removegoods" />
+			<mvc:mapping path="/admin/getgoodsbyid" />
+			<mvc:mapping path="/admin/modifygoods" />
+			<bean id="GoodsInterceptor" class="top.lothar.sdims.interceptor.GoodsInterceptor" />
+		</mvc:interceptor>
+		<!-- comment(商品列表和仓库列表-不分页)-校验采购员，销售员登录有此权限 （管理员用的是分页获取不需要此权限）-->
+	 	<mvc:interceptor>
+	 		<!--state1 3 4-->
+	 		<!-- 管理员过滤的请求-进行拦截-商品和仓库的请求，分发给 3.采购员，4.销售员（用于创建订单时候选择商品和仓库） -->
+			<mvc:mapping path="/admin/getallgoodslist" />
+			<mvc:mapping path="/admin/getallrepositorylist" />
+			<bean id="GetGoodsAndRepoListInterceptor" class="top.lothar.sdims.interceptor.GetGoodsAndRepoListInterceptor" />
+		</mvc:interceptor>
+		<!-- comment校验采购员独有获取所有供货商，不分页展示的权限 -->
+		<mvc:interceptor>
+			<!-- state1 3 只对采购员开放获取所有供货商的权限，因为采购单需要填写供应商 -->
+			<mvc:mapping path="/purchase/getallsupplierlist"/>
+			<bean id="GetSupplierInterceptor" class="top.lothar.sdims.interceptor.GetSupplierInterceptor" />
+		</mvc:interceptor>
+		<!-- 4.校验销售员是否已登录了系统的拦截器 -->
+		<mvc:interceptor>
+			<!--state 1  4-->
+			<!-- 拦截sale下所有请求,只对管理员和销售员开放，主要是销售单，客户，在次请求下有对客户和销售单的方法操作-****-对于得到仓库和商品（订单需要）上上一个拦截器中开放权限 -->
+			<mvc:mapping path="/sale/**" />
+			<!-- 拦截admin过滤的销售统计请求只对-1 4 开放 -->
+			<mvc:mapping path="/admin/getsaleorderechartsdatalist"/>
+			<!-- 这个请求在下边再次拦截只对1 4销售员开放 -->
+			<mvc:exclude-mapping path="/sale/getallcustomerlist"/>
+			<bean id="SaleInterceptor" class="top.lothar.sdims.interceptor.SaleLoginInterceptor"/>
+		</mvc:interceptor>
+		<!-- comment校验销售员独有获取所有客户，不分页展示的权限 -->
+		<mvc:interceptor>
+			<!-- state1 4 只对管理员销售员开放获取所有客户的权限，因为采购单需要填写客户 -->
+			<mvc:mapping path="/sale/getallcustomerlist"/>
+			<bean id="GetCustomerInterceptor" class="top.lothar.sdims.interceptor.GetCustomerInterceptor" />
+		</mvc:interceptor>
+		<!-- 5.校验订单审核员是否已登录了系统的拦截器 -->
+		<mvc:interceptor>
+			<!--state 1 5 -->
+			<!-- 拦截ordercheck下所有请求,只对管理员和订单经理开放，在此请求下有获取采购单和销售单以及审核的方法-->
+			<mvc:mapping path="/ordercheck/**" />
+			<bean id="OrderCheckInterceptor" class="top.lothar.sdims.interceptor.OrderCheckLoginInterceptor" />
+		</mvc:interceptor>
+		<!-- 6.校验五大用户修改密码的拦截器 -->
+		<mvc:interceptor>
+			<!--state 1 2 3 4 5 -->
+			<!-- user请求下，登录，和session获取当前用户，因为在此之前session没有信息，如果拦截全部则不能登录，不在拦截 -->
+			<!-- 修改密码需通过五个角色用户的认证，所以说这里只拦截了modiyPassword请求 -->
+			<mvc:mapping path="/user/modifypassword" />
+			<bean id="UserModifyPswInterceptor" class="top.lothar.sdims.interceptor.UserModifyPswInterceptor" />
+		</mvc:interceptor>
+		<!-- 7.管理员对用户操作的权限拦截器 -->
+		<mvc:interceptor>
+			<!--state 1-->
+			<!-- 拦截user下getUserList,addUsre,removeUsre请求,只对管理员开放-->
+			<mvc:mapping path="/user/getuserlist" />
+			<mvc:mapping path="/user/adduser" />
+			<mvc:mapping path="/user/removeuser" />
+			<bean id="UserManagerInterceptor" class="top.lothar.sdims.interceptor.UserManagerInterceptor" />
+		</mvc:interceptor>
+    </mvc:interceptors>
+</beans>

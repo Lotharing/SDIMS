@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>采购管理</title>
+	<meta name="keywords" content="表格">
+    <meta name="description" content="这真的是一个表格" />
+    <meta name="HandheldFriendly" content="True" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<!-- 检索条件框/按钮 -->
+	<div class="panel panel-body">
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="left20">商品名称</label> 
+				<input id="supplierOrderGoodsName"type="text" class="form-control" placeholder="商品名称">
+				<label class="left20">供应商名称</label> 
+				<input id="supplierOrderSupplierName"type="text" class="form-control" placeholder="供应商名称">
+				<label class="left20">仓库名称</label> 
+				<input id="supplierOrderRepositoryName"type="text" class="form-control" placeholder="仓库名称">
+				<label class="left20">订单编号</label> 
+				<input id="supplierOrderNumber"type="text" class="form-control" placeholder="订单编号"><br>
+				<label class="left20">审核状态</label>
+				<select id="PurchaseOrderState" class="form-control" style="margin-top: 5px">
+						<option>全部订单</option>
+						<option>待审核</option>
+						<option>审核通过</option>
+				</select>
+				<button style="margin-left: 0px;margin-top: 5px" onclick="searchSupplierOrder()" type="button"
+					class="btn btn-primary">查询</button>
+				<button style="margin-left: 0px;margin-top: 5px" onclick="addSupplierOrder()" type="button"
+					class="btn btn-success">添加</button>
+			</div>
+		</form>
+	</div>
+	<!-- 采购订单展示表 -->
+	<div class="panel panel-primary">
+		<table class="table table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <td style="font-size: 10px">序号</td>
+                <td style="font-size: 10px">商品</td>
+                <td style="font-size: 10px">供应商</td>
+                <td style="font-size: 10px">仓库</td>
+                <td style="font-size: 10px">订单编号</td>
+                <td style="font-size: 10px">数量</td>
+                <td style="font-size: 10px">单价</td>
+                <td style="font-size: 10px">总价</td>
+                <td style="font-size: 10px">订单描述</td>
+                <td style="font-size: 10px">创建时间</td>
+                <td style="font-size: 10px">创建者</td>
+                <td style="font-size: 10px">OM审核状态</td>
+                <td style="font-size: 10px">审核人</td>
+                <td style="font-size: 10px">审核时间</td>
+                <td style="font-size: 10px">SM审核状态</td>
+                <td style="font-size: 10px">审核人</td>
+                <td style="font-size: 10px">审核时间</td>
+                <td style="font-size: 10px">操作</td>
+            </tr>
+            </thead>
+            <tbody id="table-supplierOrder"></tbody>
+        </table>
+	</div>
+	<!-- 分页控件 -->
+	<div class="row" style="width: 70%;position:fixed;bottom:30px;">
+		<div class="col-md-6" id="page_nav_supplierOrder"></div>
+	</div>
+	
+	<!-- ----------------------------------------------弹出窗口-插入----------------------------------------------- -->
+	
+	<div class="modal fade" id="purchaseOrderModal" tabindex="-1" role="dialog" aria-labelledby="purchaseOrderModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="purchaseOrderModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品</label>
+						<select id="purchaseOrderGoods" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">供货商</label>
+						<select id="purchaseOrderSupplier" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库</label>
+						<select id="purchaseOrderRepository" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">数量</label>
+						<input id="purchaseOrderCount" style="width: 80%;float: right" type="text" class="form-control" placeholder="数量"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">单价</label>
+						<input id="purchaseOrderUnitPrice" style="width: 80%;float: right" type="text" class="form-control" placeholder="单价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">订单描述</label>
+						<input id="purchaseOrderDesc" style="width: 80%;float: right" type="text" class="form-control" placeholder="订单描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">创建者</label>
+						<input id="purchaseOrderCreater" style="width: 80%;float: right" type="text" class="form-control" placeholder="创建者"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESAddPurchaseOrder" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!------------------------------------------------弹出窗口-编辑------------------------------------------------->
+    
+    <div class="modal fade" id="EditpurchaseOrderModal" tabindex="-1" role="dialog" aria-labelledby="EditpurchaseOrderModalLabel">
+		<!-- modal-lg 变大  modal-full 铺满-->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            	<!-- 弹窗头 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="EditpurchaseOrderModalLabel"></h4>
+                </div>
+                <!-- 弹窗录入信息区域 -->
+                <div class="modal-body">
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">商品</label>
+						<select id="EditpurchaseOrderGoods" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">供货商</label>
+						<select id="EditpurchaseOrderSupplier" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">仓库</label>
+						<select id="EditpurchaseOrderRepository" style="width: 80%;float: right" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">数量</label>
+						<input id="EditpurchaseOrderCount" style="width: 80%;float: right" type="text" class="form-control" placeholder="数量"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">单价</label>
+						<input id="EditpurchaseOrderUnitPrice" style="width: 80%;float: right" type="text" class="form-control" placeholder="单价"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">订单描述</label>
+						<input id="EditpurchaseOrderDesc" style="width: 80%;float: right" type="text" class="form-control" placeholder="订单描述"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="color: red;font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">创建者</label>
+						<input id="EditpurchaseOrderCreater" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="创建者"> 
+                    </div>
+                    <div class="form-group">
+                    	<span style="font-weight: bold">＊</span>
+                        <label style="margin-top: 7px">Id</label>
+						<input id="EditpurchaseOrderId" readonly="readonly" style="width: 80%;float: right" type="text" class="form-control" placeholder="Id"> 
+                    </div>
+                </div>
+                <!-- 弹窗底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_YESEditPurchaseOrder" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $('#btn_YESAddPurchaseOrder').click(function() {
+ 		var addPurchaseOrderUrl = "/sdims/purchase/addpurchaseorder";
+		//json存放区域
+		var purchaseOrder = {};
+		var goods = {};
+		var supplier = {};
+		var repository = {};
+		goods.goodsId = $('#purchaseOrderGoods').val();
+		supplier.supplierId = $('#purchaseOrderSupplier').val();
+		repository.repoId = $('#purchaseOrderRepository').val();
+		//JSON采购单对象
+		purchaseOrder.goods = goods;
+		purchaseOrder.supplier = supplier;
+		purchaseOrder.repository = repository;
+		purchaseOrder.count = $('#purchaseOrderCount').val();
+		purchaseOrder.unitPrice = $('#purchaseOrderUnitPrice').val();
+		purchaseOrder.orderDesc = $('#purchaseOrderDesc').val();
+		purchaseOrder.creater = $('#purchaseOrderCreater').val();
+		//判断必填项是否没填
+		if (goods.goodsId == "" || supplier.supplierId == "" || 
+				repository.repoId == "" || purchaseOrder.count == "" || 
+				purchaseOrder.unitPrice == "" || purchaseOrder.creater == "") {
+			alert('商品/供货商/仓库/数量/单价/创建者不能为空');
+			return;
+		}
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('purchaseOrderStr', JSON.stringify(purchaseOrder));
+		//携带数据请求后台
+		$.ajax({
+			url : addPurchaseOrderUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('添加成功');
+					to_page_pOrder(PtotalRecord);
+				} else {
+					alert('添加失败');
+				}
+			}
+		});
+	});
+	/**
+	 * 得到模态框中的信息，并发送给后台更新数据
+	 * @returns
+	 */
+	$('#btn_YESEditPurchaseOrder').click(function() {
+		//后台更新信息URL
+		var updatePurchaseOrderUrl = "/sdims/purchase/modifypurchaseorder";
+		//json存放区域-----商品，供应商，仓库，暂时没有获得
+		var purchaseOrder = {};
+		purchaseOrder.porderId = $('#EditpurchaseOrderId').val();
+		purchaseOrder.count = $('#EditpurchaseOrderCount').val();
+		purchaseOrder.unitPrice = $('#EditpurchaseOrderUnitPrice').val();
+		purchaseOrder.orderDesc = $('#EditpurchaseOrderDesc').val();
+		// 生成表单对象，用于接收参数并传递给后台
+		var formData = new FormData();
+		// 将employee json对象转成字符流保存至表单对象key为employeeStr的的键值对里
+		formData.append('purchaseOrderStr', JSON.stringify(purchaseOrder));
+		$.ajax({
+			url : updatePurchaseOrderUrl,
+			type : 'POST',
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					alert('更新成功');
+					//返回当前页
+					to_page_pOrder(PcurrentPage);
+				}else {
+					alert('更新失败');
+				}
+			}
+		});
+	});
+    </script>
+</body>
+</html>

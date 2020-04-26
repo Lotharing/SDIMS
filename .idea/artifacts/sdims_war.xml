@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sdims:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>sdims</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="sdims.war">
+      <element id="artifact" artifact-name="sdims:war exploded" />
+    </root>
+  </artifact>
+</component>

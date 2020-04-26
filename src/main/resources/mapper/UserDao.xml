@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lothar.sdims.dao.UserDao">
+	<resultMap type="top.lothar.sdims.entity.User" id="userMap">
+		<id column="user_id" property="userId"/>
+		<result column="account" property="account"/>
+		<result column="password" property="password"/>
+		<result column="role_name" property="roleName"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="state" property="state"/>
+		<association property="employee" column="employeeId" javaType="top.lothar.sdims.entity.Employee">
+			<id column="employee_id" property="employeeId"/>
+			<result column="name" property="name"/>
+			<result column="code" property="code"/>
+		</association>
+		<association property="role" column="roleId" javaType="top.lothar.sdims.entity.Role">
+			<id column="role_id" property="roleId"/>
+			<result column="role_desc" property="roleDesc"/>
+		</association>
+	</resultMap>
+	<!-- 添加用户 -->
+	<insert id="insertUser" useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId" parameterType="top.lothar.sdims.entity.User">
+		INSERT
+		INTO
+		sd_sys_user(user_id,account,password,role_name,employee_id,update_time,state)
+		VALUES(#{userId},#{account},#{password},#{roleName},#{employee.employeeId},#{updateTime},#{role.roleId})
+	</insert>
+	<!-- 删除用户 -->
+	<delete id="deleteUserById" parameterType="Long">
+		DELETE
+		FROM
+		sd_sys_user
+		WHERE
+		user_id=#{userId}
+	</delete>
+	<!-- 更新用户 -->
+	<update id="updateUser" parameterType="top.lothar.sdims.entity.User" keyProperty="userId">
+		UPDATE
+		sd_sys_user
+		<set>
+			<if test="account!=null">account=#{account},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="roleName!=null">role_name=#{roleName},</if>
+			<if test="employee!=null and employee.employeeId!=null">employee_id=#{employee.employeeId},</if>
+			<if test="updateTime!=null">update_time=#{updateTime},</if>
+			<if test="role.roleId!=null">state=#{role.roleId}</if>
+		</set>
+		WHERE
+		user_id=#{userId}
+	</update>
+	<!-- 查询用户列表 分页-->
+	<select id="queryUserList" resultMap="userMap">
+		SELECT
+		user_id,
+		su.account,
+		su.password,
+		su.role_name,
+		be.employee_id,
+		be.name,
+		be.code,
+		su.update_time,
+		sr.role_id,
+		sr.role_desc
+		FROM
+		sd_sys_user su,
+		sd_base_employee be,
+		sd_sys_role sr
+		<where>
+			<if test="user!=null and user.roleName!=null">
+				and su.role_name=#{user.roleName}
+			</if>
+			<if test="user!=null and user.account!=null">
+				and su.account=#{user.account}
+			</if>
+			AND
+			su.employee_id=be.employee_id
+			AND
+			su.state=sr.role_id
+		</where>
+		ORDER BY
+		su.user_id ASC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<!-- 查询对应数量 -->
+	<select id="queryUserCount" resultType="int">
+		SELECT
+		COUNT(user_id)
+		FROM
+		sd_sys_user su,
+		sd_base_employee be
+		<where>
+			<if test="user!=null and user.roleName!=null">
+				and su.role_name=#{user.roleName}
+			</if>
+			<if test="user!=null and user.account!=null">
+				and su.account=#{user.account}
+			</if>
+			AND
+			su.employee_id=be.employee_id
+		</where>
+	</select>
+	<!-- 更改密码 -->
+	<update id="updatePasswordById" keyProperty="userId">
+		UPDATE
+		sd_sys_user
+		<set>
+			<if test="newPassword!=null">password=#{newPassword},</if>
+			<if test="updateTime!=null">update_time=#{updateTime}</if>
+		</set>
+		WHERE
+		user_id=#{userId}
+		AND
+		account=#{account}
+		AND
+		password=#{password}
+	</update>
+	
+	<select id="checkLoginInfo" resultMap="userMap">
+		SELECT
+		user_id,
+		su.account,
+		su.password,
+		su.role_name,
+		be.employee_id,
+		be.name,
+		be.code,
+		su.update_time,
+		sr.role_id,
+		sr.role_desc
+		FROM
+		sd_sys_user su,
+		sd_base_employee be,
+		sd_sys_role sr
+		<where>
+			<if test="account!=null">
+				and su.account=#{account}
+			</if>
+			<if test="password!=null">
+				and su.password=#{password}
+			</if>
+			AND
+			su.employee_id=be.employee_id
+			AND
+			su.state=sr.role_id
+		</where>
+	</select>
+	
+	<select id="registerCheckUserAccount" parameterType="String" resultType="int">
+		SELECT
+		COUNT(user_id)
+		FROM
+		sd_sys_user
+		WHERE
+		account = #{account}
+	</select>
+	
+</mapper>
