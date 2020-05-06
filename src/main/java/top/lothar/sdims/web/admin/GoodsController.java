@@ -1,5 +1,6 @@
 package top.lothar.sdims.web.admin;
 
+import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import top.lothar.sdims.dto.TExecution;
 import top.lothar.sdims.entity.Goods;
 import top.lothar.sdims.service.GoodsService;
 import top.lothar.sdims.util.HttpServletRequestUtil;
+import top.lothar.sdims.util.ImageUtils;
 import top.lothar.sdims.util.PageBean;
 /**
  * 商品
@@ -222,6 +224,22 @@ public class GoodsController {
 		try {
 			//使用ObjectMapper类把请求中的json信息存放在Employee实体类中
 			goods = objectMapper.readValue(goodsStr, Goods.class);
+
+			String path = goods.getPicture();
+			//TODO 保存图片路径
+			InputStream is = new BufferedInputStream(new FileInputStream(path));
+			String dbpath = ImageUtils.getRandomFileName()+".jpg";
+			OutputStream os = new BufferedOutputStream(new FileOutputStream("D:\\IDEA\\IDEAWorkSpace\\SDIMS\\src\\main\\webapp\\resources\\images\\"+dbpath)) ;
+			byte [] flush = new byte[1024];
+			int len = 0 ;
+			while(-1!=(len=is.read(flush))){
+				os.write(flush, 0, len);
+			}
+			os.flush();
+			os.close();
+			is.close();
+			//设置新路径
+			goods.setPicture(dbpath);
 			//设置更新的时间
 			goods.setUpdateTime(new Date());
 		} catch (Exception e) {
