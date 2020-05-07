@@ -11,6 +11,10 @@
     <!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
 	<mvc:annotation-driven />
+
+	<!-- servlet在找页面时，走的是dispatcherServlet路线。找不到的时候会报404
+		加上这个默认的servlet时候，servlet在找不到的时候会去找静态的内容。 -->
+	<mvc:default-servlet-handler />
 	<!-- 2.静态资源默认servlet配置 
 	(1)加入对静态资源的处理：js,gif,png 
 	(2)允许使用"/"做整体映射 -->

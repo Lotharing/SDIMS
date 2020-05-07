@@ -81,7 +81,13 @@ function getGoodsInfoToTables(data) {
 		var salePrice = $("<td></td>").append(item.salePrice);
 		var goodsDesc = $("<td></td>").append(item.goodsDesc);
 		var updateTime = $("<td></td>").append(new Date(item.updateTime).format('Y-m-d H:i:s'));
-		var picture = $("<td></td>").append(item.picture);
+
+		//添加 img  ../resources/js/util/closable-tab-div.js
+		var img = document.createElement("img");
+		//设置 img 图片地址
+		img.src = "../resources/images/"+item.picture;
+		var picture = $("<td></td>").append(img);
+
 		$("<tr></tr>")
 		.append(id)
 		.append(name)
