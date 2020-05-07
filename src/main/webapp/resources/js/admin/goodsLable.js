@@ -86,6 +86,8 @@ function getGoodsInfoToTables(data) {
 		var img = document.createElement("img");
 		//设置 img 图片地址
 		img.src = "../resources/images/"+item.picture;
+		img.style.width = '100px';
+		img.style.height = '100px';
 		var picture = $("<td></td>").append(img);
 
 		$("<tr></tr>")
