@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.4.2</version>
+			<version>3.4.6</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
@@ -184,4 +184,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!--打war包命令 mvn clean package -Dmaven.test.skip=true-->
 </project>
