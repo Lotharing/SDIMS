@@ -52,7 +52,7 @@
 ## ![1111.png](https://i.loli.net/2020/01/27/OwK5X3dQMrl6kus.png)
 
 #### 公众号
-## ![222.pbj](https://i.loli.net/2020/12/01/WPevr3ynhEi5VSw.jpg)
+## ![qrcode_for_gh_5f443202166d_258.jpg](https://i.loli.net/2020/12/01/lj1hcxsaUBECZfN.jpg)
 
 * 数据库免费提供 未上传，还有相关文档论文等
 
