@@ -23,7 +23,7 @@
 
 ## 线上地址
 
-- http://sdims.lothar.top:8080/sdims
+- http://sdims.lothar.top/sdims
 
 ## 账户
 
