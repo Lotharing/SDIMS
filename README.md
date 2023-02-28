@@ -27,7 +27,7 @@
 
 ## 线上地址
 
-- http://sdims.lothar.top/sdims
+- 域名已废弃
 
 ## 账户
 
