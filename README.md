@@ -1,5 +1,9 @@
 # 防盗门进销存管理系统（SDIMS）
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Lotharing/SDIMS&type=Date)](https://star-history.com/#Lotharing/SDIMS&Date)
+
 如果这毕设满足你要求，麻烦右上角给作者点一颗 ✨Star， 之后也会给你解答项目任何问题， 感谢支持🙏 
 
 ## 开发周期
